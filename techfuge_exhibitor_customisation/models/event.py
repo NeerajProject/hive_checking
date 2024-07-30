@@ -36,6 +36,15 @@ class Event(models.Model):
     is_different_bank_account = fields.Boolean(string="Different Bank Accounts")
     bank_details_ids = fields.Many2many('report.bank.details',string="Bank Details")
 
+    #pdf
+    pdf_header = fields.Binary(string="Pdf Header")
+   
+    # email
+    exhibitor_email = fields.Char(string="Exhibitor Email")
+    exhibitor_cc = fields.Char(string="Exhibitor CC")
+    visitor_email = fields.Char(string="Visitor Email")
+    visitor_cc = fields.Char(string="Visitor CC")
+
     # custom crm template
 
     exhibitor_registeration_template =  fields.Many2one('mail.template',string="Exhibitor Registration")

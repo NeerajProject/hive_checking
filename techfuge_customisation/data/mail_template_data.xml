@@ -465,9 +465,9 @@ M: 971 504623913 / L: 971 45665205
         <record id="email_template_registration_mail_to_visitor" model="mail.template">
             <field name="name">Visitor Registration: Mail to Visitor</field>
             <field name="model_id" ref="event.model_event_registration"/>
-            <field name="email_from">HFS 2024 &lt;visit@hivefurnitureshow.com&gt;</field>
+            <field name="email_from">{{object.visitor_email}}</field>
             <field name="email_to">{{ object.email }}</field>
-            <field name="email_cc">visit@hivefurnitureshow.com,suraj@omgexhibitions.com</field>
+            <field name="email_cc">{{object.visitor_cc}}</field>
 
             <field name="subject">Your Badge for HFS 2024 is now ready !</field>
             <field name="description">Sent mail to visitor after the successful visitor registration</field>
@@ -542,9 +542,9 @@ M: 971 504623913 / L: 971 45665205
            <record id="email_template_registration_mail_to_vip_visitor" model="mail.template">
             <field name="name">Vip Buyer Registration: Mail to Visitor</field>
             <field name="model_id" ref="event.model_event_registration"/>
-            <field name="email_from">HFS 2024 &lt;visit@hivefurnitureshow.com&gt;</field>
+            <field name="email_from">{{ object.visitor_email}}</field>
             <field name="email_to">{{ object.email }}</field>
-            <field name="email_cc">visit@hivefurnitureshow.com,suraj@omgexhibitions.com</field>
+            <field name="email_cc">{{object.visitor_cc}}</field>
 
             <field name="subject">Your Badge for HFS 2024 is now ready !</field>
             <field name="description">Sent mail to visitor after the successful visitor registration</field>
@@ -624,7 +624,7 @@ M: 971 504623913 / L: 971 45665205
         <record id="email_template_already_registered_mail_to_visitor" model="mail.template">
             <field name="name">Visitor Registration: Already Registered Visitor Mail</field>
             <field name="model_id" ref="event.model_event_registration"/>
-            <field name="email_from">HFS 2024 &lt;visit@hivefurnitureshow.com&gt;</field>
+            <field name="email_from">{{object.visitor_email}}</field>
             <field name="email_to">{{ object.email }}</field>
             <field name="subject">You are our Privileged Visitor for 2024!</field>
             <field name="description">Sent mail to already registered visitor</field>

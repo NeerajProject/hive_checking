@@ -104,9 +104,9 @@
                     <group>
                         <group>
                             <field name="embassy_details"></field>
-                          <field name="emails" ></field>
-                          <field name="place_of_supply" ></field>
-
+                            <field name="emails" ></field>
+                            <field name="place_of_supply" ></field>
+                            <field name="pdf_header" />
                         </group>
                         <group>
                           <field name="event_details"></field>
@@ -119,15 +119,26 @@
                     </group>
 
                 </page>
+
+                <page name="email_configuration" string="Email Configuration">
+                    <group>
+                        <group>
+                            <field name="exhibitor_email"></field>
+                            <field name="exhibitor_cc" />
+                        </group>
+                        <group>
+                            <field name="visitor_email"></field>
+                            <field name="visitor_cc" />
+                        </group>
+                    </group>
+                </page>
+                
                 <page string="Email Template" name="email_template">
                     <group>
                         <field name="exhibitor_registeration_template"></field>
                         <field name="exhibitor_registration_duplicate_mail_to_planner" string="Planner Mail"></field>
                     </group>
                 </page>
-
-
-
             </xpath>
         </field>
     </record>

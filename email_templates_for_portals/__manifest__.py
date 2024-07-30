@@ -11,7 +11,6 @@
         'data/contractor_email_template.xml',
         'data/mail_template_data.xml',
  'data/schedule_activity.xml',
-        'data/visitors_badge_new_templates/mail_template_data.xml'
     ],
     'installable': True,
     'application': True,
