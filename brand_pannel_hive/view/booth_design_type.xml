@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="booth_design_type_form_view" model="ir.ui.view">
+            <field name="name">brand_pannel_hive.booth.design.type.form</field>
+            <field name="model">booth.design.type</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <field name="name"></field>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="booth_design_type_tree_view" model="ir.ui.view">
+            <field name="name">brand_pannel_hive.booth.design.type.tree</field>
+            <field name="model">booth.design.type</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="booth_design_type_act_window" model="ir.actions.act_window">
+            <field name="name">Booth Design Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">booth.design.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Booth Design Type.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Booth Design Type" id="booth_design_type_menu"  parent='event.menu_event_configuration' action="booth_design_type_act_window"/>
+
+    </data>
+</odoo>

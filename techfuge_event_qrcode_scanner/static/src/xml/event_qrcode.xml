@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="event_qrcode_template">
+        <div class="o_event_barcode_bg o_home_menu_background">
+            <div class="o_event_barcode_main bg-view">
+                <div class="text-center">
+                    <h1 t-out="widget.data.name"/>
+                    <p>
+                        <t t-if="widget.data.city and widget.data.country">
+                            <t t-out="widget.data.city"/>
+                            -
+                            <t t-out="widget.data.country"/>
+                        </t>
+                        <t t-if="widget.data.city and !widget.data.country" t-out="widget.data.city"/>
+                        <t t-if="widget.data.country and !widget.data.city" t-out="widget.data.country"/>
+                    </p>
+                    <h2>
+                        <small>
+                            Welcome to
+                        </small>
+                        <t t-out="widget.data.company_name"/>
+                    </h2>
+                    <img t-if="widget.data.company_id"
+                         t-attf-src="/web/image/res.company/{{widget.data.company_id}}/logo_web" alt="Company Logo"
+                         class="o_event_barcode_company_image"/>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 mt16">
+                        <img class="o_event_barcode_image" src="/techfuge_event_qrcode_scanner/static/img/qr-code.png"
+                             alt="QR Code"/>
+                        <h5 class="mt8 mb0 text-muted">Scan a QR code</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-grow-1">
+                        <a href="/web/session/logout" class="btn btn-danger align-self-center px-5 mt-4 mb-2 w-100">
+                            <span class="align-middle fs-2 me-3 text-white"><b>Logout</b></span>
+                            <i class="fa fa-2x fa-sign-out align-middle"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

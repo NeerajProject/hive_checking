@@ -1,0 +1,1226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="paperformat_exhibitor_agreement" model="report.paperformat">
+        <field name="name">Exhibitor Agreement Paper Format</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">35</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_spacing">30</field>
+        <field name="dpi">96</field>
+    </record>
+
+    <template id="exhibitor_agreement_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <div class="header">
+            <div class="row">
+                <div class="col-6">
+                    <t t-if="o.event_id and o.event_id.event_logo">
+                        <img t-att-src="image_data_uri(o.event_id.event_logo)"
+                             style="width: 132px; height: 66px; margin-left: 50px;"/>
+
+
+
+                        <t t-esc="o.event_id.header_logo_description"></t>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </t>
+                </div>
+                <div class="col-6">
+                    <img t-att-src="image_data_uri(company.logo)"
+                         style="width: 132px; height: 66px; margin-left: 150px;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" style="background: #ededed;">
+                    <b style="font-size: 10pt; margin-left: 50px;">
+                        Event Date :
+                        <t t-if="o.event_id">
+                            <span t-esc="o.event_id.date_begin.strftime('%B').upper()"/>
+                            <span t-esc="o.event_id.date_begin.strftime('%d')"/>
+                            -
+                            <span t-esc="o.event_id.date_end.strftime('%d')"/>,
+                            <span t-esc="o.event_id.date_end.strftime('%Y')"/>
+                        </t>
+                    </b>
+                </div>
+            </div>
+        </div>
+
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+
+        <div class="footer">
+            <div class="row">
+                <div class="col-12 text-end">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">Page</li>
+                        <li class="list-inline-item">|</li>
+                        <li class="list-inline-item">
+                            <span class="page"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+    <template id="report_exhibitor_agreement">
+        <t t-call="web.html_container">
+            <t t-call="techfuge_exhibitor_customisation.exhibitor_agreement_layout">
+                <div class="page">
+                    <div t-foreach="docs" t-as="o">
+                        <h5 style="font-weight: bold; text-align: center;">
+                            SPACE ALLOCATION AGREEMENT HFS -
+                            <t t-if="o.event_id">
+                                <span t-esc="o.event_id.date_end.strftime('%Y')"/>
+                            </t>
+                        </h5>
+                        <p style="font-size: 7pt">
+                            Please enter details or attach business card: If invoice address is different from below,
+                            please provide details in ‘Notes’ section
+                        </p>
+                        <table class="w-100" style="font-size: 8pt; border: 1px solid #ffffff;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">
+                                        Name
+                                    </td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.partner_id.name"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                    <td style="width: 20%; padding: 5px;">Designation</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.partner_id.function"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; padding: padding: 5px 5px 5px 0px;">Company Name</td>
+                                    <td colspan="3" style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.partner_id.parent_id.name"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">Company Address</td>
+                                    <td colspan="3" style="width: 30%; padding: 5px;">
+                                        :
+                                        <span style="padding-left: 10px; font-weight: bold;">
+                                            <t t-if="o.partner_id.parent_id.street">
+                                                <span t-field="o.partner_id.parent_id.street"/>
+                                            </t>
+                                            <t t-if="o.partner_id.parent_id.street2">
+                                                ,
+                                                <span t-field="o.partner_id.parent_id.street2"/>
+                                            </t>
+                                            <t t-if="o.partner_id.parent_id.zip">
+                                                ,
+                                                <span t-field="o.partner_id.parent_id.zip"/>
+                                            </t>
+                                        </span>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">City / Province</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;">
+                                            <t t-if="o.partner_id.parent_id.city">
+                                                <span t-field="o.partner_id.parent_id.city"/>,
+                                            </t>
+                                            <t t-if="o.partner_id.parent_id.state_id">
+                                                <span t-field="o.partner_id.parent_id.state_id.name"/>
+                                            </t>
+                                        </span>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                    <td style="width: 20%; padding: 5px;">Country</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.partner_id.country_id.name"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">Landline No.</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.partner_id.phone"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                    <td style="width: 20%; padding: 5px;">Fax</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.partner_id.fax"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">Mobile No.</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.partner_id.mobile"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                    <td style="width: 20%; padding: 5px;">Email</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <t t-if="o.partner_id.additional_email">
+                                            <span style="padding-left: 10px;" t-field="o.partner_id.additional_email"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span style="padding-left: 10px;" t-field="o.partner_id.email"/>
+                                        </t>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">Space Type</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.space_type_id.name"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                    <td style="width: 20%; padding: 5px;">Total Area (m2)</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span t-if="o.total_area" style="padding-left: 10px;" t-esc="o.total_area"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">
+                                        Rate per m2 (<span t-esc="o.pricelist_id.currency_id.symbol"/>)
+                                    </td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.rate_per_m2"
+                                              t-options='{"widget": "float", "precision": 2}'/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                    <td style="width: 20%; padding: 5px;">Stall Dimensions (m)</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-esc="o.stall_dimensions"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">
+                                        Rate per m2 (<span t-esc="o.pricelist_id.currency_id.symbol"/>) + 5% VAT
+                                    </td>
+                                    <td style="width: 25%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-field="o.rate_per_m2_with_vat"
+                                              t-options='{"widget": "float", "precision": 2}'/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                    <td style="width: 20%; padding: 5px;">Hall Number</td>
+                                    <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-esc="', '.join(o.hall_ids.mapped('name'))"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">Total Price with VAT</td>
+                                    <td style="width: 25%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;" t-esc="o.amount_total"
+                                              t-options='{"widget": "monetary", "display_currency": o.pricelist_id.currency_id}'/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                    <td style="width: 20%; padding: 5px;">Stall Number</td>
+                                    <td style="width: 25%; padding: 5px; font-weight: bold;">
+                                        :
+                                        <span style="padding-left: 10px;"
+                                              t-esc="', '.join(o.stand_ids.mapped('stand_number'))"/>
+                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <p style="font-size: 5pt; text-align: justify;">
+                            We hereby confirm our participation at <b>HFS 2023</b> and we confirm that we have been
+                            supplied
+                            with O M G Exhibition Organizing. Terms and Conditions, which form part of this contract. We
+                            have read O M G Exhibition Organizing Terms and Conditions and confirm our acceptance of
+                            these. The execution of this contract and its receipt by O M G Exhibition Organizing is
+                            deemed conclusive evidence of the Applicant’s agreement to pay the full fees due. Where more
+                            than one exhibitor will share a stand in respect of which this contract is made (“stand
+                            sharers”), the Applicant, acting as agent for each stand sharer, shall ensure that each
+                            stand sharer is bound by the terms and conditions. The Applicant shall be liable to pay any
+                            additional charges incurred directly in respect of any stand sharer.
+                        </p>
+                        <div style="border: 1px solid #848484; width: 100%; height: 90px; font-size: 8pt; padding: 5px;">
+                            Notes:
+                            <p class="mt-2" style="line-height:15px;" t-esc="o.note_text"/>
+                        </div>
+                        <br/>
+                        <table style="width: 80%; font-size: 8pt; font-weight: 900; border: 1px solid #ffffff;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">
+                                        Account Name
+                                    </td>
+                                    <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                    <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                        O M G Exhibition Organizing LLC
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Account Number
+                                    </td>
+                                    <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                    <td style="width: 45%;  text-align: left; padding: 2px 5px;">0332 8369 3800 1</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">IBAN Number</td>
+                                    <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                    <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                        AE32 0400 0003 3283 6938 001
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Swift Code</td>
+                                    <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                    <td style="width: 45%;  text-align: left; padding: 2px 5px;">NRAKAEAK</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Routing Code
+                                    </td>
+                                    <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                    <td style="width: 45%;  text-align: left; padding: 2px 5px;">904020101</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Bank Name</td>
+                                    <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                    <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                        National Bank of Ras Al Khaimah
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Branch Name</td>
+                                    <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                    <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                        Umm Hurrair, Dubai
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Bank Address
+                                    </td>
+                                    <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                    <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                        RAKBANK, P.O. BOX 1531, Dubai, UAE
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row" style="font-size: 8pt; margin-top: 50px;">
+                            <div class="col-6">
+                                <hr style="margin: 0; width: 195px; color: #878787;"/>
+                                <p>
+                                    Signature and Company Seal of Exhibitor
+                                </p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <hr style="margin: 0 0 0 120px; width: 100px; color: #878787;"/>
+                                <p>
+                                    Date
+                                </p>
+                            </div>
+                        </div>
+                        <br/>
+                        <table style="width: 100%; font-size: 8pt; page-break-after:always; border: 1px solid #ffffff;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 40%; text-align: left; padding: 2px 5px 2px 0px; height: 20px;">
+                                        Name of Authorized Signatory
+                                    </td>
+                                    <td style="width: 60%; padding: 5px;">
+                                        :
+                                        <hr style="margin: 0 0 0 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%; text-align: left; padding: 5px;"/>
+                                    <td style="width: 60%;"/>
+                                </tr>
+                                <tr>
+                                    <td style="width: 40%; text-align: left; padding: 2px 5px 2px 0px;">
+                                        Designation of Authorized Signatory
+                                    </td>
+                                    <td style="width: 60%; padding: 5px;">
+                                        :
+                                        <hr style="margin: 0 0 0 5px; color: #878787;"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table style="width: 100%; font-size: 8pt; text-align: justify; font-weight: bold; border: 1px solid #ffffff;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 47.5%;">
+                                        <p style="line-height: 1.4;">
+                                            SPACE ALLOCATION AGREEMENT REGULATIONS
+                                            <br/>
+                                            These regulations are to be read as an integral part of the Space Allocation
+                                            Agreement.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            1. DEFINITIONS AND INTERPRETATION
+                                            <br/>
+                                            In these regulations and in the Space Allocation Agreement, the following
+                                            words shall have the meaning respectively assigned to them hereunder, unless
+                                            the
+                                            context requires or admits otherwise:
+                                            <br/>
+                                            <br/>
+                                            “Agreement“ shall mean the Space Allocation Agreement and these regulations
+                                            and Exhibition Manual;
+                                            <br/>
+                                            <br/>
+                                            Applicable Laws, shall mean the local laws and regulations of the Emirates
+                                            of Dubai and the federal laws of the United Arab Emirates;
+                                            <br/>
+                                            <br/>
+                                            “Center User” Shall mean all the exhibitors at all the Center, Tenants of
+                                            allocated space, and includes each of their agents, contractor, employees,
+                                            invitees and attendees of the Exhibition;
+                                            <br/>
+                                            <br/>
+                                            “Exhibition” Shall mean the event as named and dated in the Space Allocation
+                                            Agreement:
+                                            <br/>
+                                            <br/>
+                                            “Exhibitor” Shall mean any person, firm, company, association, organization
+                                            and its employees, servants or agents to whom exhibit space has been
+                                            allocated for the purpose of exhibiting at the Exhibition: represented by
+                                            the authorized signatory of this Agreement:
+                                            <br/>
+                                            <br/>
+                                            “Contracted Term” Shall the contracted period under the Agreement as
+                                            specifically mentioned in the Space Allocation Agreement:
+                                            <br/>
+                                            <br/>
+                                            “Exhibitor Manual“ shall mean the manual of the Organizer’s internal
+                                            guidelines established from time to time and distributed to the Exhibitor
+                                            prior to the Exhibition for the sale and orderly conduct and close of the
+                                            Exhibition;
+                                            <br/>
+                                            <br/>
+                                            “Exhibition Material” shall mean such good, exhibits, materials equipment,
+                                            stand/s, supplies, merchandise, models, exhibit items, or other property for
+                                            the sole use of the Exhibition;
+                                            <br/>
+                                            <br/>
+                                            “Force Majeure” shall mean any event or circumstances (or a combination of
+                                            events or circumstances) which are beyond the reasonable control of the
+                                            relevant, party, resulting in or causing the failure by that party,
+                                            resulting in or causing the ailure by that party to perform any of its
+                                            obligation under this Agreement (whether in whole or in part), including
+                                            without limitation. (1) revolution, riots, insurrection or other civil
+                                            commotion act to terrorism or sabotage or war; (2) nuclear explosion,
+                                            radioactive, biological or chemical contaminations or adiation; (3) general
+                                            strikes, work stoppages, working to rule, go slow actions and or lockout;
+                                            (4) any effect of the natural elements including lightening, fire,
+                                            earthquakes, flood, storm, hurricane, tsunami, cyclone or tornado. Materials
+                                            change in sea level or coastal subsidence; (5) explosion (other than nuclear
+                                            explosion or any explosion resulting from an act or war; (6) inability to
+                                            obtain necessary plant, equipment or materials due to blockade,
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            participation at the Exhibition shall be obtained prior to the
+                                            commencement
+                                            of the
+                                            Exhibitions (including all licenses or permits which may be required to
+                                            operate or
+                                            conduct the Exhibition and to pay all taxes, fees and charges levied
+                                            Against
+                                            it in
+                                            connection with the Exhibition).
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            2.3 The Exhibitor covenants and agrees
+                                            <p style="margin-left: 45px; line-height: 1.4;">
+                                                2.3.1 to observe and comply with the reasonable
+                                                directions of the Organizer.
+                                                <br/>
+                                                2.3.2 to be and remain in care, custody, and control of the
+                                                Exhibition Material
+                                                <br/>
+                                                2.3.3 to refrain from any Objectionable Display and
+                                                forthwith remove and clear any Objectionable
+                                                Displays,
+                                                as may be required by Organizer.
+                                                <br/>
+                                                2.3.4 not to use the Exhibition for any immoral, improper
+                                                unlawful or illegal purpose or a manner which is
+                                                likely to cause public disorder in or near the Centre,
+                                                or in way that might cause harm to any persons or
+                                                damage to the property of the Organizer or the
+                                                Centre Users, or in a way so as to cause nuisance or
+                                                annoyance to the Centre User;
+                                                <br/>
+                                                2.3.5 not to, unless permitted in writing by the Organizer
+                                                and then only in accordance with any conditions
+                                                imposed, collect any chargers or fees for admission
+                                                to the exhibit space;
+                                                <br/>
+                                                2.3.6 not to install or exhibit any Objectionable Displays:
+                                                <br/>
+                                                2.3.7 observe and comply with Applicable Laws.
+                                            </p>
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            2.4 Save and except as otherwise agree in writing between the Exhibitors and
+                                            Organizer, the Exhibitor shall not be entitled to sublet the whole or any
+                                            part of the exhibit space. For the avoidance of doubt, the Exhibitor may
+                                            only sublet subject to (a) the Organizer’s prior written approval for the
+                                            exhibit space to be sublet; and (b) once approved by the Organizer in
+                                            witting, for the Exhibitor to provide in writing the full name/s of the
+                                            legal entity/ i.e. the intend to sublet the exhibit space (“CO-Sharers”),
+                                            including complete
+                                            Details of the Exhibition materials of all those who will sublet. Each and
+                                            every CO-Sharer approved by the Organizer to sublet must pay the applicable
+                                            Enhanced Internet Listing, Insurance Cost Registration Fee and Marketing
+                                            Powerpack Cost.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            3. Payment
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            3.1 The Exhibitor shall pay the total Exhibition Fee in the amount, the
+                                            manner and in accordance with the invoices issued pursuant to in Schedule A.
+                                            <br/>
+                                            3.2 Time for payment shall be of the essence of the Agreement. Late payments
+                                            shall be subject to interest payment calculated at monthly EIBOR rate by
+                                            Emirates NBD or 5% P.A whichever is higher.
+                                            <br/>
+                                            3.3 The total Exhibition fee is Payable in full even if the Exhibitor for
+                                            any reason does not utilize the exhibit space or ant part thereof.
+                                            <br/>
+                                            3.4 The Total Exhibition Fee Stated in the Space Allocation Agreement are
+                                            exclusive of any applicable taxes, all amounts expressed to be payable under
+                                            this Agreement by Exhibitor to the Organizer which (in whole or part)
+                                            constitute the consideration for any supply for VAT purposes are deemed
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            4.6 If the Exhibition is cancelled due to force Majeure the Exhibitor shall
+                                            be entitled to a refund in amount equal to the Total Exhibition Fee already
+                                            paid to the Organizer.
+                                            <br/>
+                                            4.7 In the event that the Exhibitor cancelled its participation in the
+                                            Exhibition as a result of it being impossible for the Exhibitor to attend
+                                            due to borders being completely closed and a full lock-down inn place; the
+                                            in such circumstances the Exhibitor shall be entitled t a full refund in an
+                                            amount equal to the Exhibition Fee already paid to the Organizer.
+                                            <br/>
+                                            4.8 In the event of cancellation or postponed of the exhibition under the
+                                            clause4, the Exhibitor shall assume all risk associated with the
+                                            non-occurrence or delay of the Exhibition and in particular, the Exhibitor
+                                            alone shall bear all cost the Exhibitor may have chosen to incur in
+                                            anticipation of the Exhibition.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            5. REDUCTION OF EXHIBIT SPACE
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            5.1 All request for reduction of exhibit space must be made in writing
+                                            to
+                                            the Organizer.
+                                            <br/>
+                                            5.2 If the written request in clause 5.1 for reduction is received by
+                                            the
+                                            Organizer up until twelve (12) weeks before the Exhibition, the
+                                            Organizer
+                                            may in its absolute discretion, allow for the reduction, otherwise any
+                                            written requests for reduction received by the Organizer after this
+                                            period
+                                            shall not be accepted.
+                                            <br/>
+                                            5.3 The total Exhibition fee is payable in full even if the Organizer
+                                            agrees
+                                            for the reduction of the Exhibit space.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            6. STAND BOUNDARIES
+                                            <br/>
+                                            All Exhibition Materials must be kept within the agreed boundaries of the
+                                            Exhibitor’s Exhibited spaced at all times. No Exhibitors may obstruct the
+                                            gangways with the Exhibition Materials, nor may any such Exhibition
+                                            Materials protrude from the boundaries of the Exhibit space. All
+                                            distribution of literature must take place from within the boundaries of the
+                                            Exhibitor’s Exhibit space and not in the gangways or any other area within
+                                            the Venue. Any Exhibitor who continues to cause a nuisance or obstruction
+                                            after notice has been given will be liable to have their exhibit space
+                                            cleared by the Organizer at the Exhibitor’s own risk and expense.
+                                            <br/>
+                                            <br/>
+                                            7. WARRANTY
+                                            <br/>
+                                            The exhibitor represent, warrants and undertakes that it is entering into
+                                            this Agreements as principal and not as agent or nominee of any third party,
+                                            and that the Exhibition Materials does not infringe or is likely to infringe
+                                            any patent, trademark, copyrights and other intellectual property right of
+                                            any party and agrees that in the event of any breach of representation,
+                                            warranties and undertaking herein contained this Agreement may be terminated
+                                            by the organizer. and the exhibitor shall indemnify the Organizer against
+                                            any and all cost claims, demands, losses, termination due to the Exhibitor’s
+                                            Breach.
+                                            <br/>
+                                            <br/>
+                                            8. SOUND LEVEL
+                                            <br/>
+                                            The sound level of audio equipment must be tuned to an acceptable volume and
+                                            conducted in a way which does not interfere with nor becomes a nuisance to
+                                            neighboring exhibitors. The Organizer reserve the right to monitor and
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            <br/>
+                                            <br/>
+                                            12. MANDATORY SHOW INSURANCE, MARKETING POWERPACK, REGISTRATION FEE,
+                                            ENHANCED
+                                            INTERNET LISTING AND LEAD GENERATION &amp; TRACKING.
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            12.1 The Exhibitor shall carry insurance to cover the following risk (a)
+                                            Public Liability for AED 10 million; (b) Fire Damage for AED200.000; (c)
+                                            Medical; Expenses for 5,000 per person; (d)Food and drink Poisoning for AED
+                                            10 million. (e) Damage caused by the Exhibitor to DWTC Property for 10
+                                            million (f)Liability arising out of loading and unloading of Exhibition
+                                            Materials; (g) Exhibitor to Exhibitor Liability for AED10 Million; (h)
+                                            Liability due to erection and dismantling of stands; (i) Damage caused to
+                                            the Exhibitor’s property for AED 50.000 (k) Personal Accident (Including
+                                            death and disability) For 3 employees of the Exhibitors for AED 30.000 per
+                                            employee. The Cover must be provided by, and insurance company registered in
+                                            the United Arab Emirates. The Exhibitor will be responsible for filing and
+                                            setting any claims under the policy directly with the insurance company.
+                                            <br/>
+                                            12.2 The insurance cover prescribed in clause 12.1 will be taken out by the
+                                            organizer and the insurance cost charged to the Exhibitor, which shall be
+                                            paid in the amount, the manner and in accordance with the invoice issued
+                                            pursuant to Schedule A. Any policy of insurance obtained by the Exhibitor
+                                            shall be acceptable only if complies with all the requirements of clause
+                                            12.1 and provided proof or certificate of such cover along with the policy
+                                            terms and conditions are submitted to the Organizer at least two months
+                                            prior to the commencement of build-up for the Exhibition.
+                                            <br/>
+                                            12.3 where applicable and if set out in the Space Allocation Agreement, the
+                                            Organizer will provide the Exhibitor a marketing powerpack and lead
+                                            generation &amp; tracking, subject to payment in full of the Marketing
+                                            Powerpack Costs
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            13. TERMINATION
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            13.1 The Organizer may take possession of the exhibit space and terminate
+                                            this Agreements forthwith by written notice to the Exhibitor upon the
+                                            Exhibitor’s failure to meet ant of their obligations under the terms and
+                                            conditions of this Agreement and the Exhibitor Manual Including But not
+                                            limited to the Exhibitor’s.
+                                            (a)failure to pay for the total Exhibition fee or any related services
+                                            within 7 calendar days written notice.
+                                            (b)failure to set up its Exhibition Material in the Exhibit space as per the
+                                            terms and conditions herein.
+                                            (c)failure to own and maintain valid rights to make, use, perform, sell and
+                                            display patented products, copyrighted works, trademarks and trade names; or
+                                            (d) Violation of any patents, copyright or other intellectual property
+                                            rights of another exhibitor or third party in any Exhibition Materials or
+                                            ( E) involvement in the selling and/ or promotion of any counterfeit goods
+                                            at the Exhibition including goods that, in the sole opinion of the
+                                            Organizer, do not conform to the permitted show profile of the Exhibition.
+                                            <br/>
+                                            13.2 In the event that the Organizer terminates this Agreement under Clause
+                                            13.1 the Organizer shall be entitled,
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            <br/>
+                                            18. INDEMNITY
+                                            <br/>
+                                            The Exhibitor hereby indemnifies and agrees to keep the Organizer
+                                            indemnified against;
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            (1) Any and all, proceeding, claim, cost, damages or losses incurred of
+                                            suffered by the Organizer by reason of breach by the Exhibition if this
+                                            Agreement, any Regulation or any applicable law. or for any act or emission
+                                            on the part of the Exhibitor whatsoever;
+                                            <br/>
+                                            (2) Any and all customs, levy, tax fine or other payment the Organizer is
+                                            called upon to pay any authorities on behalf of the Exhibitor in relation of
+                                            the Exhibition.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            19.ORGANIZER’S LIABILITY
+                                            <br/>
+                                            The organizer will not be liable to the Exhibitor or any third party for any
+                                            loss of profits or business, or for any direct or consequential loss or
+                                            damage. The total liability of the Organizer to the Exhibitor arising out of
+                                            or in connection with this Agreement will not exceed the amount of the Total
+                                            Exhibition Fee Actually paid by the Exhibitor under this Agreement.
+                                            <br/>
+                                            <br/>
+                                            20. WAIVER
+                                            <br/>
+                                            The Exhibitor waived any and all claims (of whatsoever nature) that it may
+                                            have against the Organizer in anyway related to the storage. display or use
+                                            of any exhibit/equipment in connection with the Exhibition, whether prior
+                                            to, in the course of after its conclusion or after regular hours. The
+                                            Exhibition, acknowledge and accepts sole and exclusive responsibility for
+                                            the safety and security and storage of all the property and belongings of
+                                            the Exhibitor at all times.
+                                            <br/>
+                                            <br/>
+                                            21. ENTIRE AGREEMENT
+                                            <br/>
+                                            These Regulation together with the Space Allocation Agreement Constitute the
+                                            whole agreement and understanding between the parties relating it is subject
+                                            matter and supersedes any prior agreements whether in writing or oral,
+                                            relating to such subject matter. No variation of this Agreement shall be
+                                            effective unless made in writing and signed by each of the parties.
+                                            <br/>
+                                            <br/>
+                                            22. NOTICES
+                                            <br/>
+                                            Any and all notices, demand and statements or documents of any kind which
+                                            are desired or required to be given by one party to the other according to
+                                            the provisions of the contract may be delivered by hand and upon successful
+                                            completion of the transmission it sent by fax or electronic mail. Unless and
+                                            until change by notice in writing given in accordance with the clause, the
+                                            addresses, fax number and electronic mail id for the parties shall be as set
+                                            forth in the Agreement.
+                                            <br/>
+                                            <br/>
+                                            23. CALENDAR
+                                            <br/>
+                                            All dates and period will be determined by reference to the Gregorian
+                                            Calendar.
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                        </p>
+                                    </td>
+                                    <td style="width: 5%;"/>
+                                    <td style="width: 47.5%;">
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            embargo or sanction;
+                                            <br/>
+                                            <br/>
+                                            “Insurance Costs” means the cost of the obtaining the
+                                            mandatory insurance cover as prescribed in clause 12.1 and set out under the
+                                            Particulars;
+                                            <br/>
+                                            <br/>
+                                            “Marketing Powerpack Cost“ means (where applicable) the cost of the
+                                            powerpack or enhances internet listing. If any provided by the exhibitor as
+                                            set out in the clause 12.3 and the particulars;
+                                            <br/>
+                                            <br/>
+                                            “Objectionable “Displays” Shall means any signage, products, services or
+                                            show performance or literature could be considered offensive, immoral,
+                                            contrary to the Applicable Laws, or is politically socially to Dubai or the
+                                            U.A.E or their relations with other countries, trade bodies, associations,
+                                            clients or is otherwise objectionable In the sole and discretionary opinion
+                                            of the Organizer;
+                                            <br/>
+                                            <br/>
+                                            “organizer’ Shall mean the OMG Exhibition Organizing
+                                            <br/>
+                                            <br/>
+                                            “Refund” shall mean by way of bank transfer or credit note, which shall be
+                                            issued on such terms and conditions as deemed reasonable by the Organizer,
+                                            considering all relevant surrounding circumstances at such the acting in a
+                                            good faith manner, in this regard, the Organizer shall serve the right,
+                                            acting in its reasonable discretion, to deduct direct cost actually and
+                                            reasonably incurred in order to organize the Exhibition.
+                                            <br/>
+                                            <br/>
+                                            “Registration Fees” shall mean the fee set out under the Particulars.
+                                            <br/>
+                                            <br/>
+                                            “A “means the Space Allocation Agreement executed by the Organizer or
+                                            Exhibitor and includes Schedule A attached thereto;
+                                            <br/>
+                                            <br/>
+                                            “Total Exhibition Fee” Shall mean the sun payable by the Exhibitor to the
+                                            Organizer in the amount and manner set out in Schedule A to these Regulation
+                                            (and the avoidance of doubt shall include the Insurance costs, Registration
+                                            Fee and Marketing Powerpack Costs an / or Enhanced Internet Listing) and
+                                            <br/>
+                                            <br/>
+                                            “VAT: means value added tax or sales tax and any other tax of a similar
+                                            nature imposed in any jurisdiction; and
+                                            <br/>
+                                            <br/>
+                                            “VENUE” shall mean the Dubai International Convention and Exhibition Center,
+                                            or such other venue owned or operated by the Organizer and Identified in the
+                                            Space Allocation Agreement.
+                                            <br/>
+                                            <br/>
+                                            2. USE AND ALLOCATION OF SPACE.
+                                            <p style="margin-left: 30px; line-height: 1.4;">
+                                                2.1 The Organizer reserves the sole right to alter the allocated exhibit
+                                                space position if deemed necessary and the best interest of the
+                                                Exhibition in order to provide a viable layout. The Organizer’s decision
+                                                on such re-allocation of exhibit space shall be final and binding on the
+                                                Exhibitor.
+                                                <br/>
+                                                2.2 The exhibitor covenants and agrees that all governmental and other
+                                                regulatory approvals required for the display or use of Exhibition
+                                                Materials and its
+                                            </p>
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            too be exclusive of any Vat which is chargeable on any supply made by
+                                            Organizer
+                                            to the Exhibitor under this agreement. And the organizer is required to
+                                            account to the relevant tax authority for the VAT, the exhibitor shall pay
+                                            to the Organizer (in addition to and at the same time as paying any other
+                                            consideration for such supply) an amount equal to the amount of the CAT, and
+                                            the Organizer shall provide an appropriate Vat Invoice to the Exhibitor. 5%
+                                            VAT is applicable on Services and Goods in UAE since Jan 01, 2018 as per
+                                            Federal Decree Law No. 8 , 2017.
+                                            <br/>
+                                            3.5 The Exhibitor shall pay the insurance Cost and Marketing Powerpack Cost
+                                            for each and every Co- Sharer of the Exhibitor not approved bt the Organizer
+                                            in Advance in writing and present at the Event, the Exhibitor shall pay the
+                                            Organizer immediately and in full, the applicable insurance costs,
+                                            registration Fee, Marketing Powerpack cost, Enhanced Internet Listing Costs.
+                                            <br/>
+                                            3.6 Any additional services and amenities bought before, during or after
+                                            fair will be invoiced separately, on which VAT will be applicable.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            4.CANCELLATION
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            4.1 The Exhibitor shall immediately inform the Organizer in writing of its
+                                            intention not to utilize the exhibit Space Allocation Agreement for, In the
+                                            event that no notice is provided whatsoever to the Organizer hereunder then
+                                            the Exhibitor shall indemnify the Organizer for all cost associated with its
+                                            noncompliance with this provision (including loss of profit and
+                                            consequential losses).
+                                            <br/>
+                                            4.2 Upon receipt of written notice in clause 4.1 (but subject to clause 4.7)
+                                        </p>
+                                        <p style="margin-left: 45px; line-height: 1.4;">
+                                            4.2.1 All rights granted to the Exhibitors pursuant to the Agreements shall
+                                            cease and the Organizer shall be at liberty to enter and use the exhibit
+                                            space
+                                            <br/>
+                                            4.2.2 all sums paid to the Organizer by the Exhibitor on account of the
+                                            total Exhibition Fee Shall be Forfeited to the Organizer, and the Exhibitor
+                                            shall pay in full any portion outstanding of the Total Exhibition Fee and
+                                            other outstanding amounts then owed to the Organizer on account of the total
+                                            Exhibition Fee Forthwith.
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            4.3 Subject to clause 4.4 4.5 and 4.6 the Organizer reserves the right at
+                                            all times to change the date of the Exhibition. In relation to its
+                                            commencement, duration and conclusion, or to cancel due to force Majeure.
+                                            <br/>
+                                            4.4 If the Exhibition is substantively postponed by the Organizer the amount
+                                            of the Total Exhibition Fee paid by the Exhibitor shall be carried over in
+                                            view of the Exhibitor’s Participation in the postponed Exhibition. For the
+                                            avoidance of doubt, any credit note issued/carry over shall only be valid
+                                            for the next annual show edition (unless otherwise agreed between the
+                                            parties) Thereafter the credit note/carry over and the amount of the total
+                                            Exhibition fee paid by the Exhibitor for the Exhibition shall be forfeited
+                                            to the Organizer in the event the postponed Exhibition dates are not
+                                            suitable for the Exhibitor
+                                            <br/>
+                                            4.5 In the event of cancellation of the Exhibition by the Organizer without
+                                            cause the Exhibitor shall be entitled to a refund, within a reasonable time,
+                                            to the Total Fee paid to the Organizer.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            <br/>
+                                            where necessary, determine the acceptable level of sound of equipment
+                                            entertainment and audio-visual presentation. If the Exhibitor continues to
+                                            refuse to comply with the request to reduce the volume. The Organizer
+                                            reserved the right to disconnect all power supplies to the exhibit space and
+                                            no compensation will be made to the Exhibitor.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            9. EXHIBITOR’S RESPONSIBILITY
+                                            <br/>
+                                            The Exhibitor is responsible for all claims, actions or cost for personal
+                                            injury and loss of or damage to the property caused by or arising from the
+                                            erection an dismantling of the stands and anything permitted, committed or
+                                            done during the period of the Exhibition including the build-up or tear-down
+                                            periods, caused by the Exhibitor or any of its contractors, sub-contractor,
+                                            agent, or the act omission or neglect of or by any such person or by any
+                                            Exhibition Material or other article belonging to or in the care control. Or
+                                            custody. The Exhibitor, The Exhibitor shall comply with the requirements of
+                                            the exhibitor Manual and Ensure the contractor and sub-contractor and
+                                            suppliers likewise comply with its provisions.
+                                            <br/>
+                                            <br/>
+                                            10. EXHIBITORS AND PASSES
+                                            <br/>
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            10.1 Every Exhibitor shall ensure their exhibit space is open to view and
+                                            staffed by competent representatives during the Exhibition opening hours. In
+                                            the event of any Exhibitor failing to open their exhibit space or uncover
+                                            their Exhibition Material. The Organizer may do so or may arrange for the
+                                            exhibit space and Exhibition Materials to remove, and the Exhibitor shall be
+                                            liable for any charges that may be incurred. The Organizer will not be
+                                            liable for any damage losses, or expenses sustained by the Exhibitor as a
+                                            result of this Action.
+                                            <br/>
+                                            10.2Every exhibitor, and all person s for whom the may be considered
+                                            responsible in any way whatsoever, must conduct themselves in such manner as
+                                            shall not be objectionable to any other exhibitor or visitor or the
+                                            Organizer. The Exhibitor shall observe the tradition and social norms
+                                            applicable in the UAE. Any person who does not comply with these
+                                            requirements shall be liable, at the discretion of the Organizer to be
+                                            immediately removed from the Exhibition and refused re-admission during the
+                                            period of the Exhibition.
+                                            <br/>
+                                            10.3 The organizer shall issue official passes for the admission to the
+                                            Exhibition and no other form for admission pass shall be valid. No Exhibitor
+                                            shall be admitted to the Exhibition without producing to the gate official
+                                            the Exhibitor’s pass being transferred or otherwise disposed of, it shall be
+                                            immediately forfeited and no further pass will be issued in its place.
+                                            <br/>
+                                            10.4 The organizer reserves the right at their sole discretion to withdraw
+                                            the pass issued to any person if complaints have been received concerning
+                                            his/ her conduct or if there has been a breach of this Agreement.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            11. ORGANIZER’S RIGHT OF ENTRY
+                                            <br/>
+                                            The organizer and those authorized by them, have the right to enter the
+                                            premises of the Exhibition at any time execute works, repairs, and
+                                            alterations and for any other purposes deemed necessary. No compensation
+                                            shall be payable to an Exhibitors for damage,
+                                            loss or inconvenience so caused
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            if necessary, to remove and dispatch
+                                            such exhibits (at the risk and expense of the Exhibitors) and apply this to
+                                            the recovery of any monies owed to the Organizer on account of the Total
+                                            Exhibition Fee shall be forfeited and the Exhibitor shall pay any
+                                            outstanding amount owed to the Organizer on account of the Total Exhibition
+                                            Fee Forthwith in addition, the Organizer reserves the right to claim any
+                                            loss or damages, established by the Organizer or arising out of such
+                                            Termination.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            14. BANKRUPCY OR LIQUIDATION
+                                        </p>
+                                        <p style="margin-left: 30px; line-height: 1.4;">
+                                            14.1 in the event of an Exhibitor become bankrupt or entering into
+                                            liquidation (other than voluntary liquidation for the purpose of
+                                            amalgamation or reconstruction) or having a receiver appointed this
+                                            Agreement will terminate forthwith, and the allotment of exhibit space will
+                                            be cancelled, and all sums paid by the Exhibitor to the Organizer on account
+                                            of the Total Exhibition Fee Under the Agreements shall be forfeited.
+                                            <br/>
+                                            14.2 In the event of the Organizer becomes bankrupt or entering into
+                                            liquidation (other than voluntary liquidation for the purpose of
+                                            amalgamation or reconstruction) or having a receiver appointed this
+                                            agreement will terminate forthwith and no further fees will be payable by
+                                            the Exhibitor to the Organizer.
+                                        </p>
+                                        <p style="margin-left: 15px; line-height: 1.4;">
+                                            15. FORCE MAJEURE
+                                            <br/>
+                                            A party shall not be in breach of this Agreement nor be liable for any
+                                            failure or delay in performance of any obligations thereunder arising from
+                                            or attributable to an event of Force Majeure ( with the exceptional of
+                                            payment obligations) provided that such party has promptly notified the
+                                            other party in writing of the nature and extent of the event of force
+                                            Majeure causing its failure or delay in performance, If an event of Force
+                                            Majeure occurs and written notice is serve then the Organizer may terminate
+                                            this Agreement by written notice and the provisions of Clause 4.6 above
+                                            shall apply. In the event of termination of this Agreement pursuant to Force
+                                            Majeure, Neither party shall be liable to the other for any loss or damage
+                                            of any nature or kind whatsoever suffered as a result of such termination.
+                                            <br/>
+                                            <br/>
+                                            16.ASSIGNMENT
+                                            <br/>
+                                            The Exhibitor may not assign or transfer any its rights or obligations under
+                                            the Agreement without the prior written approval of the Organizer may assign
+                                            the whole or any part of the agreement to any third party without the
+                                            consent of but with notice to the Exhibitions. The Agreement shall be
+                                            binding on the successors -in tittle of the respective parties.
+                                            <br/>
+                                            <br/>
+                                            17. SEVERABILITY
+                                            <br/>
+                                            If any term or conditions of the Agreement or the application thereof to any
+                                            person or circumstances shall to any extent be invalid of unenforceable, the
+                                            remainder of the Agreement, or application of such term or condition to
+                                            persons or circumstances other than those as to which is it held invalid or
+                                            unenforceable shall not be affected thereby and each term or condition of
+                                            the contract shall be valid and enforceable
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            24. GOVERNING LAW &amp; JURISDICTION
+                                            <br/>
+                                            This agreement shall be governed by and construed in accordance with the
+                                            local laws of the Emirates of Dubai and the federal laws of the UAE. Applied
+                                            in the Emirate of Dubai. Any dispute arising out of this Agreement shall be
+                                            finally settled through the courts of Dubai.
+                                            <br/>
+                                            <br/>
+                                        </p>
+                                        <t t-if="o.space_type_id.type == 'package' and o.include_special_condition">
+                                            <span t-esc="o.hotel_special_inclusion_info"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="font-size: 9pt; font-weight: bold;">
+                            <div class="text-center" style="font-weight: 900;">
+                                <u>
+                                    <b>
+                                        SCHEDULE A
+                                    </b>
+                                </u>
+                            </div>
+                            <br/>
+                            <div style="font-size: 9pt; text-align: justify; font-weight: bold;">
+                                The payment plan for the Rental Fee and Insurance Cost (including any applicable
+                                Marketing Powerpack Costs) (“total Exhibition Fee”) to be paid by Exhibitor to the
+                                Organizer shall be as follows:
+                            </div>
+                            <br/>
+                            <div class="text-center" style="font-weight: 900;">
+                                <b>
+                                    PAYMENT TERMS
+                                </b>
+                            </div>
+                            <br/>
+                            <div style="font-size: 9pt; font-weight: bold; text-align: justify;">
+                                Installment of the Total Exhibition Fee as per % assigned to be received along with
+                                the Signed Space Allocation Agreement on or before the due date.
+                            </div>
+                        </div>
+                        <br/>
+                        <t t-if="o.exhibitor_payment_stage_ids">
+                            <div style="font-size: 9pt; font-weight: bold;">
+                                <t t-set="payment_sl_no" t-value="1"/>
+                                <table style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="padding: 5px; width: 7%; border: 1px solid black;">Sl.No.</th>
+                                            <th style="padding: 5px; width: 44%; border: 1px solid black;">
+                                                Description
+                                            </th>
+                                            <th style="padding: 5px; width: 14%; border: 1px solid black;">
+                                                Percentage
+                                            </th>
+                                            <th style="padding: 5px; width: 15%; border: 1px solid black;">
+                                                Amount
+                                            </th>
+                                            <th style="padding: 5px; width: 20%; border: 1px solid black;">
+                                                Due Date
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="o.exhibitor_payment_stage_ids" t-as="payment">
+                                            <td style="text-align: center; padding: 3px; border: 1px solid black;">
+                                                <span t-esc="payment_sl_no"/>
+                                                <t t-set="payment_sl_no" t-value="payment_sl_no+1"/>
+                                            </td>
+                                            <td style="text-align: left; padding: 3px; border: 1px solid black;">
+                                                <span t-esc="payment.name"/>
+                                            </td>
+                                            <td style="width: 15%; text-align: center; padding: 3px; border: 1px solid black;">
+                                                <span t-esc="int(payment.paid_percentage)"/>%
+                                            </td>
+                                            <td style="width: 15%; text-align: center; padding: 3px; border: 1px solid black;">
+                                                <span t-esc="payment.paid_amount"
+                                                      t-options='{"widget": "monetary", "display_currency": o.pricelist_id.currency_id}'/>
+                                            </td>
+                                            <td style="width: 20%;  text-align: center; padding: 3px; border: 1px solid black;">
+                                                <t t-if="payment.payment_due_date">
+                                                    <span t-esc="payment.payment_due_date.strftime('%d-%B-%Y')"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"
+                                                style="text-align: center; padding: 2px 5px; border: 1px solid black;">
+                                                <b>Total</b>
+                                            </td>
+                                            <td style="text-align: center; padding: 2px 5px; border: 1px solid black;">
+                                                <b>
+                                                    <span t-esc="sum(o.exhibitor_payment_stage_ids.mapped('paid_percentage'))"/>
+                                                    %
+                                                </b>
+                                            </td>
+                                            <td style="text-align: center; padding: 2px 5px; border: 1px solid black;">
+                                                <b>
+                                                    <span t-esc="sum(o.exhibitor_payment_stage_ids.mapped('paid_amount'))"
+                                                          t-options='{"widget": "monetary", "display_currency": o.pricelist_id.currency_id}'/>
+                                                </b>
+                                            </td>
+                                            <td style="text-align: center; padding: 2px 5px; border: 1px solid black;"/>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </t>
+                        <br/>
+                        <ol style="margin-left: 30px; line-height: 1.4; font-size: 9pt; text-align: justify; font-weight: bold;">
+                            <li>
+                                As per terms &amp; condition clause # 3.2 – Time for the payment shall of the essence of
+                                the
+                                agreement. Late payments shall be subject to interest payment calculated at monthly
+                                EIBOR rate by Emirates NBD or 10% p.a whichever is higher. Organizer reserves the right
+                                to charge Exhibitors with late payment fee if the payments are not received base in the
+                                agreed payment schedule.
+                            </li>
+                            <li>
+                                No payment shall be deemed to have been received intil the Organizer has received
+                                cleared funds.
+                            </li>
+                            <li>
+                                All outstanding payments owed to the Organizer on account of the rental fee shall become
+                                due immediately on cancellation or termination of the agreement without prejudice to
+                                other rights reserved under the regulations.
+                            </li>
+                            <li>
+                                The rental fee for the exhibition is exclusive of any applicable bank charges which are
+                                to borne by the exhibitor.
+                            </li>
+                            <li>
+                                All amounts expressed to be payable under this Agreement by the Exhibitor to the
+                                Organizer which (in whole or part) constitute the consideration for any supply for VAT
+                                purposes are deemed to be exclusive of any VAT which is chargeable on that supply and
+                                accordingly if VAT is or becomes chargeable on any supply made by Organizer to the
+                                Exhibitor under this Agreement and the Organizer is required to account to the relevant
+                                tax authority for the VAT, the Exhibitor shall pay to the Organizer (in addition to and
+                                at the same time as paying any other consideration or such supply) an amount equal to
+                                the amount of the VAT. And the Organizer shall provide an appropriate VAT invoice to the
+                                Exhibitor.
+                            </li>
+                        </ol>
+                        <p style="margin-left: 20px; line-height: 1.4; font-size: 9pt; text-align: justify; font-weight: bold;">
+                            I’ the undersigned, having carefully read the rules and regulations of the show stipulated
+                            above, copies of which are in possession, do hereby promise to respect all the clauses
+                            without reserve or restriction.
+                            <br/>
+                            <br/>
+                            I ’the undersigned, certify that the materials, products to be presented at the show are
+                            not, and are not liable to be, the subject of a dispute that could lead to a seizure during
+                            the show or more generally any damage for the Organizers and managers of the venues in which
+                            the event is taking place.
+                            <br/>
+                            <br/>
+                            I hereby undertake to only display at the show materials and products that comply in every
+                            way with the aforementioned commitment.
+                        </p>
+                        <table style="width: 100%; line-height: 1.4; font-size: 9pt; font-weight: bold;">
+                            <tbody>
+                                <tr style="background: #aeaaaa;">
+                                    <td colspan="2" style="padding: 5px; border: 1px solid black;">
+                                        For and on Behalf of
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px; width: 50%; border: 1px solid black; height: 40px;">
+                                        Name:
+                                    </td>
+                                    <td rowspan="3" style="padding: 5px; border: 1px solid black;">
+                                        Signature &amp; Stamp by the handwritten declaration
+                                        <br/>
+                                        “read and approve”
+<br></br>
+
+                                        <img src="/techfuge_exhibitor_customisation/static/src/img/sign_of_owner.jpg" style="width: 250px;width:250px"/>
+
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px; width: 45%; border: 1px solid black; height: 40px;">
+                                        Position:
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px; width: 45%; border: 1px solid black; height: 40px;">
+                                        Date:
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_exhibitor_agreement" model="ir.actions.report">
+        <field name="name">Exhibitor Agreement</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">techfuge_exhibitor_customisation.report_exhibitor_agreement</field>
+        <field name="report_file">techfuge_exhibitor_customisation.report_exhibitor_agreement</field>
+        <field name="print_report_name">'AGREEMENT - %s - %s' % (object.event_id.name,object.partner_id.parent_id.name or '')</field>
+        <field name="binding_model_id" ref="model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_exhibitor_agreement"/>
+    </record>
+
+
+</odoo>
+
+

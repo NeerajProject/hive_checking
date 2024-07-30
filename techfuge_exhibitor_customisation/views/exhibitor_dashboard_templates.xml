@@ -1,0 +1,574 @@
+<odoo>
+
+    <template id="footer_custom_inherit" inherit_id="website.footer_custom" name="Default" active="True">
+        <xpath expr="//div[@id='footer']" position="replace">
+        </xpath>
+    </template>
+
+    <template id="portal_exhibitor_dashboard_side_nav_bar" name="Exhibitor Dashboard Menu Side Bar">
+        <t t-set="user" t-value="request.env.user"/>
+        <t t-set="partner" t-value="user.partner_id"/>
+        <div class="dashboard-nav">
+
+            <header>
+                <a href="#!" class="menu-toggle">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <div class='dashboard-nav-dropdown'>
+                    <a href="#" class="brand-logo w-100 dashboard-nav-dropdown-toggle">
+                        <div class="d-flex p-2 w-100">
+                            <div class="align-self-center" style="width:25%">
+                                <img t-attf-src="/web/image?model=res.users&amp;field=avatar_128&amp;id=#{json.dumps(user.id)}"
+                                     alt="Avatar" class="avatar"/>
+                            </div>
+                            <div class="align-self-center text-white" style="width:65%">
+                                <h6 class="mb-0" style="font-size:18px;">
+                                    <strong>
+                                        <t t-esc="partner.name"/>
+                                    </strong>
+                                </h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </header>
+
+            <nav class="dashboard-nav-list">
+                <a href="/exhibitor_dashboard" class="dashboard-nav-item active">
+                    <span>
+                        <i class="fa fa-th"></i>
+                        Dashboard
+                    </span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                <a href="/exhibitor_dashboard/company_details" class="dashboard-nav-item">
+                    <span>
+                        <i class="fa fa-building"></i>
+                        Company Details
+                    </span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                <a href="/exhibitor_dashboard/uploaded_documents" class="dashboard-nav-item">
+                    <span>
+                        <i class="fa fa-upload"></i>
+                        Document Uploads
+                    </span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+
+<t t-if="partner.exhibitor_contract_id.event_id.is_portal_attendee_enable">
+         <a href="/exhibitor_dashboard/attendee_details" class="dashboard-nav-item">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        Attendee Badge Creation                    </span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+</t>
+
+
+                 <t t-if="partner.exhibitor_contract_id.enable_hotel_request">
+                    <a href="/exhibitor_dashboard/hotel_requests" class="dashboard-nav-item">
+                        <span>
+                            <i class="fa fa-bed"></i>
+                            Hotel Booking
+                        </span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </t>
+
+   <t t-if="user.user_category == 'exhibitor'">
+       <t t-if="partner.exhibitor_contract_id.event_id.is_portal_attendee_enable">
+
+                    <a href="/exhibitor_dashboard/invitation_letter_requests" class="dashboard-nav-item">
+                        <span>
+                            <i class="fa fa-envelope"></i>
+                            Invitation Letter For Visa Application
+                        </span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+       </t>
+                </t>
+
+
+
+
+                <a href="/exhibitor_dashboard/other_requests"  class="dashboard-nav-item">
+                    <span>
+                        <i class="fa fa-shopping-cart"></i>
+                        Place Orders
+                    </span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+
+                <t t-if="partner.exhibitor_contract_id.enable_shipment_section">
+                    <a href="/exhibitor_dashboard/shipment_details" class="dashboard-nav-item">
+                        <span>
+                            <i class="fa fa-ship"></i>
+                            Shipment Details
+                        </span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </t>
+                <t t-if="partner.exhibitor_contract_id.enable_contractor_section">
+                    <a href="/exhibitor_dashboard/contractor_details" class="dashboard-nav-item">
+                        <span>
+                            <i class="fa fa-user-circle"></i>
+                            Contractor Details  ( Raw Space Exhibitor)
+                        </span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </t>
+                <t t-if="user.user_category == 'exhibitor'">
+                    <a href="/exhibitor_dashboard/scan_badge" class="dashboard-nav-item">
+                        <span>
+                            <i class="fa fa-id-badge"></i>
+                            Scan Badge
+                        </span>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </t>
+            </nav>
+
+        </div>
+    </template>
+
+    <template id="portal_exhibitor_dashboard" name="Exhibitor Dashboard">
+        <t t-set="user" t-value="request.env.user"/>
+        <t t-set="partner" t-value="user.partner_id"/>
+        <t t-set="exhibitor_contract" t-value="partner.exhibitor_contract_id"/>
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-lg-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Dashboard</h4>
+                            </div>
+                        </div>
+                    </header>
+                    <section class="s_text_image pt32 o_colored_level oe_img_bg o_bg_img_center pb88"
+                             data-snippet="s_image_text" data-name="Image - Text"
+                             style="background-image: url(/techfuge_exhibitor_customisation/static/src/img/HomeBannerIFF.jpg); height: 40%;">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 pt16 pb16 o_colored_level o_we_force_no_transition">
+
+                                     <img class="w-50"
+                                         src="/techfuge_exhibitor_customisation/static/src/img/hfs_2023_black.png"
+                                         alt=""/>
+
+
+                                </div>
+                                <div class="col-lg-6 pt16 pb16 o_colored_level banner-content">
+
+<!--                                    <h3 clasqs="o_default_snippet_text mt-3" style="color:#0a4e6f">-->
+<!--                                        <strong>INTERNATIONAL FURNITURE &amp; HOME ACCESSORIES TRADE SHOW</strong>-->
+<!--                                    </h3>-->
+
+                                    <h5 class="mt-3" style="color:#0a4e6f">
+<!--                                        <strong>DECEMBER 01-03, 2023-->
+<!--                                            <br/>-->
+<!--IIC,DWARAKA, NEW DELHI, INDIA-->
+<!--                                        </strong>-->
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class='dashboard-content'>
+
+                        <div class='container'>
+                            <div class="row">
+                                <div class="dashboard-menu-blocks">
+                                    <div class="orange-box text-center">
+                                        <a href="/exhibitor_dashboard/company_details"
+                                           style="color: #212529; text-decoration: none;">
+                                            <div class="mx-auto">
+                                                <img src="/techfuge_exhibitor_customisation/static/src/img/company.png"
+                                                     alt=""/>
+                                            </div>
+                                            <div class="orange-box-content text-center mt-3">
+                                                <h5>Company Details</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="blue-box text-center">
+                                        <a href="/exhibitor_dashboard/uploaded_documents"
+                                           style="color: #212529; text-decoration: none;">
+                                            <div class="mx-auto">
+                                                <img src="/techfuge_exhibitor_customisation/static/src/img/upload_file.png"
+                                                     alt=""/>
+                                            </div>
+                                            <div class="blue-box-content text-center mt-3">
+                                                <h5>Upload Documents</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+
+
+
+
+                                    <t t-if="is_exhibitor">
+
+
+
+
+
+                                          <div class="brown-box text-center">
+                                        <a href="/exhibitor_dashboard/exhibitor_branding_panel"
+                                           style="color: #212529; text-decoration: none;">
+                                            <div class="mx-auto">
+                                                <img src="/techfuge_exhibitor_customisation/static/src/img/branding/branding_panel.png"
+                                                     alt=""/>
+                                            </div>
+                                            <div class="blue-box-content text-center mt-3">
+                                                <h5>Branding and Catalogue Info</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+
+
+
+                                        <div class="blue-box text-center">
+                                        <a href="/exhibitor_dashboard/exhibitor_floor_plan"
+                                           style="color: #212529; text-decoration: none;">
+                                            <div class="mx-auto">
+                                                <img src="/techfuge_exhibitor_customisation/static/src/img/branding/floor_plan.png"
+                                                     alt=""/>
+                                            </div>
+                                            <div class="blue-box-content text-center mt-3">
+                                                <h5>Stand Design Info</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+
+
+
+                                    </t>
+
+
+
+
+
+
+            <t t-if="not is_exhibitor == 'contractor'">
+
+                                    <div class="green-box text-center">
+                                        <a href="/exhibitor_dashboard/other_requests"
+                                           style="color: #212529; text-decoration: none;">
+                                            <div class="mx-auto">
+                                                <img src="/techfuge_exhibitor_customisation/static/src/img/shopping-cart.png"
+                                                     alt=""/>
+                                            </div>
+                                            <div class="green-box-content text-center mt-3">
+                                                <h5>Place Orders</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+            </t>
+
+<t t-if="exhibitor_contract.event_id.is_portal_attendee_enable">
+
+
+                                    <div class="brown-box text-center">
+                                        <a href="/exhibitor_dashboard/attendee_details"
+                                           style="color: #212529; text-decoration: none;">
+                                            <div class="mx-auto">
+                                                <img src="/techfuge_exhibitor_customisation/static/src/img/attendee.png"
+                                                     alt=""/>
+                                            </div>
+                                            <div class="brown-box-content text-center mt-3">
+                                                <h5>Attendee Details</h5>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <t t-if="user.user_category == 'exhibitor'">
+                                        <div class="orange-box text-center">
+                                            <a href="/exhibitor_dashboard/invitation_letter_requests"
+                                               style="color: #212529; text-decoration: none;">
+                                                <div class="mx-auto">
+                                                    <img src="/techfuge_exhibitor_customisation/static/src/img/invitation-letter.png"
+                                                         alt=""/>
+                                                </div>
+                                                <div class="orange-box-content text-center mt-3">
+                                                    <h5>Invitation Letter Request</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </t>
+</t>
+                                    <t t-if="exhibitor_contract.enable_hotel_request">
+                                        <div class="blue-box text-center">
+                                            <a href="/exhibitor_dashboard/hotel_requests"
+                                               style="color: #212529; text-decoration: none;">
+                                                <div class="mx-auto">
+                                                    <img src="/techfuge_exhibitor_customisation/static/src/img/booking.png"
+                                                         alt=""/>
+                                                </div>
+                                                <div class="blue-box-content text-center mt-3">
+                                                    <h5>Hotel Booking Details</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </t>
+
+                                    <t t-if="exhibitor_contract.enable_shipment_section">
+                                        <div class="green-box text-center">
+                                            <a href="/exhibitor_dashboard/shipment_details"
+                                               style="color: #212529; text-decoration: none;">
+                                                <div class="mx-auto">
+                                                    <img src="/techfuge_exhibitor_customisation/static/src/img/shipment.png"
+                                                         alt=""/>
+                                                </div>
+                                                <div class="green-box-content text-center mt-3">
+                                                    <h5>Shipment Details</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </t>
+
+                                    <t t-if="exhibitor_contract.enable_contractor_section">
+                                        <div class="brown-box text-center">
+                                            <a href="/exhibitor_dashboard/contractor_details"
+                                               style="color: #212529; text-decoration: none;">
+                                                <div class="mx-auto">
+                                                    <img src="/techfuge_exhibitor_customisation/static/src/img/contractor.png"
+                                                         alt=""/>
+                                                </div>
+                                                <div class="brown-box-content text-center mt-3">
+                                                    <h5>Contractor Details</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </t>
+
+                                    <t t-if="user.user_category == 'exhibitor'">
+                                        <div class="orange-box text-center">
+                                            <a href="/exhibitor_dashboard/scan_badge"
+                                               style="color: #212529; text-decoration: none;">
+                                                <div class="mx-auto">
+                                                    <img src="/techfuge_exhibitor_customisation/static/src/img/qr-code-scan.png"
+                                                         alt=""/>
+                                                </div>
+                                                <div class="orange-box-content text-center mt-3">
+                                                    <h5>Scan Visitor Badge</h5>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </t>
+
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div t-attf-class="{{'col-md-6' if contract.enable_finance_section else 'col-md-12' }}">
+                                    <div class="text-center border align-self-center shadow dashboard-quick-info-box">
+
+                                        <div class="col-12 bg-orange rounded p-2 mb-2">
+                                            <h6 class="mb-0" style="text-align: left;">Statistics</h6>
+                                        </div>
+
+                                        <div class="mt-2 row">
+                                            <div t-attf-class="{{'col-md-6' if user.user_category == 'exhibitor' else 'col-md-12' }}">
+                                                <div class="text-center border align-self-center dashboard-statistics-box w-100">
+                                                    <canvas id="badge-info-chart"
+                                                            style="width:100%; height: 100%"></canvas>
+                                                </div>
+                                            </div>
+                                            <div t-if="user.user_category == 'exhibitor'" class="col-md-6">
+                                                <div class="text-center border align-self-center dashboard-statistics-box w-100">
+                                                    <div class="text-center align-self-center">
+                                                        <b style="font-size: 10pt;">
+                                                            Stand Details
+                                                        </b>
+                                                        <br/>
+                                                        <span style="font-size: 9pt;">
+                                                            Total area (m2):
+                                                            <t t-esc="exhibitor_contract.total_area"/>
+                                                        </span>
+                                                        <br/>
+                                                        <span style="font-size: 9pt">
+                                                            Stall Dimensions:
+                                                            <t t-esc="exhibitor_contract.stall_dimensions"/>
+                                                        </span>
+                                                    </div>
+                                                    <div class="text-center align-self-center mt-4">
+                                                        <b style="font-size: 10pt;">Package Options</b>
+                                                        <br/>
+                                                        <t t-foreach="exhibitor_contract.commercial_items_ids"
+                                                           t-as="item">
+                                                            <span style="font-size: 9pt">
+                                                                <t t-esc="item.product_template_id.name"/>
+                                                                <br/>
+                                                            </span>
+                                                        </t>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div t-if="contract.enable_finance_section" class="col-md-6">
+                                    <div class="text-center border align-self-center shadow dashboard-quick-info-box">
+
+                                        <div class="col-12 bg-orange rounded p-2">
+                                            <h6 class="mb-0" style="text-align: left;">Finance Documents</h6>
+                                        </div>
+
+                                        <div class="mt-2">
+                                            <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                                               href="/my/quotes" title="Quotations">
+                                                Quotations
+                                                <span class="badge text-bg-secondary rounded-pill">
+                                                    <t t-esc="quotation_count"/>
+                                                </span>
+                                            </a>
+                                            <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                                               href="/my/orders" title="Proforma Invoices">
+                                                Proforma Invoices
+                                                <span class="badge text-bg-secondary rounded-pill">
+                                                    <t t-esc="proforma_count"/>
+                                                </span>
+                                            </a>
+                                            <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                                               href="/my/invoices" title="Tax Invoices">
+                                                Tax Invoices
+                                                <span class="badge text-bg-secondary rounded-pill">
+                                                    <t t-esc="invoice_count"/>
+                                                </span>
+                                            </a>
+                                            <a class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                                               href="/my/payment" title="Payment Receipts">
+                                                Payment Receipts
+                                                <span class="badge text-bg-secondary rounded-pill">
+                                                    <t t-esc="payment_receipt_count"/>
+                                                </span>
+                                            </a>
+                                            <a t-if="user.user_category == 'exhibitor'"
+
+                                               class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                                               href="my/agreement" title="Agreements">
+                                                Agreements
+                                                <span class="badge text-bg-secondary rounded-pill">
+                                                    <t t-esc="len(exhibitor_contract)"/>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="text-center border align-self-center shadow dashboard-quick-info-box">
+
+                                        <div class="col-12 bg-orange rounded p-2">
+                                            <h6 class="mb-0" style="text-align: left;">Attendees</h6>
+                                        </div>
+
+                                        <div class="mt-2">
+                                            <table class="table table-sm table-responsive">
+                                                <thead class="bg-100">
+                                                    <tr>
+                                                        <th class="text-start">Name</th>
+                                                        <th class="text-start">Mobile</th>
+                                                        <th class="text-start">Email</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr t-foreach="attendees" t-as="attendee">
+                                                        <td class="text-start">
+                                                            <p t-esc="attendee.attendee_full_name"/>
+                                                        </td>
+                                                        <td class="text-start">
+                                                            <p t-esc="attendee.mobile"/>
+                                                        </td>
+                                                        <td class="text-start">
+                                                            <p t-esc="attendee.email"/>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+<!--                                    <div class="text-center border align-self-center shadow dashboard-quick-info-box">-->
+
+<!--                                        <div class="col-12 bg-orange rounded p-2 mb-2">-->
+<!--                                            <h6 class="mb-0" style="text-align: left;">Send Message</h6>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="mt-2">-->
+<!--                                            <form action="/send/quick_mail" method="post"-->
+<!--                                                  id="exh_send_quick_mail_form" enctype="multipart/form-data">-->
+<!--                                                <input type="hidden" name="contract_id"-->
+<!--                                                       t-att-value="contract.id"/>-->
+<!--                                                <div class="col-md-12 mb-4 mb-md-0">-->
+<!--                                                    <div class="form-group">-->
+<!--                                                        <input type="email" class="form-control"-->
+<!--                                                               value="exhibit@hivefurnitureshow.com"-->
+<!--                                                               id="exh_quick_mailto" name="exh_quick_mailto"-->
+<!--                                                               readonly="readonly"/>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-md-12 mb-4 mt-2 mb-md-0">-->
+<!--                                                    <div class="form-group">-->
+<!--                                                        <input type="text" class="form-control"-->
+<!--                                                               placeholder="subject"-->
+<!--                                                               id="exh_quick_mail_subject" name="exh_quick_mail_subject"-->
+<!--                                                               required="required"/>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-md-12 mb-4 mt-2 mb-md-0">-->
+<!--                                                    <div class="form-group">-->
+<!--                                                        <textarea rows="3" class="form-control"-->
+<!--                                                                  placeholder="content"-->
+<!--                                                                  id="exh_quick_mail_content"-->
+<!--                                                                  name="exh_quick_mail_content" required="required"/>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="col-12 p-0">-->
+<!--                                                    <div class="d-flex flex-sm-row flex-column justify-content-end">-->
+<!--                                                        <div class="mr-auto p-2">-->
+<!--                                                            <button type="submit"-->
+<!--                                                                    class="btn btn-orange" style="padding: 3px 30px;">-->
+<!--                                                                Send-->
+<!--                                                            </button>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="p-2">-->
+<!--                                                            <button type="button" class="btn btn-red-light"-->
+<!--                                                                    id="btn_clear_all" style="padding: 3px 15px;">-->
+<!--                                                                Clear-->
+<!--                                                            </button>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </form>-->
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

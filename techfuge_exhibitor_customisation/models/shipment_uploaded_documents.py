@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+
+from odoo import api, fields, models
+
+
+class ShipmentUploadedDocuments(models.Model):
+    _name = 'shipment.uploaded.documents'
+    _description = 'Shipment Uploaded Documents'
+
+    exhibitor_contract_id = fields.Many2one("exhibitor.contract", string="Exhibitor Contract")
+    event_id = fields.Many2one("event.event", string="Event")
+    document_type_id = fields.Many2one("exhibitor.document.type", string="Document Type")
+    document_note = fields.Text(string="Note")
+    document_attachment_id = fields.Many2one('ir.attachment', string="Uploaded Document Attachment")
+    status = fields.Selection(selection=[
+        ('draft', 'Draft'),
+        ('submitted', 'Submit'),
+        ('confirm','Confirm')
+    ], string='Status',default='draft')
+
+    def download_shipment_uploaded_document(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/%s?download=true' % self.document_attachment_id.id,
+            'target': 'self',
+        }

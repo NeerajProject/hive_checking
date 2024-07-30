@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+   <record forcecreate="True" id="stand_details_unite" model="decimal.precision">
+            <field name="name">Stand Details Unit</field>
+            <field name="digits">2</field>
+        </record>
+
+
+    </data>
+</odoo>

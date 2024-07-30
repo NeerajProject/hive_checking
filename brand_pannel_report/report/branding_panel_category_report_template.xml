@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+         <template id="branding_panel_category_report_template">
+
+   <t t-call="web.html_container">
+<t t-call="web.basic_layout">
+<t t-foreach="docs" t-as="doc">
+
+<link rel="stylesheet" href="/brand_pannel_report/static/src/css/bootstrap.css"/>
+<link rel="stylesheet" href="/brand_pannel_report/static/src/css/custom_style_branding_panel.css"/>
+
+
+    <br></br>
+    <br></br>
+    <center>
+        <h3><strong> EXHIBITOR CATALOGUE DETAILS </strong> </h3>
+
+        <br></br>
+        <h6 class="text-danger"><t t-esc="doc.event_id.name"></t> </h6>
+
+    </center>
+
+    <div class="container">
+
+
+
+<br></br>
+    <table class="table">
+  <thead style="background-color:#4473c5">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color:#cfd6eb">
+      <td >LOGO</td>
+
+      <td>			<t  t-if="doc.company_logo">
+          <img id="branding_panel_icons" class="card-title" style="width: auto; height: 120px;" t-att-src="image_data_uri(doc.company_logo)"></img>
+      </t>				</td>
+    </tr>
+       <tr style="background-color:#e9ecf5" t-if="doc.branding_panel_company_name">
+      <td>COMPANY NAME</td>
+      <td>
+																<t t-esc="doc.branding_panel_company_name"></t>
+      </td>
+    </tr>
+
+
+<!--      -->
+
+
+
+<!--      -->
+
+      <tr style="background-color:#cfd6eb">
+      <td>COUNTRY. </td>
+      <td>	<t t-if="doc.country_name">
+								<t t-esc="doc.country_name.upper()"></t>
+							</t>
+</td>
+
+
+    </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+                <tr style="background-color:#e9ecf5">
+                         <td >STAND NO </td>
+      <td t-if="doc.stand_ids">
+          <t t-foreach="doc.stand_ids" t-as="o">
+
+
+              <t t-esc="o.stand_id.stand_number"></t> <p>   </p>
+          </t>
+
+</td>
+          </tr>
+
+
+
+
+
+        <tr style="background-color:#e9ecf5">
+                         <td >COMPANY WEBSITE</td>
+      <td>	<t t-esc="doc.partner_id.website"></t>
+</td>
+          </tr>
+
+  <tr style="background-color:#e9ecf5">
+                         <td >EMAIL. </td>
+      <td>	<t t-esc="doc.email"></t>
+</td>
+          </tr>
+
+  </tbody>
+</table>
+    <br></br>
+
+
+
+
+
+<br></br>
+<br></br>
+<center>
+        <h3>CATEGORIES LIST FOR <t t-esc="doc.event_id.name"></t> EXHIBITOR CATALOGUE</h3>
+
+</center>
+    <br/>
+    <br/>
+
+   <div class="row">
+            <div class="col-6">
+                 <strong>FURNITURE </strong><br></br>
+<br></br>
+                <t t-foreach="doc.category_furniture" t-as="category">
+
+                     <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="True"/>
+  <label class="form-check-label" for="flexCheckChecked">
+
+      <t t-esc="category.name"></t>
+  </label>
+</div>
+
+                <t t-if="doc.is_other_furniture">
+                      <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="True"/>
+  <label class="form-check-label" for="flexCheckChecked">
+      <t t-esc="doc.is_other_furniture"></t>
+  </label>
+</div>
+
+                </t>
+<!--                    <p><t t-esc="category.name"></t></p>-->
+                </t>
+
+
+            </div>
+            <div class="col-6">
+                <strong> ACCESSORIES </strong><br/>
+                                <br></br>
+
+ <t t-foreach="doc.category_accessories" t-as="category">
+                    <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="True"/>
+  <label class="form-check-label" for="flexCheckChecked">
+      <t t-esc="category.name"></t>
+  </label>
+</div>
+ </t>
+                <t t-if="doc.is_other_accessory">
+                      <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="True"/>
+  <label class="form-check-label" for="flexCheckChecked">
+      <t t-esc="doc.is_other_accessory"></t>
+  </label>
+</div>
+
+                </t>
+
+                </div>
+        </div>
+
+
+    </div>
+
+
+
+
+                    </t>
+
+                    </t>
+
+
+
+
+   </t>
+
+    </template>
+
+    </data>
+</odoo>

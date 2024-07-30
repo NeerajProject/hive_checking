@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_event_knowledge_source_form" model="ir.ui.view">
+            <field name="name">event.knowledge.source.form</field>
+            <field name="model">event.knowledge.source</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_event_knowledge_source_tree" model="ir.ui.view">
+            <field name="name">event.knowledge.source.tree</field>
+            <field name="model">event.knowledge.source</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_view_event_knowledge_source" model="ir.actions.act_window">
+            <field name="name">Source of Knowledge</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">event.knowledge.source</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_event_knowledge_source_tree"/>
+        </record>
+
+        <menuitem name="Source of Knowledge"
+                  id="menu_event_knowledge_source"
+                  action="action_view_event_knowledge_source"
+                  sequence="102"
+                  parent="event.menu_event_configuration"
+                  groups="techfuge_customisation.group_event_create_or_edit_access"/>
+
+    </data>
+</odoo>

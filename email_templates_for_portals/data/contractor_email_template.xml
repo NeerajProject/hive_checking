@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+
+
+
+
+
+
+        <record id="email_template_exhibitor_hotel_notification" model="mail.template">
+            <field name="name">Exhibitor Registration: HOTEL SECTION</field>
+            <field name="model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_contract"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">exhibit@hivefurnitureshow.com</field>
+            <field name="email_cc">exhibit@hivefurnitureshow.com,admin@omgexhibitions.com,neerajkrishnan82@gmail.com</field>
+                     <field name="subject">HFS 2024/{{object.company_name}}/STAND NO:{{','.join(object.sale_order_id.stand_ids.mapped('stand_number'))}}/HOTEL REQUEST</field>
+
+            <field name="body_html" type="html">
+
+              <p>
+                   Hotel booking request is submitted by the exhibitor, please approve.
+
+              </p>
+
+
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           <record id="email_template_contractor_contractor_portal_waring_exhibitors" model="mail.template">
+            <field name="name">NOTIFICATION MAIL FOR CONTRACTOR PORTAL</field>
+            <field name="model_id" ref="brand_pannel_hive.model_exhibitor_contract"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">exhibit@hivefurnitureshow.com</field>
+            <field name="email_cc">exhibit@hivefurnitureshow.com,admin@omgexhibitions.com,neerajkrishnan82@gmail.com</field>
+
+            <field name="subject">HFS 2024/{{object.company_name}}/ STAND NO {{','.join(object.sale_order_id.stand_ids.mapped('stand_number'))}}/CONTRACTOR SECTION</field>
+            <field name="body_html" type="html">
+
+<p>
+Please check the portal and Grant the Portal Access for the Contractor.
+</p>
+
+
+
+
+
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         <record id="email_template_contractor_documents_exhibitors" model="mail.template">
+            <field name="name">DOCUMENT MAIL CONTRACTOR SECTION</field>
+            <field name="model_id" ref="brand_pannel_hive.model_exhibitor_contract"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">exhibit@hivefurnitureshow.com</field>
+            <field name="email_cc">exhibit@hivefurnitureshow.com,admin@omgexhibitions.com,neerajkrishnan82@gmail.com</field>
+
+            <field name="subject">HFS 2024/{{object.company_name}}/ STAND NO {{','.join(object.sale_order_id.stand_ids.mapped('stand_number'))}}/CONTRACTOR SECTION</field>
+            <field name="body_html" type="html">
+
+<p>
+Please check the portal for document uploaded for Contractor.
+</p>
+
+                <ol>
+
+                    <t t-foreach="object.contractor_document_ids.filtered(lambda l: l.not_is_contractor_documents_sent == True)"
+                       t-as="documents">
+
+                            <li>
+                                <t t-esc="documents.document_attachment_id.name or ''"></t>
+                                /
+                                <t t-if="documents.document_type_id">
+                                    <span t-out="documents.document_type_id.name"></span>
+                                </t>
+                            </li>
+                        </t>
+
+                </ol>
+
+
+
+
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </data>
+</odoo>

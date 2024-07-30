@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_users_form_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Event Details" name="event_details">
+                    <group>
+                        <group>
+                            <field name="user_category" widget="radio" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="event_id" required="1"/>
+                        </group>
+                        <group>
+                            <field name="hall_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="stand_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]/group/field[@name='share']" position="after">
+                <field name="brand_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_tree_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">res.users.tree.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login']" position="after">
+                <field name="parent_company_id" string="Company"/>
+                <field name="brand_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_search_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">res.users.search.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='share']" position="after">
+                <field name="parent_company_id" string="Company"/>
+                <field name="brand_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

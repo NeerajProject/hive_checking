@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+<!--        <record id="branding_update_line_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">branding.update.line.branding_update_line.tree</field>-->
+<!--            <field name="model">branding.update.line</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="ModelTitle">-->
+<!--                                  <field name="partner_id"/>-->
+<!--                                  <field name="exhibitor_contract_id"/>-->
+<!--                    <field name="stand_id"/>-->
+<!--                    <field name="event_id"/>-->
+<!--                    <field name="category_accessories" widget = "many2many_tags"></field>-->
+<!--                    <field name="category_furniture" widget = "many2many_tags"></field>-->
+<!--                    <field name="is_submited"></field>-->
+
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+<!--        <record id="branding_update_line_act_window" model="ir.actions.act_window">-->
+<!--            <field name="name">Branding Panel Report</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">branding.update.line</field>-->
+<!--            <field name="view_mode">tree</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="oe_view_nocontent_create">-->
+<!--                    There is no examples click here to add new ModelTitle.-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <menuitem name="Branding Panel Report" parent="event.menu_reporting_events" id="branding_update_line_menu" action="branding_update_line_act_window"/>-->
+
+    </data>
+</odoo>

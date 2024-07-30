@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+    <template id="visit_badge_printing_qr_code" name="Exhibitor Badge Printing">
+
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+        <script>
+
+
+
+        </script>
+
+         <script type="text/javascript">
+        setTimeout(function() {
+                $('#submission_success_msg').hide();
+}, 10000);
+    </script>
+
+
+
+
+
+
+
+
+
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!--        <script></script>-->
+<style>
+
+
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #eee6d2cb;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width:100%;
+        margin: 2em auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding:2em;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus {
+        border-color: #dfb630;
+    }
+    input[type="submit"] {
+        background-color: hsl(49, 70%, 56%);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+    .col-new-6{
+    margin-left:1em;
+    width:100%
+    }
+    .row-new{
+    display: flex;
+    flex-direction: row
+    }
+
+    input[type="submit"]:hover {
+        background-color: #c7a252;
+    }
+
+
+    @media (min-width:320px)  {
+
+     .container {
+            width: 90%;
+        }
+  .row-new{
+    display:block !important;
+    }
+
+    }
+@media (min-width:480px)  {
+
+     .container {
+            width: 90%;
+        }
+  .row-new{
+    display:block !important;
+    }
+
+    }
+@media (min-width:600px)  { / .container {
+            width: 90%;
+        }
+  .row-new{
+    display:block !important;
+    }
+    }
+@media (min-width:801px)  {  .container {
+            width: 90%;
+        }
+  .row-new{
+    display:Block !important;
+    } }
+@media (min-width:1025px) {
+
+     .container {
+            width: 90%;
+        }
+  .row-new{
+    display:flex !important;
+    }
+    }
+@media (min-width:1281px) {      .container {
+            width: 90%;
+        }
+  .row-new{
+    display:flex !important;
+    } }
+
+
+
+
+</style>
+
+<div class="container">
+    <div style="      display: flex;
+      justify-content: center;
+">
+         <img src="/techfuge_exhibitor_customisation/static/src/img/icons/HFS2024.svg" style="width:30%"></img>
+
+    </div>
+    <h2><t t-esc="event_id.name"/> Visitors  Registration</h2>
+    <form action="/submit/visitors/badge" method="post">
+        <input name="event_id" t-att-value="event_id.id" style="display:None"></input>
+
+
+        <div class="form-group">
+            <label for="title" style="font-size:1.5em">Title:</label>
+            <select id="title" style="font-size:1.5em" name="title">
+                <option value="Mr.">Mr.</option>
+                <option value="Ms.">Ms.</option>
+                <option value="Mrs.">Mrs.</option>
+
+            </select>
+        </div>
+
+        <div class="row-new">
+            <div class="col-new-6">
+                       <label for="firstname" style="font-size:1.5em">First Name:</label>
+            <input type="text" id="firstname"  style="font-size:1.5em" name="name" required="True"/>
+            </div>
+            <div class="col-new-6">
+                 <label for="lastname" style="font-size:1.5em">Last Name:</label>
+            <input type="text" id="last_name" style="font-size:1.5em" name="lastname" required="True"/>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="row-new">
+            <div class="col-new-6">
+                            <label for="designation" style="font-size:1.5em">Designation:</label>
+            <input type="text" id="designation" style="font-size:1.5em" name="designation" required="True"/>
+            </div>
+            <div class="col-new-6">
+                    <label for="email" style="font-size:1.5em">Business Email:</label>
+            <input type="email" id="email" name="email"  style="font-size:1.5em" required="True"/>
+            </div>
+        </div>
+
+
+        <div class="row-new">
+            <div class="col-new-6">
+                      <label for="mobile" style="font-size:1.5em">Mobile:</label>
+            <input type="tel" id="mobile" name="mobile"  style="font-size:1.5em" required="True"/>
+            </div>
+            <div class="col-new-6">
+                   <label for="company" style="font-size:1.5em">Company Name:</label>
+            <input type="text" id="company" style="font-size:1.5em" name="company_name" required="True"/>
+            </div>
+        </div>
+        <div class="row-new">
+                    <div class="col-new-6">
+             <label for="website" style="font-size:1.5em">Company Website:</label>
+            <input type="text" id="website" style="font-size:1.5em" name="company_website" />
+        </div>
+
+            <div class="col-new-6">
+                  <label for="city" style="font-size:1.5em">City:</label>
+            <input type="text" id="city" name="city_or_town" style="font-size:1.5em" required="True"/>
+            </div>
+        </div>
+
+<div class="row-new">
+    <div class="col-new-6">
+                    <label for="state" style="font-size:1.5em">State:</label>
+            <input type="text" id="state" style="font-size:1.5em" name="state_or_province" required="True"/>
+    </div>
+    <div class="col-new-6">
+        <label for="country" style="font-size:1.5em">Country:</label>
+
+             <select id="title"  style="font-size:1.5em" class="advanced-select"   name="country">
+
+                  <t t-foreach="country_ids" t-as="country">
+                <option t-att-value="country.id"><t t-esc="country.name"></t> </option>
+            </t>
+
+            </select>
+
+    </div>
+</div>
+
+<br></br>
+
+        <input type="submit" style="font-size:1.5em" value="Register"/>
+
+            <t t-if="successful">
+
+               <div id="submission_success_msg"  style="font-size:1.5em" class="alert alert-info mb-4" role="status">
+                   <strong> Successfully registered! </strong>
+ Please Check Your Email                                    </div>
+
+        </t>
+    </form>
+</div>
+    </template>
+    </data>
+</odoo>

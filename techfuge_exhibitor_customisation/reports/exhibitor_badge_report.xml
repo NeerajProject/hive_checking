@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_exhibitor_badge">
+            <t t-call="web.html_container">
+                <t t-call="techfuge_customisation.visitor_badge_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page exh_badge_background" style="'background-image:url('/web/image/event.event/19/exhibitor_template')'">
+                            <div class="visitor_info_section">
+                                <br></br>
+                                <br></br>
+                                <p class="text-center">
+                                    <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', o.generate_visitor_badge_qr_code(), 100, 100)"
+                                         class="badge_qr"/>
+                                </p>
+                                <p class="visitor_reg_no">
+                                    <span t-esc="o.attendee_reg_no"/>
+                                </p>
+                                <p class="visitor_name">
+                                    <span t-esc="o.attendee_full_name"/>
+                                </p>
+                                <p class="visitor_designation">
+                                    <t t-if="o.designation">
+                                        <span t-esc="o.designation"/>
+                                    </t>
+                                </p>
+                                <p class="visitor_company">
+                                    <t t-if="o.company_name">
+                                        <span t-esc="o.company_name"/>
+                                    </t>
+                                </p>
+                                <p class="visitor_country" style="margin-top: 0.4rem;">
+                                    <t t-if="o.country_id">
+                                        <span t-esc="o.country_id.name"/>
+                                    </t>
+                                </p>
+                            </div>
+                            <div class="visitor_type_section">
+                                <p class="visitor_type">
+                                    <t t-if="o.attendee_type_id">
+<!--                                        <span t-esc="o.attendee_type_id.name"/>-->
+                                    </t>
+                                </p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_report_exhibitor_badge" model="ir.actions.report">
+            <field name="name">Exhibitor Badge</field>
+            <field name="model">event.registration</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">techfuge_exhibitor_customisation.report_exhibitor_badge</field>
+            <field name="report_file">techfuge_exhibitor_customisation.report_exhibitor_badge</field>
+            <field name="binding_model_id" ref="event.model_event_registration"/>
+            <field name="paperformat_id" ref="techfuge_customisation.paperformat_visitor_badge"/>
+        </record>
+
+    </data>
+</odoo>

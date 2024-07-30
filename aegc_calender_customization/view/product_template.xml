@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    Inherited the form view of product_template in order to add fields
+     for restricting products.-->
+    <record id="product_template_view_form" model="ir.ui.view">
+        <field name="name">product.template.view.form.inherit.product.restriction.users</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='purchase_ok']" position="before">
+
+                     <span class="d-inline-block">
+                            <field name="is_golf"/>
+                            <label for="is_golf"/>
+                        </span>
+
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+
+
+
+
+
+
+
+
+        <record id="aegc_booking_backend" model="ir.actions.client">
+        <field name="name">Appointment</field>
+        <field name="tag">AegcBookingBackend</field>
+    </record>
+
+
+
+
+
+            <menuitem id="menu_golf_booking_slots"  name="Booking" web_icon="aegc_calender_customization,static/description/icon.png" groups="aegc_calender_customization.group_golf_club_booking"  action="aegc_booking_backend"/>
+
+
+
+
+
+
+</odoo>

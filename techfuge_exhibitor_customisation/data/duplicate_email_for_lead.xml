@@ -1,0 +1,235 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <data>
+
+
+
+
+   <record id="email_template_exhibitor_registration_duplicate_mail_to_planner" model="mail.template">
+            <field name="name">Exhibitor Registration: Mail to Duplicate</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&lt;</field>
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="subject">Thank you for Registering !</field>
+                          <field name="email_cc">admin@omgexhibitions.com,exhibit@hivefurnitureshow.com</field>
+            <field name="description">Sent mail to planner after the successful exhibitor registration</field>
+            <field name="body_html" type="html">
+
+
+             <p>Dear Exhibitor,</p>
+             <p></p>
+             <p></p>
+             <p>
+              Thank you for your continued partnership. We are pleased to confirm your participation in our upcoming event. We intend to use the same contact details previously provided for the new contract. Should there be any updates or changes, please inform us at your earliest convenience.
+             </p>
+                <table align="center" width="100%" style="width: 100%;">
+                    <tr>
+                        <td/>
+                        <td align="center" width="600" style="width: 600px;">
+                            <table align="center" border="0" width="100%" style="width: 100%;">
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Name</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.partner_full_name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Designation</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.function"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Business Email</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.email_from"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Mobile</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.mobile"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Company Name</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.partner_name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Company Website</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.website"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Company Address</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td style="text-align: justify;">
+                                        <t t-out="object.street"/>
+                                    </td>
+                                </tr>
+
+                                  <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Desired Area in SQM</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.desired_area_in_sqm"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>City / Town</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.city"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>State / Province</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.state_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Country</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.country_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Landline</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.phone"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Product Category</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.product_categories"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>About Company</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td style="text-align: justify;">
+                                        <t t-out="object.about_exhibitor_company"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Communication Permission</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td style="text-align: justify;">
+                                        <t t-if="object.communication_permission">
+                                            I would like to be informed though email, about Advertisements,
+                                            announcements and developments related to the exhibition.
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td/>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td align="left" style="width: 150px;"/>
+                        <td align="center" style="padding: 40px 0 20px 30px;">
+                            <a href="/web/login" target="_blank"
+                               style="background-color: #eba52e; padding: 6px; text-decoration: none; color: #fff; border-radius: 10px; font-size:13px;">
+                                Go to Portal
+                            </a>
+                        </td>
+                        <td/>
+                    </tr>
+                </table>
+             <p></p>
+             <p>See you at the Event,</p>
+             <p>Best wishes.</p>
+             <p>OMG team.</p>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+
+
+
+
+    </data>
+
+
+
+ </odoo>

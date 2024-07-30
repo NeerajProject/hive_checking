@@ -1,0 +1,30 @@
+<odoo>
+<template id="added_branding_pannel" inherit_id="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar">
+        <xpath expr="//a[@href='/exhibitor_dashboard/uploaded_documents']" position="after">
+
+            <t t-if="not is_exhibitor == 'contractor'">
+
+
+   <a href="/exhibitor_dashboard/exhibitor_branding_panel" class="dashboard-nav-item">
+                    <span>
+                        <i class="fa fa-globe	"></i>
+                        Branding and Catalogue Info
+<t t-esc="is_exhibitor"></t>
+
+                    </span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+
+
+
+               <a href="/exhibitor_dashboard/exhibitor_floor_plan" class="dashboard-nav-item">
+                    <span>
+                        <i class="fa fa-tasks"></i>
+Stand Design Info
+                    </span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+</t>
+        </xpath>
+</template>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="appointment_type_timestamp_form_view" model="ir.ui.view">
+            <field name="name">"appointment.type.timestamp.form</field>
+            <field name="model">appointment.type.timestamp</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"></field>
+                            </group>
+                            <group>
+                                                        <field name="last_selected_date"></field>
+                        <field name="search_appointment_type_ids" widget="many2many_tags"></field>
+
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="appointment_type_timestamp__tree_view" model="ir.ui.view">
+            <field name="name">"appointment.type.timestamp.tree</field>
+            <field name="model">appointment.type.timestamp</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                                                                      <field name="name"></field>
+
+                                            <field name="search_appointment_type_ids"></field>
+                        <field name="search_appointment_type_ids" widget="many2many_tags"></field>
+
+
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="appointment_type_timestamp_act_window" model="ir.actions.act_window">
+            <field name="name">Appointment Type Default Params</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">appointment.type.timestamp</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new appointment search parameter.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Appointment Type Default Params" parent="base.menu_users" id="appointment_type_timestamp_menu"  action="appointment_type_timestamp_act_window"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="event_agreement_country_form_view" model="ir.ui.view">
+            <field name="name">custom_exhibitor_agreement.event.agreement.country.form</field>
+            <field name="model">event.agreement.country</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"></field>
+<field name="event_id"></field>
+                            </group>
+                            <group>
+
+                                <field name="email_template_id"></field>
+<field name="country_id"></field>
+                                <field name="payment_instruction"></field>
+                                <field name="special_instruction"></field>
+                                <field name="different_payment_description"></field>
+                            </group>
+                        </group>
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="event_agreement_country_tree_view" model="ir.ui.view">
+            <field name="name">custom_exhibitor_agreement.event.agreement.country.tree</field>
+            <field name="model">event.agreement.country</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+<field name="name"></field>
+<field name="event_id"></field>
+<field name="email_template_id"></field>
+<field name="country_id"></field>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="event_agreement_country_act_window" model="ir.actions.act_window">
+            <field name="name">Event Agreement Country Master</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">event.agreement.country</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Event Agreement Country Master" id="event_agreement_country_menu" parent="event.menu_event_configuration" action="event_agreement_country_act_window"/>
+
+    </data>
+</odoo>

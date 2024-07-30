@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_event_registration_form_inherit" model="ir.ui.view">
+        <field name="name">event.registration.form.inherit</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//widget[@name='web_ribbon']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//sheet/group[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_send_badge_email']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_confirm']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_set_done']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_set_draft']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//sheet" position="inside">
+                <group col="3" class="mt48 mb16">
+                    <group>
+                        <field name="title"/>
+                        <field name="designation" required="1"/>
+                        <field name="company_name" required="1"/>
+                        <field name="city_or_town" required="1"/>
+                        <field name="phone" string="Landline"/>
+                        <field name="source_of_registration" string="Source" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="name" string="First Name" required="1"/>
+                        <field name="email" string="Business Email" required="1"/>
+                        <field name="company_website"/>
+                        <field name="state_or_province"/>
+                        <field name="attendee_type_id" options="{'no_create': True, 'no_edit': True, 'no_open': True}"
+                               required="1"/>
+                        <field name="attendee_parent_type" invisible="1"/>
+                        <field name="create_date" readonly="1" string="Attendee Created Date"/>
+                    </group>
+                    <group>
+                        <field name="last_name" required="1"/>
+                        <field name="mobile" required="1"/>
+                        <field name="company_address"/>
+                        <field name="country_id" required="1"/>
+                        <field name="event_id"/>
+                        <field name="badge_sent" readonly="1"/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Visitor Details" name="visitor_details"
+                          attrs="{'invisible': [('attendee_parent_type', '!=', 'visitor')]}">
+                        <group>
+                            <group>
+                                <field name="nature_of_business_id"
+                                       attrs="{'required': [('attendee_parent_type', '=', 'visitor')]}"
+                                       options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                <field name="source_of_knowledge_id"
+                                       attrs="{'required': [('attendee_parent_type', '=', 'visitor')]}"
+                                       options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                <field name="no_of_stores"
+                                       attrs="{'required': [('attendee_parent_type', '=', 'visitor')]}"/>
+                                <field name="interested_product_categories_ids" widget="many2many_tags"
+                                       attrs="{'required': [('attendee_parent_type', '=', 'visitor')]}"
+                                       options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="purpose_of_visit_ids" widget="many2many_tags"
+                                       attrs="{'required': [('attendee_parent_type', '=', 'visitor')]}"
+                                       options="{'no_create': True, 'no_edit': True, 'no_open': True}"/>
+                                <field name="role_description"
+                                       attrs="{'required': [('attendee_parent_type', '=', 'visitor')]}"/>
+                                <field name="annual_revenue_enterprise"
+                                       attrs="{'required': [('attendee_parent_type', '=', 'visitor')]}"/>
+                                <field name="first_visit_exhibition"
+                                       attrs="{'required': [('attendee_parent_type', '=', 'visitor')]}"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="VIP Hosted Buyer Details" name="vip_visitor_details"
+                          attrs="{'invisible': [('attendee_parent_type', '!=', 'vip_visitor')]}">
+                        <group>
+                            <group>
+                                <field name="checkin_date"/>
+                                <field name="no_of_nights"/>
+                                <field name="air_fare_claim_value"/>
+                                <field name="receiver_signed_cash_receipt"/>
+                                <field name="visa_copy"/>
+                            </group>
+                            <group>
+                                <field name="checkout_date"/>
+                                <field name="eligible_for_flight_ticket"/>
+                                <field name="air_fare_claim_date"/>
+                                <field name="passport_copy"/>
+                                <field name="air_ticket"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Exhibitor Details" name="exhibitor_details"
+                          attrs="{'invisible': [('attendee_parent_type', '!=', 'exhibitor')]}">
+                        <group>
+                            <group>
+                                <field name="exhibitor_company_name" string="Company Name" invisible="1"/>
+                                <field name="exhibitor_company_website" string="Company Website" invisible="1"/>
+                                <field name="exhibitor_company_address" string="Company Address" invisible="1"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Contractor Details" name="contractor_details"
+                          attrs="{'invisible': [('attendee_parent_type', '!=', 'contractor')]}">
+                        <group>
+                            <group>
+                                <field name="exhibitor_name" readonly="1"/>
+                                <field name="contractor_company_name" string="Company Name" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="contractor_company_website" string="Company Website" invisible="1"/>
+                                <field name="contractor_company_address" string="Company Address" invisible="1"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="Attendee Event Activities" name="attendee_event_activities">
+                        <field name="attendee_activities_ids" readonly="1">
+                            <tree no_open="1">
+                                <field name="name"/>
+                                <field name="activity_location_type_id"/>
+                                <field name="user_id"/>
+                                <field name="exhibitor_name"/>
+                                <field name="stand_number"/>
+                                <field name="attendee_activity_datetime"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_event_registration_tree_inherit" model="ir.ui.view">
+        <field name="name">event.registration.tree.inherit</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='create_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='event_ticket_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='activity_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_set_done']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='activity_exception_decoration']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="attendee_reg_no"/>
+                <field name="attendee_full_name" string="Attendee Name"/>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="before">
+                <field name="mobile"/>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="company_name"/>
+                <field name="create_date" string="Attendee Created Date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_event_visitor_tree" model="ir.ui.view">
+        <field name="name">event.registration.tree</field>
+        <field name="model">event.registration</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <field name="attendee_id" optional="hide"/>
+                <field name="attendee_reg_no"/>
+                <field name="title" optional="hide"/>
+                <field name="name" string="First Name"/>
+                <field name="last_name"/>
+                <field name="designation"/>
+                <field name="email"/>
+                <field name="mobile"/>
+                <field name="company_name"/>
+                <field name="company_website" optional="hide"/>
+                <field name="company_address" optional="hide"/>
+                <field name="city_or_town" optional="hide"/>
+                <field name="state_or_province" optional="hide"/>
+                <field name="country_id"/>
+                <field name="phone" optional="hide"/>
+                <field name="attendee_type_id"/>
+                <field name="event_id"/>
+                <field name="event_reference" optional="hide"/>
+                <field name="source_of_registration"/>
+                <field name="nature_of_business_id" optional="hide"/>
+                <field name="purpose_of_visit_ids" optional="hide" widget="many2many_tags"/>
+                <field name="source_of_knowledge_id" optional="hide"/>
+                <field name="role_description" optional="hide"/>
+                <field name="no_of_stores" optional="hide"/>
+                <field name="annual_revenue_enterprise" optional="hide"/>
+                <field name="interested_product_categories_ids" optional="hide" widget="many2many_tags"/>
+                <field name="first_visit_exhibition" optional="hide"/>
+                <field name="create_date" string="Attendee Created Date" optional="hide"/>
+                <field name="checkin_date" optional="hide"/>
+                <field name="checkout_date" optional="hide"/>
+                <field name="no_of_nights" optional="hide"/>
+                <field name="air_fare_claim_value" optional="hide"/>
+                <field name="receiver_signed_cash_receipt" optional="hide"/>
+                <field name="visa_copy" optional="hide"/>
+                <field name="eligible_for_flight_ticket" optional="hide"/>
+                <field name="air_fare_claim_date" optional="hide"/>
+                <field name="passport_copy" optional="hide"/>
+                <field name="air_ticket" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_registration_search_form_inherit" model="ir.ui.view">
+        <field name="name">event.registration.search.inherit</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_registration_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="attendee_reg_no"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_view_event_visitor" model="ir.actions.act_window">
+        <field name="name">Visitors List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">event.registration</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_event_visitor_tree"/>
+        <field name="search_view_id" ref="event.view_registration_search"/>
+    </record>
+
+    <menuitem name="Visitors List"
+              id="menu_event_visitor_list"
+              action="action_view_event_visitor"
+              sequence="100"
+              parent="event.menu_reporting_events"/>
+
+</odoo>

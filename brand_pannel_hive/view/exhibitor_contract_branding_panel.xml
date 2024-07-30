@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <record id="branding_panel_report_exhibitor_contract_tree_view" model="ir.ui.view">
+            <field name="name">branding.panel.report.exhibitor.contract.form.view</field>
+            <field name="model">exhibitor.contract</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="company_name" string="Registered Company Name"/>
+                    <field name="branding_panel_company_name" string="Company Name Required on Panel"/>
+                    <field name="stand_details_report" string="Stand Name"/>
+                    <field name="company_logo" string="Logo" widget="image" class="oe_avatar"/>
+                    <field name="branding_panel_width" string="Panel width in Mtrs"/>
+                    <field name="branding_panel_height" string="Panel height in Mtrs"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="exhibitor_contract_branding_panel_act_window" model="ir.actions.act_window">
+            <field name="name">Branding Panel Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exhibitor.contract</field>
+                    <field name="view_id" ref="branding_panel_report_exhibitor_contract_tree_view"/>
+
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Branding Panel Report" id="exhibitor_contract_branding_panel_menu"  parent='event.menu_reporting_events' action="exhibitor_contract_branding_panel_act_window"/>
+
+    </data>
+</odoo>

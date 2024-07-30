@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+
+<t t-name="AegcFilters">
+
+    <nav class="navbar navbar-light bg-light">
+
+        <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                style="margin-left:20px" aria-controls="offcanvasExample">
+<i class="fa fa-filter" aria-hidden="true"/>
+            Filter
+</button>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+             aria-labelledby="offcanvasExampleLabel" style="width:300px !important">
+<div class="offcanvas-header">
+<h5 class="offcanvas-title" id="offcanvasExampleLabel">Filters</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"/>
+</div>
+            <div class="offcanvas-body">
+<hr/>
+
+
+                <div class="mb-3">
+<label for="exampleFormControlInput1" class="form-label">Date</label>
+                    <input type="date" class="form-control"
+                           t-att-value="widget.all_appointment_type_except_selected.date_of_search"
+                           id="update_search_date_of_screen"/>
+                    <t t-esc="widget.all_appointment_type_except_selected['used_appointment_type_id']"/>
+</div>
+                <hr/>
+                <div class="form-check form-switch">
+<t t-foreach="widget.all_appointment_type_except_selected.appointment_type_ids_screen" t-as="appointment_type">
+<t t-if="appointment_type['checked']">
+<input class="form-check-input" type="checkbox" id="appointment_type_remove" checked="true"
+       t-att-value="appointment_type.id"/>
+    <label class="form-check-label" for="flexSwitchCheckDefault">
+<t t-esc="appointment_type.name"/>
+</label>
+    <br/>
+</t>
+    <t t-else="appointment_type['checked']">
+<input class="form-check-input" type="checkbox" id="appointment_type_add" t-att-value="appointment_type.id"/>
+        <label class="form-check-label" for="flexSwitchCheckDefault">
+<t t-esc="appointment_type.name"/>
+</label>
+        <br/>
+</t>
+</t>
+                    <hr/>
+                    <button type="submit" class="btn btn-primary" id="close_reload_page" data-bs-dismiss="offcanvas">Submit</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>
+        </div>
+
+        <center>
+                    <h2> <t t-esc="widget.all_slots_available.date_of_search"></t></h2>
+
+            <br></br>
+
+<button type="button" id="aegc_create_event" class="btn btn-secondary">
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+
+    Create Event
+</button>
+
+        </center>
+
+    </nav>
+
+
+</t>
+
+
+    <t t-name="AegcBookingBackend">
+<div id="reload_page_of_booking_screen" style="overflow: scroll;">
+
+        <t t-call="AegcFilters">
+
+        </t>
+
+
+    <div class="container">
+    <div class="row">
+    <div class="col-2">
+        <div class="alert alert-dark" role="alert">
+Available
+        </div>
+    </div>
+        <div class="col-2">
+        <div class="alert alert-warning" role="alert">
+Booked
+        </div>
+    </div>
+        <div class="col-2">
+        <div class="alert alert-success" role="alert">
+Paid
+        </div>
+    </div>
+
+    <div class="col-2">
+        <div class="alert alert-info" role="alert">
+Event
+        </div>
+    </div>
+
+            <div class="col-2">
+        <div class="alert alert-danger" role="alert">
+Blocked
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+
+    <hr></hr>
+
+
+    <t t-call="AegcContainerTables"></t>
+
+</div>
+
+    </t>
+
+</template>

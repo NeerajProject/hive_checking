@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+
+<template id="report_branding_panel_layout">
+
+  <t t-if="not o" t-set="o" t-value="docs"/>
+   <t t-set="company" t-value="company_id"/>
+   <div class="header">
+	   <br/>
+	<br/>
+		<p style="font-size:25px"> <strong> WIDTH :</strong> <t t-esc="o.branding_panel_width"></t> MTR </p>
+		<p style="font-size:25px"> <strong> HEIGHT : </strong>  <t t-esc="o.branding_panel_height"></t> MTR </p>
+<!--          <img src="/brand_pannel_report/static/src/img/preview_image.jpeg" style="width:1000px;margin-left:-20px"></img>-->
+   </div>
+   <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
+        t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+       <t t-call="web.address_layout"/>
+       <t t-raw="0"/>
+   </div>
+    <div class="footer">
+
+    </div>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+         <template id="report_branding_panel_template">
+
+
+
+     <t t-call="web.html_container">
+
+       <t  t-foreach="docs" t-as="o">
+<t t-call="brand_pannel_report.report_branding_panel_layout">
+
+		<div t-att-style="'background-image:url(\'/web/image/branding.panel.badge/'+str(o.get_country_branding_panel_badge())+'/background_image_report/\');'" style="height:500px; background-repeat: no-repeat !important;  background-size: cover !important;" >
+
+<div style="height:150px"></div>
+
+
+<div style="height:1300px">
+<div  style="margin-top:50%" t-if="o.company_logo">
+						<img  style="  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%; " t-att-src="image_data_uri(o.company_logo)"></img>
+
+
+
+</div>
+<center>
+
+
+<br></br>
+<br></br>
+<br></br>
+
+    		<h1  t-if="o.branding_panel_company_name"  style=" font-size:80px;">
+															<span id="branding_panel_company_id" >
+
+																<t t-esc="o.branding_panel_company_name"></t>
+															</span>
+
+						</h1>
+
+		<div t-if="o.stand_ids">
+						<h1 style="color:#ea7235;font-size:80px">
+							<t t-foreach="o.stand_ids" t-as="stand">
+								<t t-esc="stand.stand_id.stand_number"></t>
+							</t>
+
+
+						</h1>
+					</div>
+
+
+
+</center>
+
+
+
+</div>
+
+<!--</div>-->
+        </div>
+
+
+
+
+</t>
+
+   </t>
+
+
+
+
+</t>
+
+
+    </template>
+
+    </data>
+</odoo>

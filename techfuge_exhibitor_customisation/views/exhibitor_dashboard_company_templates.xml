@@ -1,0 +1,377 @@
+<odoo>
+
+    <template id="portal_exhibitor_dashboard_company_details" name="Exhibitor Dashboard Company Details">
+        <t t-set="user" t-value="request.env.user"/>
+        <t t-set="partner" t-value="user.partner_id"/>
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-sm-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Company Details</h4>
+                            </div>
+                        </div>
+                    </header>
+                    <div class='dashboard-content pt-2'>
+                        <div class='container'>
+                            <div class="row">
+                                <div class="col-12 bg-blue rounded p-2">
+                                    <h5 class="mb-0">Company Information</h5>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <t t-if="submission_success">
+                                    <div id="submission_success_msg" class="alert alert-success mb-4" role="status">
+                                        Contact Created Successfully !!!
+                                    </div>
+                                </t>
+                                <div class="col-12 p-0">
+                                    <div class="table-responsive rounded">
+                                        <table class="table table-bordered text-center">
+                                            <tr class="bg-blue-light">
+                                                <th>Company Name</th>
+                                                <th>Brand</th>
+                                                <th>Address</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="partner.parent_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="brand_name"/>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <span t-esc="partner.parent_id.street"/>
+                                                    </p>
+                                                    <p>
+                                                        <span t-esc="partner.parent_id.street2"/>
+                                                    </p>
+                                                    <p>
+                                                        <span t-esc="partner.parent_id.city"/>
+                                                    </p>
+                                                    <p>
+                                                        <t t-if="partner.parent_id.state_id">
+                                                            <span t-esc="partner.parent_id.state_id.name"/>,
+                                                        </t>
+                                                        <span t-esc="partner.parent_id.country_id.name"/>
+                                                    </p>
+                                                    <p>
+                                                        <t t-if="partner.parent_id.zip">
+                                                            ZIP:
+                                                            <span t-esc="partner.parent_id.zip"/>
+                                                        </t>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-12 bg-blue rounded p-2">
+                                    <h5 class="mb-0">Contact Person Information</h5>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-12 p-0">
+                                    <div class="table-responsive rounded">
+                                        <table class="table table-bordered text-center">
+                                            <tr class="bg-blue-light">
+                                                <th>Primary Contact Name</th>
+                                                <th>Phone Number</th>
+                                                <th>Email</th>
+                                            </tr>
+                                            <tr t-foreach="contacts" t-as="contact">
+                                                <td>
+                                                    <p>
+                                                        <span t-esc="contact.name"/>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <span t-esc="contact.mobile"/>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <t t-if="contact.additional_email">
+                                                            <span t-esc="contact.additional_email"/>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-esc="contact.email"/>
+                                                        </t>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <t t-if="user.user_category == 'exhibitor'">
+                                <div class="row mt-0 mt-md-4">
+                                    <div class="col-12 p-0">
+                                        <div class="d-flex flex-sm-row flex-column justify-content-end">
+                                            <div class="mr-auto p-2">
+                                                <a href="/exhibitor_dashboard/company_details/add_contact" role="button"
+                                                   style="color: #212529; text-decoration: none;"
+                                                   class="btn btn-orange w-100 btn-orange-padding">
+                                                    Add Contact
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class="col-12 bg-blue rounded p-2">
+                                        <h5 class="mb-0">Stand and Exhibit Information</h5>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                    <div class="col-12 p-0">
+                                        <div class="table-responsive rounded">
+                                            <table class="table table-bordered text-center">
+                                                <tr class="bg-blue-light">
+                                                    <th>Hall Number</th>
+                                                    <th>Number of Stands</th>
+                                                    <th>Stand Numbers</th>
+                                                    <th>Total Area (m2)</th>
+                                                    <th>Stall Dimensions</th>
+                                                    <th>Package Options</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <t t-foreach="halls" t-as="hall">
+                                                            <p t-esc="hall"/>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <p t-esc="contract.no_of_stands"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-foreach="stands" t-as="stand">
+                                                            <p t-esc="stand"/>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <p t-esc="contract.total_area"/>
+
+                                                    </td>
+                                                    <td>
+                                                        <p t-esc="contract.stall_dimensions"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-foreach="package_options" t-as="package">
+                                                            <p t-esc="package"/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_exhibitor_dashboard_add_contact" name="Exhibitor Dashboard Add more Contacts">
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-sm-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Add Contacts</h4>
+                            </div>
+                        </div>
+                    </header>
+                    <div class='dashboard-content pt-2'>
+                        <div class='container'>
+                            <div class="row">
+                                <div class="col-12 bg-blue rounded p-2" style="border-bottom:1px solid #B9E9F8;">
+                                    <h5 class="mb-0">Add Contact Details</h5>
+                                </div>
+                            </div>
+
+                            <form action="/submit/contact_details" method="post" id="attendee_badge_request_form"
+                                  enctype="multipart/form-data">
+                                <div class="row mt-4">
+                                    <t t-if="error_message">
+                                        <div class="alert alert-danger mb-4" role="alert">
+                                            <span t-esc="error_message"/>
+                                        </div>
+                                    </t>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contact_title" class="font-weight-normal">
+                                                Title
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-control form-select"
+                                                    name="exh_contact_title" required="required">
+                                                <option>Select an option</option>
+                                                <option>Mr.</option>
+                                                <option>Ms.</option>
+                                                <option>Mrs.</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contact_fname">
+                                                First Name
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text"
+                                                   class="form-control" placeholder="Enter your first name"
+                                                   id="exh_contact_fname" name="exh_contact_fname" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contact_lname">
+                                                Last Name
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="Enter your last name"
+                                                   id="exh_contact_lname" name="exh_contact_lname" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4 mb-md-0">
+                                        <div class="form-group">
+                                            <label for="exh_contact_designation">
+                                                Designation
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text"  class="form-control"
+                                                   placeholder="Enter your designation"
+                                                   id="exh_contact_designation" name="exh_contact_designation"
+                                                   required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4 mb-md-0">
+                                        <div class="form-group">
+                                            <label for="exh_contact_mobile">
+                                                Mobile Number
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+
+                                            <!--                                            Mobile Country Code -->
+                                            <div class="row">
+
+                                                <div class="col-4">
+                                                    <select class="form-select" style="width:130px" name="country_code">
+
+                                                        <option>Select a code</option>
+
+                                                        <t t-foreach="country_code" t-as="code">
+                                                            <option t-att-value="code.code"><t t-esc="code.country"></t>(<t
+                                                                    t-esc="code.code"></t>)
+                                                            </option>
+                                                        </t>
+
+
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+
+
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Enter your mobile number"
+                                                           pattern="[0-9]*"
+                                                           id="exh_contact_mobile" name="exh_contact_mobile"
+                                                           required="required"/>
+                                                    <small>Please add country code (ex : +971)</small>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!--                                            -->
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4 mb-md-0">
+                                        <div class="form-group">
+                                            <label for="exh_contact_email">
+                                                Email
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="email" class="form-control" placeholder="mail@example.com"
+                                                   id="exh_contact_email" name="exh_contact_email" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contact_landline">
+                                                Landline Number
+                                            </label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="Enter your landline number"
+                                                   pattern="[0-9]*"
+
+                                                   id="exh_contact_landline" name="exh_contact_landline"/>
+                                            <small>Please add country code (ex : +971)</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-0 mt-md-4">
+                                    <div class="col-12 p-0">
+                                        <div class="d-flex flex-sm-row flex-column justify-content-end">
+                                            <div class="mr-auto p-2">
+                                                <button type="submit" class="btn btn-orange w-100 btn-orange-padding">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="p-2">
+                                                <button type="button" class="btn btn-red-light w-100"
+                                                        id="btn_clear_all">
+                                                    Clear All
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+</odoo>

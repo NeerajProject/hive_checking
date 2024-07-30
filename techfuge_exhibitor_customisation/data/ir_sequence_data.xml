@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="seq_exhibitor_contract" model="ir.sequence">
+            <field name="name">Exhibitor Contract</field>
+            <field name="code">exhibitor.contract</field>
+            <field name="prefix">HFS%(year)s/AC-</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_contractor_contract" model="ir.sequence">
+            <field name="name">Contractor Contract</field>
+            <field name="code">contractor.contract</field>
+            <field name="prefix">HFS%(year)s/CC-</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_exhibitor_invitation_letter_request" model="ir.sequence">
+            <field name="name">Exhibitor Invitation Letter Request</field>
+            <field name="code">exhibitor.invitation.letter.request</field>
+            <field name="prefix">OMG-%(year)s-INVTLTR-</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_exhibitor_floor_plan" name="Exhibitor Dashboard Branding Panel">
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-lg-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Stand Design Details</h4>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!--put code here-->
+                    <div class='dashboard-content pt-3 pt-md-2'>
+                        <div class='container'>
+                            <div class="row">
+                                <div class="col-12 bg-blue rounded p-2" style="border-bottom:1px solid #B9E9F8;">
+                                    <h5 class="mb-0">Stand Design Details</h5>
+                                </div>
+                            </div>
+
+
+                            <br></br>
+                            <br></br>
+                            <t t-call="brand_pannel_hive.portal_exhibitor_floor_stand"></t>
+
+
+                            <div class="d-flex flex-sm-row flex-column justify-content-end">
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </t>
+    </template>
+
+</odoo>

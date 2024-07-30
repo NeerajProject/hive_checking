@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_event_visit_purpose_form" model="ir.ui.view">
+            <field name="name">event.visit.purpose.form</field>
+            <field name="model">event.visit.purpose</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_event_visit_purpose_tree" model="ir.ui.view">
+            <field name="name">event.visit.purpose.tree</field>
+            <field name="model">event.visit.purpose</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_view_event_visit_purpose" model="ir.actions.act_window">
+            <field name="name">Purpose of Visit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">event.visit.purpose</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_event_visit_purpose_tree"/>
+        </record>
+
+        <menuitem name="Purpose of Visit"
+                  id="menu_event_visit_purpose"
+                  action="action_view_event_visit_purpose"
+                  sequence="103"
+                  parent="event.menu_event_configuration"
+                  groups="techfuge_customisation.group_event_create_or_edit_access"/>
+
+    </data>
+</odoo>

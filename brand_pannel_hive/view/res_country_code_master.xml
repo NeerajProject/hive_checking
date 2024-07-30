@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="brand_pannel_hive_form_view" model="ir.ui.view">
+            <field name="name">brand_pannel_hive.brand_pannel_hive.form</field>
+            <field name="model">res.country.code.master</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                    <field name="code"></field>
+                    <field name="country"></field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="brand_pannel_hive_tree_view" model="ir.ui.view">
+            <field name="name">brand_pannel_hive.brand_pannel_hive.tree</field>
+            <field name="model">res.country.code.master</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                                      <field name="code"></field>
+                                      <field name="country"></field>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="brand_pannel_hive_search_view" model="ir.ui.view">
+            <field name="name">brand_pannel_hive.brand_pannel_hive.search</field>
+            <field name="model">res.country.code.master</field>
+            <field name="arch" type="xml">
+                <search string="ModelTitle">
+                                        <field name="code"></field>
+                                        <field name="country"></field>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="brand_pannel_hive_act_window" model="ir.actions.act_window">
+            <field name="name">Country Code </field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.country.code.master</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Country Code.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Country Code" parent="event.menu_event_configuration" id="brand_pannel_hive_menu" action="brand_pannel_hive_act_window"/>
+
+    </data>
+</odoo>

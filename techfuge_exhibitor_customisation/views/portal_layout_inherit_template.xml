@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="menu_exhibitor_dashboard" model="website.menu">
+        <field name="name">Dashboard</field>
+        <field name="url">/exhibitor_dashboard</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">50</field>
+    </record>
+
+    <template id="portal_my_home_inherit_exhibitor" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="attributes">
+            <attribute name="style">display: none;</attribute>
+        </xpath>
+    </template>
+
+    <template id="my_account_link_inherit_exhibitor" inherit_id="portal.my_account_link">
+        <xpath expr="//a[@href='/my/home']" position="replace"/>
+    </template>
+
+    <template id="portal_contact"  inherit_id="portal.portal_contact">
+        <xpath expr="//div" position="replace">
+        <div class="o_portal_contact_details mb-5">
+            <h4><t t-if="title" t-esc="title"/><t t-else="">Your contact</t></h4>
+
+
+
+            <hr class="mt-1 mb0"/>
+            <h6 class="mb-1"><b t-esc="sales_user.name"/></h6>
+            <div class="d-flex align-items-center mb-1">
+                <div class="fa fa-envelope fa-fw me-1"></div>
+                exhibit@hivefurnitureshow.com
+<!--                <a t-att-href="'mailto:'+sales_user.email" t-esc="sales_user.email"/>-->
+            </div>
+<!--            <div class="d-flex flex-nowrap align-items-center mb-1">-->
+<!--                <div class="fa fa-phone fa-fw me-1"></div>-->
+<!--                <span t-esc="sales_user.phone"/>-->
+<!--            </div>-->
+<!--            <div class="d-flex flex-nowrap align-items-center mb-1">-->
+<!--                <div class="fa fa-map-marker fa-fw me-1"></div>-->
+<!--                <span t-esc="sales_user.city"/>-->
+<!--            </div>-->
+        </div>
+        </xpath>
+    </template>
+    <template id="portal_layout_inherit" inherit_id="portal.portal_layout">
+        <xpath expr="//div[hasclass('o_portal_wrap')]/div[1]" position="attributes">
+            <attribute name="style">margin-top: 100px;</attribute>
+        </xpath>
+        <xpath expr="//t[@t-if='my_details']" position="before">
+            <header class='dashboard-toolbar' style="left: 0;">
+                <div class="d-flex w-100">
+                    <div class="p-2 align-self-center">
+                        <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                             alt="" width="100"/>
+                    </div>
+                    <div class="p-2 align-self-center w-100">
+                        <h4 class="dashboard-toolbar-header">
+                            Welcome
+                            <span t-field="user_id.name"/>
+                        </h4>
+                    </div>
+                </div>
+            </header>
+        </xpath>
+        <xpath expr="//t[@t-if='my_details']/div[1]/div[1]" position="inside">
+            <t t-if="user_id.user_category in ['exhibitor', 'contractor']">
+                <a href="/exhibitor_dashboard" role="button"
+                   class="mt-4 btn btn-orange w-100 btn-orange-padding d-flex flex-sm-row flex-column justify-content-center mr-auto p-2">
+                    Click here to access Dashboard
+                </a>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_login_page_inherit" inherit_id="web.login">
+        <xpath expr="//label[@for='login']" position="replace">
+            <label for="login" class="form-label">Username</label>
+        </xpath>
+        <xpath expr="//input[@name='login']" position="attributes">
+            <attribute name="placeholder">Username</attribute>
+        </xpath>
+    </template>
+
+</odoo>

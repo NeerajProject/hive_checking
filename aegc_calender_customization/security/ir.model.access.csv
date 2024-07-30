@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_appointment_type_timestamp,appointment_type_timestamp,aegc_calender_customization.model_appointment_type_timestamp,,1,1,1,1
+access_calendar_event_report,calendar_event_report,aegc_calender_customization.model_calendar_event_report,,1,1,1,1
+access_golf_event_create,golf_event_create,aegc_calender_customization.model_golf_event_create,,1,1,1,1
+access_membership_type_info,membership_type_info,aegc_calender_customization.model_membership_type_info,,1,1,1,1

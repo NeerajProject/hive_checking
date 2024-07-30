@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<record id="view_exhibitor_contractor_copy_button_form" model="ir.ui.view">
+            <field name="name">exhibitor.contractor.details.form</field>
+            <field name="model">exhibitor.contract</field>
+            <field name="inherit_id" ref="techfuge_exhibitor_customisation.view_exhibitor_contract_form"/>
+
+            <field name="arch" type="xml">
+                  <xpath expr="//header" position='inside'>
+
+
+                      <button name="action_duplicate_exhibitor_contract" type="object" string="Duplicate"></button>
+
+            </xpath>
+            </field>
+</record>
+
+
+
+
+        <record id="copy_contract_form" model="ir.ui.view">
+        <field name="name">exhibitor.contract.copy.form</field>
+        <field name="model">exhibitor.contract.copy</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="event_id" />
+                </group>
+                <footer>
+                    <button name="action_create_duplicate" string="Create" type="object"
+                            class="oe_highlight" data-hotkey="q"/>
+                    <button string="Cancel" class="oe_highlight" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+
+
+
+
+
+
+</record>
+
+
+
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ <template id="portal_exhibitor_floor_suggestion_plan" name="Exhibitor Dashboard Branding Panel">
+       <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-lg-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Floor Plan Suggestions</h4>
+                            </div>
+                        </div>
+                    </header>
+
+                    <br></br>
+                    <br></br>
+<div class="container">
+
+
+<br></br>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/exhibitor_dashboard/exhibitor_floor_plan">Stand Design Details  </a></li>
+    <li class="breadcrumb-item active" aria-current="page">Suggestions</li>
+  </ol>
+</nav>
+<br></br>
+
+
+           <div class="row mt-2">
+                                <div class="col-12 p-0">
+                                    <div class="table-responsive rounded">
+                                        <table class="table table-bordered text-center">
+                                            <tbody><tr class="bg-blue-light">
+                                                <th>Stand Numbers</th>
+                                                <th>Total Area (m2)	</th>
+                                                <th>Stall Dimensions	</th>
+                                            </tr>
+
+                                            <t t-foreach="floor_plan_documents_id" t-as="floor">
+                                                    <tr>
+                                                <td>
+                                                    <p><t t-esc="floor.stand_id.stand_number"/></p>
+                                                </td>
+
+                                                        	<td>
+												<p>
+													<t t-esc="floor.stand_id.stand_size"></t>
+												</p>
+											</td>
+											<td>
+												<p>
+													<t t-esc="floor.stand_id.stand_width"></t> x
+													<t t-esc="floor.stand_id.stand_depth"></t>
+												</p>
+											</td>
+                                            </tr>
+
+
+
+                                            </t>
+
+
+                                        </tbody></table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+<!--Booth documents-->
+
+
+
+           <div class="row mt-2">
+                                <div class="col-12 p-0">
+                                    <div class="table-responsive rounded">
+                                        <table class="table table-bordered text-center">
+                                            <tbody><tr class="bg-blue-light">
+                                                <th>Document Type</th>
+                                                <th>Description	</th>
+                                                <th>	</th>
+                                            </tr>
+
+                                            <t t-foreach="floor_plan_documents_id" t-as="floor">
+                                                    <tr>
+                                                <td>
+                                                    <t t-esc="floor.booth_design_id.name"></t>
+<!--                                                    <p><t t-esc="floor.booth_design_id.name"/></p>-->
+                                                </td>
+
+                                                        	<td>
+												<p>
+													<t t-esc="floor.description"></t>
+												</p>
+											</td>
+											<td>
+
+
+
+
+                                                	<t t-foreach="floor.generate_download_url()" t-as="document">
+															<a title="Download" style="text-decoration: none; color: #2b343b;" t-att-href="document[1]">
+                                                            <i class="fa fa-download"></i>
+                                                            <span><t t-esc="document[0]"></t> </span>
+                                                            </a>
+														</t>
+
+
+
+
+											</td>
+                                            </tr>
+
+
+
+                                            </t>
+
+
+                                        </tbody></table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+<br></br>
+
+<div class="alert alert-warning" role="alert">
+Please mention comments here and attach reference document/drawing if any.
+</div>
+
+
+<t t-call="portal.message_thread">
+                            <t t-set="object" t-value="floor_plan_documents_id"/>
+                        </t>
+
+
+
+<div class="col-12 p-0">
+										<div class="d-flex flex-sm-row flex-column justify-content-end">
+											<div class="mr-auto p-2">
+       <form action="/exhibitor_dashboard/exhibitor_floor_plan" method="post" id="attendee_badge_request_form"
+                                  enctype="multipart/form-data">
+
+
+           <input type="hidden" name="id" t-att-value="id"></input>
+                                                    	<button type="submit" class="btn btn-orange w-100 btn-orange-padding" id="btn_generate_badge">
+Back
+                                                </button>
+
+                                                </form>
+
+											</div>
+
+
+										</div>
+									</div>
+
+
+
+
+
+<br></br>
+
+
+
+<br></br>
+<br></br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </t>
+    </template>
+
+</odoo>

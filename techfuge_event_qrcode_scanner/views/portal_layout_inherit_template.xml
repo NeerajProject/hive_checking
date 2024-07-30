@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_layout_inherit_qr_scanner" inherit_id="portal.portal_layout">
+        <xpath expr="//t[@t-if='my_details']/div[1]/div[1]" position="inside">
+            <t t-if="not request.env.user.user_category">
+                <a href="/exhibitor_dashboard/scan_badge" role="button"
+                   class="mt-4 btn btn-orange w-100 btn-orange-padding d-flex flex-sm-row flex-column justify-content-center mr-auto p-2">
+                    Scan Badge
+                </a>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

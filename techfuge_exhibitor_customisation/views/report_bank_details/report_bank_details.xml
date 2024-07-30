@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="report_bank_details_form_view" model="ir.ui.view">
+            <field name="name">report.bank.details.form</field>
+            <field name="model">report.bank.details</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <group>
+<field name="name"></field>
+<field name="account_number"></field>
+<field name="iban_number"></field>
+<field name="swift_code"></field>
+<field name="bank_address"></field>
+<field name="bank_name"></field>
+<field name="branch_name"></field>
+<field name="country_id" string="Restrict Country"></field>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="report_bank_details_tree_view" model="ir.ui.view">
+            <field name="name">report.bank.details.tree</field>
+            <field name="model">report.bank.details</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+         <field name="name"></field>
+<field name="account_number"></field>
+<field name="iban_number"></field>
+<field name="swift_code"></field>
+<field name="bank_address"></field>
+<field name="bank_name"></field>
+<field name="branch_name"></field>
+<field name="country_id" string="Restrict Country"></field>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="report_bank_details_act_window" model="ir.actions.act_window">
+            <field name="name"> Event Bank Details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">report.bank.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Event Bank Details.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Event Bank Details" parent="event.menu_event_configuration" id="report_bank_details_menu" action="report_bank_details_act_window"/>
+
+    </data>
+</odoo>

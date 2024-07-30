@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_event_form_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">event.event.form.inherit</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='kanban_state']" position="after">
+                <field name="event_logo" widget="image" class="oe_avatar"/>
+            </xpath>
+            <xpath expr="//field[@name='kanban_state']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(event.act_event_registration_from_event)d']" position="after">
+                <button name="%(techfuge_exhibitor_customisation.action_view_exhibitor_contracts)d"
+                        type="action"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        context="{'search_default_event_id': context.get('id')}"
+                      >
+                    <field name="exhibitor_contracts_count" widget="statinfo" string="Exhibitor Contracts"/>
+                </button>
+
+
+<!--                added stand details -->
+
+
+                              <button name="view_event_stand_details"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-fw fa-arrow-right">
+                                                  <field name="exhibitor_stand_count" widget="statinfo"  string="Stand Details"></field>
+
+                </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <button class="oe_stat_button" name="action_view_contractor_details" icon="fa-user-circle"
+                                                context="{'search_default_event_id': context.get('id')}"
+
+                        type="object" attrs="{'invisible': [('contractor_details_count', '=', 0)]}">
+                    <field name="contractor_details_count" string="Contractors" widget="statinfo"/>
+                </button>
+            </xpath>
+
+                        <xpath expr="//field[@name='sales_person_id']" position="before">
+
+            <field name="is_onsite"></field>
+            <field name="visitors_urls"></field>
+                            <field name="is_different_bank_account" ></field>
+                            <field name="bank_details_ids" widget="many2many_tags"  attrs="{'invisible': [('is_different_bank_account', '=', False)]}"></field>
+
+                        </xpath>
+
+            <xpath expr="//notebook" position="inside">
+
+
+
+                <page name="stand_details" string="Stand Details">
+
+
+                    <field name="exhibitor_stand_ids">
+                        <tree editable="bottom" no_open="1" limit="100">
+                            <field name="hall_id"/>
+                            <field name="stand_number"/>
+                            <field name="stand_description"/>
+                            <field name="stand_width"/>
+                            <field name="stand_depth"/>
+                            <field name="stand_size"/>
+                        </tree>
+                    </field>
+                </page>
+                <page name="hotel_details" string="Hotel Details">
+                    <group>
+                        <group>
+                            <field name="checkin_date"/>
+                            <field name="allowed_no_of_nights"/>
+                                                    <field name="last_booking_hotel"></field>
+
+                        </group>
+                        <group>
+                            <field name="is_portal_attendee_enable"></field>
+                            <field name="checkout_date"/>
+                            <field name="rate_per_additional_night"/>
+                        </group>
+                    </group>
+
+                </page>
+                  <page name="report_template" string="Report Template">
+                    <group>
+                        <group>
+                            <field name="embassy_details"></field>
+                          <field name="emails" ></field>
+                          <field name="place_of_supply" ></field>
+
+                        </group>
+                        <group>
+                          <field name="event_details"></field>
+                            <field name="header_logo_description"></field>
+                            <field name="exhibitor_template_name"></field>
+
+                            <field name="branding_panel_width"></field>
+                            <field name="branding_panel_height"></field>
+                        </group>
+                    </group>
+
+                </page>
+                <page string="Email Template" name="email_template">
+                    <group>
+                        <field name="exhibitor_registeration_template"></field>
+                        <field name="exhibitor_registration_duplicate_mail_to_planner" string="Planner Mail"></field>
+                    </group>
+                </page>
+
+
+
+            </xpath>
+        </field>
+    </record>
+
+    <record id="event.menu_reporting_events" model="ir.ui.menu">
+        <field name="groups_id"
+               eval="[(4, ref('techfuge_exhibitor_customisation.group_show_event_exhibitor_contract_report'))]"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+  <record id="portal_users_activity" model="mail.activity.type">
+            <field name="name">Portal Activity </field>
+            <field name="icon">fa fa-user</field>
+            <field name="res_model">exhibitor.contract</field>
+        </record>
+
+    </data>
+</odoo>

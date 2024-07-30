@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="booth_design_line_form_view" model="ir.ui.view">
+            <field name="name">booth.design.line.booth_design_line.form</field>
+            <field name="model">booth.design.line</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <header>
+         <button name="download_floor_client_plan_document" type="object" string="Document"
+                                                class="oe_highlight"  icon="fa-download"/>
+                                    <field name="status" widget="statusbar"/>
+                    </header>
+
+
+                    <sheet>
+
+
+                        <group>
+                                  <field name="stand_id"  string="Stand" placeholder="Title" readonly="1"/>
+                                                                <field  string="Contract" name="exhibitor_contract_id"  readonly="1"/>
+                                <field name="booth_design_id"  readonly="1"/>
+                                <field name="attachement_ids"  widget="many2many_binary"/>
+
+                    <field name="date_of_upload"></field>
+
+                                <field name="description" ></field>
+                        </group>
+                    </sheet>
+                  <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                                        <field name="activity_ids"/>
+
+                        <field name="message_ids"/>
+                    </div>
+
+
+                </form>
+            </field>
+        </record>
+
+        <record id="booth_design_line_tree_view" model="ir.ui.view">
+            <field name="name">booth.design.line.booth_design_line.tree</field>
+            <field name="model">booth.design.line</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                      <field name="stand_id" placeholder="Title"/>
+
+
+                                <field name="exhibitor_contract_id"/>
+                                <field name="booth_design_id"/>
+                                <field name="attachement_ids"/>
+<!--                    <field name="date_of_upload" filename="file_name"></field>-->
+
+
+                    <button name="download_floorplan_upload_document" string="Document"
+                                                class="oe_highlight"  icon="fa-download"/>
+
+
+                                <field name="description"></field>
+                                <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="booth_design_line_act_window" model="ir.actions.act_window">
+            <field name="name">Booth Design</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">booth.design.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+
+<!--        <menuitem name="Booth Design" id="booth_design_line_act_window"  action="brand_pannel_hive.booth_design_line_act_window"/>-->
+
+    </data>
+</odoo>

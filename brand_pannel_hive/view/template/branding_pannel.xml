@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="portal_preview_branding_panel">
+
+		<br></br>
+		<p> <strong> WIDTH :</strong> <t t-esc="contract.branding_panel_width"></t> MTR </p>
+		<p> <strong> HEIGHT : </strong>  <t t-esc="contract.branding_panel_height"></t> MTR </p>
+
+<t t-if="contract.branding_panel_status=='confirm'">
+
+		<div class="alert alert-success" role="alert"  t-if="contract.branding_panel_status == 'confirm'">
+YOUR BRANDING PANEL INFORMATION HAS BEEN RECEIVED SUCCESSFULLY
+		</div>
+</t>
+
+
+		<div t-att-style="'background-image:url(\'/web/image/branding.panel.badge/'+str(contract.get_country_branding_panel_badge())+'/background_image/\')'	"
+			 style="width:24rem;background-repeat: no-repeat;background-size: cover;">
+			<div style="height:200px"></div>
+			<div style="height:650px">
+				<t t-if="contract.company_logo">
+					<div style="display:flex;justify-content: center;align-items:center;">
+						<img id="branding_panel_icons" t-att-src="image_data_uri(contract.company_logo)"
+							 class="card-title" style="width:auto;height:120px;"/>
+					</div>
+				</t>
+				<t t-else="contract.company_logo">
+					<div style="display:flex;justify-content: center;align-items:center;">
+						<img id="branding_panel_icons" style="width:auto;height:120px;"/>
+					</div>
+				</t>
+				<br/>
+				<t t-if="contract.branding_panel_company_name">
+					<div style="display:flex;justify-content: center;align-items:center; text-align: center;">
+						<h1 style="font-size:1.5rem;width:95%">
+							<center>
+								<span id="branding_panel_company_id"
+									  t-esc="contract.branding_panel_company_name.upper()"/>
+							</center>
+						</h1>
+						<br/>
+					</div>
+					<br/>
+				</t>
+				<br/>
+				<br/>
+				<br/>
+				<t t-if="stands.stand_id">
+					<div style="display:flex;justify-content: center;align-items:center;">
+						<h1 style="color:#ea7235">
+							<t t-esc="stands.stand_id.stand_number.upper()"/>
+						</h1>
+					</div>
+				</t>
+				<br/>
+				<br/>
+				<br/>
+			</div>
+
+
+		</div>
+
+	</template>
+
+
+
+
+
+
+	<template id="portal_exhibitor_branding_panel" name="Exhibitor Dashboard Branding Panel">
+		<t t-call="website.layout">
+			<div class="dashboard">
+				<t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar" />
+				<div class="dashboard-app">
+					<header class="dashboard-toolbar">
+						<a href="#!" class="menu-toggle d-block d-lg-none">
+							<i class="fa fa-bars" />
+						</a>
+						<div class="d-flex w-100">
+							<div class="p-2 align-self-center">
+								<img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png" alt="" width="100" />
+							</div>
+							<div class="p-2 align-self-center w-100">
+								<h4 class="dashboard-toolbar-header">Branding Catalogue Info</h4>
+							</div>
+						</div>
+					</header>
+					<!--put code here-->
+					<div class="dashboard-content pt-3 pt-md-2" id="branding_panel_info">
+						<div class="container">
+							<div class="row">
+								<div class="col-12 bg-blue rounded p-2" style="border-bottom:1px solid #B9E9F8;">
+									<h5 class="mb-0">Branding Panel Info</h5>
+								</div>
+							</div>
+<br></br>
+<div class="alert alert-warning" role="alert">
+	In case of any valid changes required , Please send mail to exhibit@hivefurnitureshow.com
+</div>
+
+
+							<form action="/submit/branding_panel/logo" method="post" id="attendee_badge_request_form"
+                           enctype="multipart/form-data">
+
+
+								<div  class="row mt-4">
+
+																		<div class="col-md-8 mb-8">
+
+														<div class="form-group">
+											<label for="exh_attendee_first_name">
+												<strong>Step 1  </strong>– View your Company Name as per Agreement
+
+
+
+												<span class="text-danger" />
+
+											</label>
+      <input type="hidden" name="contract_id" t-att-value="contract.id"></input>
+															<input type="text" pattern="[A-Za-z0-9\s]*" class="form-control"  lang="en" t-att-value="contract.company_name" placeholder="Company Name"  readonly="True" required="required" />
+
+											<br></br>
+											<br></br>
+
+
+
+
+
+
+
+															<label for="exh_attendee_first_name">
+												<strong> Step 2  </strong>– Please Type
+Company Name as required to be
+printed if different from Agreement
+
+
+												<p class="text-danger">In case of any valid changes required. Please
+													send mail to exhibit@hivefurnitureshow.com
+												</p>
+
+												<span class="text-danger" />
+											</label>
+
+
+
+
+
+
+											<t t-if="contract.branding_panel_company_name">
+													<input type="text"  id="company_name_changer"
+                                        class="form-control" name="branding_company_name" lang="en" t-att-value="contract.branding_panel_company_name"
+
+                                        t-att-readonly="contract.is_lock_branding_panel" placeholder="Company Name" required="required" />
+
+											</t>
+
+													<t t-else="contract.branding_panel_company_name">
+													<input type="text"  id="company_name_changer"
+                                        class="form-control" name="branding_company_name" lang="en" t-att-value="contract.company_name"
+
+                                        t-att-readonly="contract.is_lock_branding_panel" placeholder="Company Name" required="required" />
+													</t>
+
+
+
+<br></br>
+<br></br>
+
+	<div class="form-group">
+											<label for="exh_document" class="font-weight-normal">
+												<strong> Step 3 </strong> :  Upload a HIGH
+RESOLUTION LOGO File. Pixelated
+Image will be rejected.  SVG , PNG, JPEG files only
+
+
+												<span class="text-danger" />
+											</label>
+											<t t-if="contract.is_lock_branding_panel">
+															<input type="file" class="form-control"  id="company_name_logo" name="exh_document"
+													disabled="true"
+
+												   accept="image/svg+xml,image/png,image/jpeg" />
+											</t>
+											<t t-else="contract.is_lock_branding_panel">
+												<input type="file" class="form-control"  id="company_name_logo" name="exh_document"
+ 												  accept="image/svg+xml,image/png,image/jpeg"
+												/>
+											</t>
+
+										</div>
+
+
+															<br></br>
+															<br></br>
+
+
+
+
+
+
+
+																<div class="form-group">
+											<label for="exh_document_note">
+												<strong> Step 4 :  </strong>View Stand
+Number as per Agreement
+
+
+
+
+											</label>
+											<br></br>
+
+											<input rows="3" class="form-control" t-att-value="contract._compute_stand_details()" readonly="1"></input>
+																</div>
+										<br></br>
+										<br></br>
+
+<div class="col-6"></div>
+<div class="col-6">
+
+	<p>
+														<strong>
+                                             Step 5:
+                                       </strong>
+                                    Check preview
+
+
+													</p>
+
+
+
+
+	<button type="button" class="btn btn-orange w-100 btn-orange-padding"      t-att-disabled="contract.is_lock_branding_panel" id="btn_confirm_branding_panel">Preview</button>
+
+</div>
+
+
+														</div>
+
+</div>
+
+
+
+									<div class="col-md-4 mb-4">
+
+											<div style=" width:420px;height:25%">
+											<t t-set="one_stand" t-value="True"/>
+											<t t-foreach="contract.stand_ids" t-as="stands">
+												<t t-if="one_stand">
+
+													<t t-call="brand_pannel_hive.portal_preview_branding_panel" />
+													<t t-set="one_stand" t-value="False"/></t>
+												<br/>
+											</t>
+											</div>
+
+
+										<br></br>
+										<br></br>
+
+
+
+
+
+
+
+</div>
+
+
+								</div>
+
+
+<!--<br></br>-->
+<!--<br></br>-->
+
+
+
+
+
+
+<!--									</div>-->
+<!--									<div class="col-md-4 mb-4">-->
+<!--										<div class="form-group">-->
+<!--											<label for="exh_document" class="font-weight-normal">-->
+<!--												<strong> Step 3 </strong> :  Upload a HIGH-->
+<!--RESOLUTION LOGO File. Pixelated-->
+<!--Image will be rejected.  PNG –-->
+<!--JPEG files only-->
+
+
+<!--												<span class="text-danger" />-->
+<!--											</label>-->
+<!--											<t t-if="contract.is_lock_branding_panel">-->
+<!--															<input type="file" class="form-control"  id="company_name_logo" name="exh_document"-->
+<!--													disabled="true"-->
+
+<!--												   accept="image/png, image/jpeg" />-->
+<!--											</t>-->
+<!--											<t t-else="contract.is_lock_branding_panel">-->
+<!--												<input type="file" class="form-control"  id="company_name_logo" name="exh_document"-->
+
+<!--												   accept="image/png, image/jpeg" />-->
+<!--											</t>-->
+
+<!--										</div>-->
+<!--										<br></br>-->
+<!--										<br></br>-->
+<!--										<div class="form-group">-->
+<!--											<label for="exh_document_note">-->
+<!--												<strong> Step 4 :  </strong>View Stand-->
+<!--Number as per Agreement-->
+
+
+
+
+<!--											</label>-->
+<!--											<br></br>-->
+<!--											<br></br>-->
+<!--											<br></br>-->
+<!--											<input rows="3" class="form-control" t-att-value="contract._compute_stand_details()" readonly="1"></input>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div class="col-md-4 mb-4">-->
+<!--										<div style=" width:420px;height:25%">-->
+<!--											<t t-set="one_stand" t-value="True"/>-->
+<!--											<t t-foreach="contract.stand_ids" t-as="stands">-->
+<!--												<t t-if="one_stand">-->
+<!--													<p>-->
+<!--														<strong>-->
+<!--                                             Step 5:-->
+<!--                                       </strong>-->
+<!--                                    Check preview-->
+
+
+<!--													</p>-->
+<!--													<t t-call="brand_pannel_hive.portal_preview_branding_panel" />-->
+<!--													<t t-set="one_stand" t-value="False"/></t>-->
+<!--												<br />-->
+<!--											</t>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									&lt;!&ndash;									new code&ndash;&gt;-->
+<!--									<br />-->
+<!--									&lt;!&ndash;                           branding panel submit&ndash;&gt;-->
+<!--									<div class="row mt-0 mt-md-4">-->
+<!--										<div class="col-12 p-0">-->
+<!--											<div class="d-flex flex-sm-row flex-column justify-content-end">-->
+<!--												<div class="mr-auto p-2">-->
+
+
+<!--														<button type="submit" class="btn btn-orange w-100 btn-orange-padding"-->
+<!--                                            t-att-disabled="contract.is_lock_branding_panel" id="btn_generate_badge">-->
+<!--                                       Confirm-->
+<!--                                    </button>-->
+
+<!--&lt;!&ndash;													<a t-att-href="'/submit/brand/branding_panel?id=%s' %contract.id"  >&ndash;&gt;-->
+
+<!--&lt;!&ndash;<button type="button" class="btn btn-warning">Confirm</button>&ndash;&gt;-->
+
+<!--&lt;!&ndash;														</a>&ndash;&gt;-->
+<!--												</div>-->
+
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+
+
+<!--									<t t-if="successfully_submit">-->
+<!--										<div class="alert alert-success" role="alert">-->
+<!--Branding Panel for your Stand is successfully  submitted for Final Printing-->
+<!--										</div>-->
+<!--									</t>-->
+<!--								</div>-->
+							</form>
+
+
+
+
+
+
+
+
+
+
+                       	<div class="row">
+									<div class="col-12 bg-blue rounded p-2" style="border-bottom:1px solid #B9E9F8;">
+										<h5 class="mb-0">Categories For Catalogue</h5>
+									</div>
+								</div>
+								<br/>
+							</div>
+
+
+
+
+
+
+						<div class="container">
+
+
+
+
+
+
+                       <form  action="/submit/branding_panel/category" method="post" id="attendee_badge_request_form"
+                           enctype="multipart/form-data">
+							<div class="row mt-4">
+
+								<div class="col-md-4 mb-4">
+									<div class="form-group">
+										<label for="exh_attendee_first_name">
+                                    FURNITURE
+
+
+
+											<span class="text-danger">*</span>
+										</label>
+										<div class="col-md-20 mb-20">
+											<t t-foreach="furniture" t-as="o">
+												<div>
+													<t t-if="contract.is_lock_branding_panel">
+																											<input  disabled="true" type="checkbox" t-att-name="o" t-att-readonly="contract.is_lock_branding_panel" id="input_category_checkbox" t-att-value="o.id" t-att-checked="o.check_checked(contract.category_furniture.mapped('id'))" />
+													<label for="label_of_bed">
+														<t t-esc="o.name" />
+
+
+													</label>
+													</t>
+														<t t-else="contract.is_lock_branding_panel">
+																											<input   type="checkbox" t-att-name="o" t-att-readonly="contract.is_lock_branding_panel" id="input_category_checkbox" t-att-value="o.id" t-att-checked="o.check_checked(contract.category_furniture.mapped('id'))" />
+													<label for="label_of_bed">
+														<t t-esc="o.name" />
+
+
+													</label>
+													</t>
+
+
+
+														<t t-if="o.is_others">
+                                                  <input type="text"        t-att-readonly="contract.is_lock_branding_panel"   oninput="this.value = this.value.toUpperCase()"   class="form-control" name="is_other_furniture" t-att-value="contract.is_other_furniture"></input>
+														</t>
+
+												</div>
+											</t>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 mb-4">
+									<div class="form-group">
+										<label for="exh_attendee_title" class="font-weight-normal">
+                                    ACCESSORIES
+                                                  <input type="hidden" name="contract_id" t-att-value="contract.id"></input>
+
+
+
+											<span class="text-danger">*</span>
+										</label>
+										<div class="col-md-9 mb-9">
+											<t t-foreach="accessories" t-as="o">
+
+												<div>
+														<t t-if="contract.is_lock_branding_panel">
+													<input type="checkbox"     disabled="true" id="contract.input_category_checkbox" t-att-name="o" t-att-value="o.id" t-att-checked="o.check_checked(contract.category_accessories.mapped('id'))" />
+													<label for="labe_of_sofa">
+														<t t-esc="o.name" />
+													</label>
+														</t>
+
+														<t t-else="contract.is_lock_branding_panel">
+													<input type="checkbox"      id="contract.input_category_checkbox" t-att-name="o" t-att-value="o.id" t-att-checked="o.check_checked(contract.category_accessories.mapped('id'))" />
+													<label for="labe_of_sofa">
+														<t t-esc="o.name" />
+													</label>
+														</t>
+
+													<t t-if="o.is_others">
+                                                  <input type="text"        t-att-readonly="contract.is_lock_branding_panel"   oninput="this.value = this.value.toUpperCase()"    class="form-control"  name="is_other_accessory" t-att-value="contract.is_other_accessory"></input>
+														</t>
+												</div>
+											</t>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+							<div class="row mt-0 mt-md-4">
+								<div class="col-12 p-0">
+									<div class="d-flex flex-sm-row flex-column justify-content-end">
+										<div class="mr-auto p-2">
+											<button type="submit" class="btn btn-orange w-100 btn-orange-padding" t-att-disabled="contract.is_lock_branding_panel"  id="btn_generate_badge">Submit</button>
+										</div>
+										<div class="p-2">
+
+											<t t-if="contract.is_lock_branding_panel">
+
+											</t>
+
+													<a t-att-href="'/submit/branding_panel/category/remove?id=%s' %contract.id"  >
+
+											<button type="button" class="btn btn-red-light w-100"       t-att-disabled="contract.is_lock_branding_panel"  id="btn_clear_all">Clear All</button>
+													</a>
+										</div>
+									</div>
+
+								</div>
+
+
+						   	<t t-if="category_submit">
+												<div class="alert alert-success" role="alert">
+
+
+													Categories Details successfully submitted for Final Printing Purpose.
+						</div>
+						</t>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </form>
+
+
+</div>
+</div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

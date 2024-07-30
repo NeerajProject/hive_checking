@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <template id="exhibitor_agreement_layout_hive_2024_turkey">
+
+
+            <t t-call="web.html_container">
+                <t t-call="custom_exhibitor_agreement.exhibitor_agreement_layout_hive2024">
+
+                    <div class="page">
+                        <div t-foreach="docs" t-as="o">
+
+
+                            <h5 style="font-weight: bold; text-align: center;  text-decoration: underline;">
+                                PARTICIPATION AGREEMENT – HFS
+                                <t t-if="o.event_id">
+                                    <span t-esc="o.event_id.date_end.strftime('%Y').upper()"/>
+                                </t>
+                            </h5>
+
+
+                            <table class="w-100" style="font-size: 8pt; border: 1px solid #ffffff;">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">
+                                            Name
+                                        </td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-field="o.partner_id.name"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                        <td style="width: 20%; padding: 5px;">Designation</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-field="o.partner_id.function"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width: 20%; padding: padding: 5px 5px 5px 0px;">Company Name</td>
+                                        <td colspan="3" style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-field="o.partner_id.parent_id.name"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">Brand Name
+
+                                        </td>
+                                        <td colspan="3" style="width: 30%; padding: 5px;">
+                                            :
+                                            <span style="padding-left: 10px; font-weight: bold;">
+                                                <t t-if="o.brand_id">
+                                                    <span t-field="o.brand_id.name"/>
+                                                </t>
+
+                                            </span>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">Company Registered
+                                            Address
+                                        </td>
+                                        <td colspan="3" style="width: 30%; padding: 5px;">
+                                            :
+                                            <span style="padding-left: 10px; font-weight: bold;">
+                                                <t t-if="o.partner_id.parent_id.street">
+                                                    <span t-field="o.partner_id.parent_id.street"/>
+                                                </t>
+                                                <t t-if="o.partner_id.parent_id.street2">
+                                                    ,
+                                                    <span t-field="o.partner_id.parent_id.street2"/>
+                                                </t>
+                                                <t t-if="o.partner_id.parent_id.zip">
+                                                    ,
+                                                    <span t-field="o.partner_id.parent_id.zip"/>
+                                                </t>
+                                            </span>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">City / Province</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;">
+                                                <t t-if="o.partner_id.parent_id.city">
+                                                    <span t-field="o.partner_id.parent_id.city"/>,
+                                                </t>
+                                                <t t-if="o.partner_id.parent_id.state_id">
+                                                    <span t-field="o.partner_id.parent_id.state_id.name"/>
+                                                </t>
+                                            </span>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                        <td style="width: 20%; padding: 5px;">Country</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-field="o.partner_id.country_id.name"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">Landline No.</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-field="o.partner_id.phone"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">Mobile No.</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-field="o.partner_id.mobile"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+
+
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px;">Fax No</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-field="o.partner_id.fax"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+
+
+                                        <td style="width: 20%; padding: 5px;">Email ID</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <t t-if="o.partner_id.additional_email">
+                                                <span style="padding-left: 10px;"
+                                                      t-field="o.partner_id.additional_email"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span style="padding-left: 10px;" t-field="o.partner_id.email"/>
+                                            </t>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">Space Type</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-field="o.space_type_id.name"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                        <td style="width: 20%; padding: 5px;">Total Area in SQM</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+
+                                            <span style="padding-left: 10px;" t-esc="'%.2f'% o.total_area"/>
+
+
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">
+                                            Booth Rate With Offerings Per SQM
+<!--                                            (<span-->
+<!--                                                t-esc="o.pricelist_id.currency_id.symbol"/>)-->
+                                        </td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <t t-if="o.space_type_id.type == 'package'">
+
+
+                                                <span style="padding-left: 10px;" t-field="o.rate_per_m2"
+                                                      t-options='{"widget": "float", "precision": 2}'/>
+                                            </t>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                        <td style="width: 20%; padding: 5px;">Stall Dimensions W x D in Mtrs</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-esc="o.stall_dimensions"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">
+                                            Booth Rate With Offerings Per SQM + VAT
+                                        </td>
+                                        <td style="width: 25%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <!--new code-->
+                                            <t t-if="o.space_type_id.type == 'package'">
+                                                <t t-if="not o.is_zero_total_tax_text()">
+                                                    <span style="padding-left: 10px;" t-field="o.rate_per_m2_with_vat"
+                                                          t-options='{"widget": "float", "precision": 2}'/>
+                                                </t>
+                                            </t>
+
+
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                        <td style="width: 20%; padding: 5px;">Hall Number</td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;"
+                                                  t-esc="', '.join(o.hall_ids.mapped('name'))"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">
+                                            Booth Rate Per SQM
+                                        </td>
+                                        <td style="width: 25%; padding: 5px; font-weight: bold;">
+                                            :
+
+                                            <t t-if="o.space_type_id.type == 'non-package'">
+
+                                                <span style="padding-left: 10px;" t-field="o.rate_per_m2"
+                                                      t-options='{"widget": "float", "precision": 2}'/>
+
+                                            </t>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                        <td style="width: 20%; padding: 5px;"> Stall Number </td>
+                                        <td style="width: 25%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;"
+                                                  t-esc="', '.join(o.stand_ids.mapped('stand_number'))"/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">
+                                            Booth Rate Per SQM + Vat
+                                        </td>
+                                        <td style="width: 25%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <t t-if="o.space_type_id.type == 'non-package'">
+                                                <t t-if="not o.is_zero_total_tax_text()">
+
+                                                    <span style="padding-left: 10px;" t-field="o.rate_per_m2_with_vat"
+                                                          t-options='{"widget": "float", "precision": 2}'/>
+                                                </t>
+                                            </t>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                        <td style="width: 20%; padding: 5px;"></td>
+                                        <td style="width: 30%; padding: 5px; font-weight: bold;">
+                                            <!--                                      -->
+                                            <!--                                        <span style="padding-left: 10px;" t-esc="', '.join(o.hall_ids.mapped('name'))"/>-->
+                                            <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="width: 20%; padding: 5px 5px 5px 0px;">Total Agreement Value
+
+
+                                        </td>
+                                        <td style="width: 25%; padding: 5px; font-weight: bold;">
+                                            :
+                                            <span style="padding-left: 10px;" t-esc="o.amount_total"
+                                                  t-options='{"widget": "monetary", "display_currency": o.pricelist_id.currency_id}'/>
+                                            <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>
+                                        </td>
+                                        <td style="width: 20%; padding: 5px;"></td>
+                                        <td style="width: 25%; padding: 5px; font-weight: bold;">
+                                            <!--                                        :-->
+                                            <!--                                        <span style="padding-left: 10px;"-->
+                                            <!--                                              t-esc="', '.join(o.stand_ids.mapped('stand_number'))"/>-->
+                                            <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                        </td>
+                                    </tr>
+
+
+                                    <!--                                <tr>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">Landline No.</td>-->
+                                    <!--                                    <td style="width: 30%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-field="o.partner_id.phone"/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px;">Fax</td>-->
+                                    <!--                                    <td style="width: 30%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-field="o.partner_id.fax"/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                </tr>-->
+                                    <!--                                <tr>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">Mobile No.</td>-->
+                                    <!--                                    <td style="width: 30%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-field="o.partner_id.mobile"/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px;">Email</td>-->
+                                    <!--                                    <td style="width: 30%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <t t-if="o.partner_id.additional_email">-->
+                                    <!--                                            <span style="padding-left: 10px;" t-field="o.partner_id.additional_email"/>-->
+                                    <!--                                        </t>-->
+                                    <!--                                        <t t-else="">-->
+                                    <!--                                            <span style="padding-left: 10px;" t-field="o.partner_id.email"/>-->
+                                    <!--                                        </t>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                </tr>-->
+                                    <!--                                <tr>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">Space Type</td>-->
+                                    <!--                                    <td style="width: 30%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-field="o.space_type_id.name"/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px;">Total Area (m2)</td>-->
+                                    <!--                                    <td style="width: 30%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-field="o.total_area"/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                </tr>-->
+                                    <!--                                <tr>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">-->
+                                    <!--                                      Booth Rate With Offering Per SQM(<span t-esc="o.pricelist_id.currency_id.symbol"/>)-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style="width: 30%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-field="o.rate_per_m2"-->
+                                    <!--                                              t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px;">Stall Dimensions (m)</td>-->
+                                    <!--                                    <td style="width: 30%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-esc="o.stall_dimensions"/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                </tr>-->
+                                    <!--                                <tr>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">-->
+                                    <!--                                       Booth Rate+5% Vat With Offering Per SQM-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style="width: 25%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-field="o.rate_per_m2_with_vat"-->
+                                    <!--                                              t-options='{"widget": "float", "precision": 2}'/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px;">Hall Number</td>-->
+                                    <!--                                    <td style="width: 30%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-esc="', '.join(o.hall_ids.mapped('name'))"/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                </tr>-->
+                                    <!--                                <tr>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px 5px 5px 0px;">Total Agreement Value</td>-->
+                                    <!--                                    <td style="width: 25%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;" t-esc="o.amount_total"-->
+                                    <!--                                              t-options='{"widget": "monetary", "display_currency": o.pricelist_id.currency_id}'/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style="width: 20%; padding: 5px;">Stall Number</td>-->
+                                    <!--                                    <td style="width: 25%; padding: 5px; font-weight: bold;">-->
+                                    <!--                                        :-->
+                                    <!--                                        <span style="padding-left: 10px;"-->
+                                    <!--                                              t-esc="', '.join(o.stand_ids.mapped('stand_number'))"/>-->
+                                    <!--                                        <hr style="margin: 0 0 0 5px; padding-left: 5px; color: #878787;"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                </tr>-->
+                                </tbody>
+                            </table>
+
+
+                            <br/>
+                            <p style="font-size: 5pt; text-align: justify;">
+                                We hereby conﬁrm our participation at <strong>HFS 2024</strong> and we conﬁrm that we
+                                have been supplied with O M G Exhibition Organizing LLC. Terms and Conditions, which
+                                form part of this contract. We have read O M G Exhibition Organizing LLC Terms and
+                                Conditions and confirm our acceptance of these. The execution of this contract and its
+                                receipt by O M G Exhibition Organizing LLC is deemed conclusive evidence of the
+                                Company’s/Applicant’s agreement to pay the full fees due. Where more than one exhibitor
+                                will share a stand in respect of which this contract is made (“stand sharers”), the
+                                Company/Applicant, acting as agent for each stand sharer, shall ensure that each stand
+                                sharer is bound by the terms and conditions. The Applicant shall be liable to pay any
+                                additional charges incurred directly in respect of any stand sharer.
+                            </p>
+
+
+                            <br/>
+                            <br/>
+                            <table style="width: 80%; font-size: 8pt; font-weight: 900; border: 1px solid #ffffff;">
+                                <tbody>
+                                    <t t-if="o.event_id.is_different_bank_account">
+                                        <t t-set="bank_info" t-value="o.get_bank_details()"></t>
+                                             <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">
+                                            Account Name
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                            O M G EXHIBITIONS ORGANIZING LLC
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Account
+                                            Number
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                            <t t-esc="bank_info.account_number"></t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">IBAN
+                                            Number
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                            <t t-esc="bank_info.iban_number"></t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Swift Code
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                                                                        <t t-esc="bank_info.swift_code"></t>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Bank Name
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                                                                        <t t-esc="bank_info.bank_name"></t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Branch
+                                            Name
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                                                                        <t t-esc="bank_info.branch_name"></t>
+                                        </td>
+                                    </tr>
+                               <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Bank Address
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                            <t t-esc="bank_info.bank_address"></t>
+                                        </td>
+                                    </tr>
+
+
+
+                                    </t>
+                                    <t t-else="o.event_id.is_different_bank_account">
+                                             <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">
+                                            Account Name
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                            O M G EXHIBITIONS ORGANIZING LLC
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Account
+                                            Number
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">0332 8369 3800 1
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">IBAN
+                                            Number
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                            AE32 0400 0003 3283 6938 001
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Swift Code
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">NRAKAEAK</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Routing Code
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">904020101</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Bank Name
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                            National Bank of Ras Al Khaimah
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Branch
+                                            Name
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                            Umm Hurrair, Dubai
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; text-align: left; padding: 2px 5px 2px 0px;">Bank Address
+                                        </td>
+                                        <td style="width: 5%; text-align: center; padding: 2px 5px;">:</td>
+                                        <td style="width: 45%;  text-align: left; padding: 2px 5px;">
+                                            RAKBANK, P.O. BOX 1531, Dubai, UAE
+                                        </td>
+                                    </tr>
+                                    </t>
+
+                                </tbody>
+                            </table>
+                            <div class="row" style="font-size: 8pt; margin-top: 50px;">
+                                <div class="col-6">
+                                    <hr style="margin: 0; width: 195px; color: #878787;"/>
+                                    <p>
+                                        Signature and Company Seal of Exhibitor
+                                    </p>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <hr style="margin: 0 0 0 120px; width: 100px; color: #878787;"/>
+                                    <p>
+                                        Date
+                                    </p>
+                                </div>
+                            </div>
+                            <br/>
+                            <table style="width: 100%; font-size: 8pt; page-break-after:always; border: 1px solid #ffffff;">
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 40%; text-align: left; padding: 2px 5px 2px 0px; height: 20px;">
+                                            Name of Authorized Signatory
+                                        </td>
+                                        <td style="width: 60%; padding: 5px;">
+                                            :
+                                            <hr style="margin: 0 0 0 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 40%; text-align: left; padding: 5px;"/>
+                                        <td style="width: 60%;"/>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 40%; text-align: left; padding: 2px 5px 2px 0px;">
+                                            Designation of Authorized Signatory
+                                        </td>
+                                        <td style="width: 60%; padding: 5px;">
+                                            :
+                                            <hr style="margin: 0 0 0 5px; color: #878787;"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                            <br></br>
+
+                            <t t-call="custom_exhibitor_agreement.terms_and_conditions_hive_2024_turkey"></t>
+
+
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+
+        </template>
+    </data>
+</odoo>

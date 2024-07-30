@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <data>
+
+
+
+ <record id="email_template_registration_mail_to_custom" model="mail.template">
+            <field name="name">QRCODE ONLY: Mail to Visitor</field>
+            <field name="model_id" ref="event.model_event_registration"/>
+            <field name="email_from">HFS 2024 &lt;visit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">{{ object.email }}</field>
+            <field name="email_cc">visit@hivefurnitureshow.com,suraj@omgexhibitions.com</field>
+
+            <field name="subject">Your Visitor Badge for IIFF 2024 is now ready !</field>
+            <field name="description">Sent mail to visitor after the successful visitor registration</field>
+            <field name="body_html" type="html">
+
+
+                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" >
+    <tr>
+      <td style="padding: 20px 0;">
+        <img src="/techfuge_customisation/static/src/img/banner/email_banner.jpeg" alt="Banner"  style="display: block; width:100%"/>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Email Content -->
+  <table role="presentation" width="100%">
+    <tr  style="width:800px">
+      <td>
+        <p>Dear      <span t-out="object.attendee_full_name or ''"></span>,</p>
+
+
+          <p>Thank you for registering for India Interior and Furniture Fair 2024, scheduled to take place from
+December 5 - 7, 2024, at Pragati Maidan, New Delhi.</p>
+
+
+
+        <p>To ensure swift entry into the exhibition, please download the e-Badge to your mobile device or
+print it out.</p>
+          <p></p>
+          <p>
+              Your Unique Reference Number (URN) for entry is:
+          </p>
+
+
+          <p></p>
+
+
+                <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', object.event_reference, 100, 100)"
+                                                        ></img>
+          <p> <strong>
+               <span t-out="object.attendee_reg_no or  ''"></span>
+          </strong>
+             </p>
+          <p></p>
+          <p>Here are the exhibition timings:</p>
+    <p></p>
+ <ul>
+          <li>Thursday, December 5, 2024 : 10:00 am - 6:00 pm</li>
+          <li>Friday, December 6, 2024 : 10:00 am - 6:00 pm</li>
+          <li>Saturday, December 7, 2024 : 10:00 am - 8:00 pm</li>
+        </ul>
+<p></p>
+    <p>Venue: PRAGATI MAIDAN, NEW DELHI, INDIA</p>
+          <p></p>
+<p>We wish you a successful and rewarding experience at the event. For any inquiries, please feel
+free to contact us via email at visit@iiffglobal.com</p>
+<!--          Linkdin icons-->
+
+
+<p></p>
+          <p></p>
+          <p>We eagerly anticipate meeting you at Hive Furniture Show 2024!</p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p>Warm regards,</p>
+<p>Team IIFF</p>
+      </td>
+    </tr>
+  </table>
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+<!--            <field name="report_template" ref="techfuge_customisation.action_report_visitor_badge"/>-->
+<!-- <field name="report_name">{{ object.attendee_full_name  }}</field>-->
+
+        </record>
+
+
+    </data>
+
+</odoo>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="appointment_form" name="Website Appointment: Your Data" inherit_id="appointment.appointment_form">
+        <xpath expr="//input[@name='duration_str']" position="before">
+
+
+            <t t-if="appointment_type.is_golf_club">
+           <div class="mb-3">
+                                    <label class="pb-2" for="name">Select Product *</label>
+                                    <div>
+                                       <select style="width:300px" class="advanced-select selection_product" name="product_id">
+                                                                                                                                         <option value=""></option>
+
+                                           <t t-foreach="product_golf" t-as="product" >
+
+                                                   <option t-att-value="product.id" t-att-id="product.list_price"  ><t t-esc="product.display_name"></t>[<t t-esc="product.list_price"/>
+
+                                                       <t t-if="product.currency_id">
+                                                             <t t-esc="product.currency_id.name"/>
+                                                       </t>
+                                                     </option>
+
+                                           </t>
+
+</select>
+                                    </div>
+                                </div>
+
+
+            <div class="row">
+                <div class="col-6">
+
+                    <div class="mb-3">
+                                    <label class="pb-2" for="name">Select Member 1 </label>
+                                    <div>
+                                       <select style="width:300px" class="advanced-select" name="first_member_id" id="first_member_id">
+                                                                                                                                         <option value=""></option>
+
+                                           <t t-foreach="members_ids" t-as="members">
+
+                                                   <option t-att-value="members.id"><t t-esc="members.display_name"></t></option>
+
+                                           </t>
+
+</select>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+                </div>
+                <div class="col-6">
+
+                    <div class="mb-3">
+                                    <label class="pb-2" for="name">Select Member 2 </label>
+                                    <div>
+                                       <select style="width:300px" class="advanced-select" name="second_member_id" id="second_member_id">
+                                                                                                                                         <option value=""></option>
+
+                                           <t t-foreach="members_ids" t-as="members">
+
+                                                   <option t-att-value="members.id"><t t-esc="members.display_name"></t></option>
+
+                                           </t>
+
+</select>
+                                    </div>
+                                </div>
+
+
+                </div>
+
+<div class="col-6">
+    <div class="mb-3">
+                                    <label class="pb-2" for="name">Select Member 3 </label>
+                                    <div>
+                                       <select style="width:300px" class="advanced-select" name="third_member_id" id="third_member_id">
+                                                                                                                                         <option value=""></option>
+
+                                           <t t-foreach="members_ids" t-as="members">
+
+                                                   <option t-att-value="members.id"><t t-esc="members.display_name"></t></option>
+
+                                           </t>
+
+</select>
+                                    </div>
+                                </div>
+
+
+</div>
+
+
+                <div class="col-6">
+
+
+                     <div class="mb-3">
+                                    <label class="pb-2" for="name">Select Member 4 </label>
+                                    <div>
+                                       <select style="width:300px" class="advanced-select" name="fourth_member_id" id="fourth_member_id">
+                                                                                              <option value=""></option>
+
+                                           <t t-foreach="members_ids" t-as="members">
+
+                                                   <option t-att-value="members.id"><t t-esc="members.display_name"></t></option>
+
+                                           </t>
+
+</select>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+                    <div class="col-6">
+
+                          <input type="checkbox"  name="is_multiple_invoice" />
+  <label>
+Is Single Invoice
+  </label>
+                        <br/>
+
+
+                    </div>
+
+
+
+
+
+</t>
+
+
+
+        </xpath>
+    </template>
+</odoo>

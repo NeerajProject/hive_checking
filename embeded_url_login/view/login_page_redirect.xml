@@ -1,0 +1,11 @@
+<odoo>
+<template id="auth_signup.login" inherit_id="web.login" name="Sign up - Reset Password">
+            <xpath expr="//button[@type='submit']" position="before">
+
+                                  <input type="hidden" name="redirect" value="/redirect"/>
+
+            </xpath>
+        </template>
+
+
+</odoo>

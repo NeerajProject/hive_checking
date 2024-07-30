@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+  <record id="hfs_2024_turkey" model="event.agreement.country">
+            <field name="name"> HIVE FURNITURE SHOW 2024 TURKEY</field>
+      <field name="country_id" ref="base.tr"></field>
+                  <field name="email_template_id" ref="custom_exhibitor_agreement.mail_template_sale_exhibitor_agreement_hive2024_turkey"></field>
+
+        </record>
+
+
+
+
+          <record id="hfs_2024_non_turkey" model="event.agreement.country">
+            <field name="name">HIVE FURNITURE SHOW 2024 </field>
+
+            <field name="email_template_id" ref="custom_exhibitor_agreement.mail_template_sale_exhibitor_agreement_hive2024"></field>
+
+        </record>
+
+
+
+
+
+    </data>
+</odoo>

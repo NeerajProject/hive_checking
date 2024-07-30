@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_event_form_inherit" model="ir.ui.view">
+        <field name="name">event.event.form.inherit</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='date_begin']" position="before">
+                <field name="event_ref_no"/>
+            </xpath>
+            <xpath expr="//field[@name='date_tz']" position="before">
+                <field name="build_up_date"/>
+                <field name="attendee_reg_no_prefix" required="1"/>
+            </xpath>
+            <xpath expr="//field[@name='auto_confirm']" position="after">
+                <field name="sales_person_id" context="{'default_sales_team_id': sales_team_id}"
+                       widget="many2one_avatar_user"/>
+                <field name="sales_team_id" options="{'no_open': True, 'no_create': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="analytic_account_id" options="{'no_open': True, 'no_create': True}"/>
+            </xpath>
+            <xpath expr="//page[@name='event_notes']" position="after">
+                <page string="Halls / Activity Locations" name="activity_locations">
+                    <field name="activity_location_ids">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="activity_location_type_id" required="1"/>
+                            <field name="activity_location_group"/>
+                        </tree>
+                    </field>
+                </page>
+
+<page name="special_include" string="Special Include">
+    <group>
+        <group>
+            <field name="special_include"></field>
+        </group>
+        <group>
+            <field name="special_include_part_b"></field>
+        </group>
+    </group>
+</page>
+<!--                <page string="Badge Template">-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="buyer_image_template"></field>-->
+<!--                            <field name="contractor_image_template"></field>-->
+<!--                            <field name="exhibitor_template"></field>-->
+
+
+<!--                        </group>-->
+
+<!--                             <group>-->
+
+
+<!--                                 <field name="vip_image_template"></field>-->
+<!--<field name="vip_hosted_template"></field>-->
+<!--                        </group>-->
+
+
+<!--                    </group>-->
+<!--                </page>-->
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

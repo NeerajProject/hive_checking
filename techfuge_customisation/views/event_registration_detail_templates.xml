@@ -1,0 +1,145 @@
+<odoo>
+
+    <template id="portal_event_registration_details_template" name="Event Registration Details">
+        <t t-call="website.layout">
+            <t t-set="user" t-value="request.env.user"/>
+            <section class="pt32">
+                <div class="container">
+                    <div class="alert alert-success mb-4" role="alert">
+                        Success !!
+                        <span>Attendee registration confirmed</span>
+                    </div>
+                    <t t-if="is_food_coupon">
+                        <div class="alert alert-info mb-4" role="alert">
+                            <span t-esc="used_food_coupons"/>
+                            of
+                            <span t-esc="no_of_food_coupons"/>
+                            food coupons are used !
+                        </div>
+                    </t>
+                    <div class="text-center">
+                        <a href="/exhibitor_dashboard/scan_badge"
+                           title="Back to Scanning" aria-label="Back to Scanning" class="btn"
+                           style="background: #dd9933; color: white; text-transform: uppercase;">
+                            Scan another Badge
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section class="pt32 pb32 event_reg_details_section">
+                <div class="container" style="border: 1px solid #ced4da; padding: 40px;">
+                    <h4 class="text-center pb-3">
+                        <u>Attendee Registration Details</u>
+                    </h4>
+                    <form id="event_registration_details_form" action="/submit/event_registration_details" method="post"
+                          enctype="multipart/form-data">
+                        <input type="hidden" name="attendee_id" id="attendee_id" t-att-value="attendee.id"/>
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="pb-2" for="attendee_name">Name</label>
+                                <div>
+                                    <input type="char" class="form-control" name="attendee_title"
+                                           t-att-value="attendee.attendee_full_name" disabled="true"
+                                           style="background-color: white;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-12">
+                                <label class="pb-2" for="attendee_designation">Designation</label>
+                                <div>
+                                    <input type="char" class="form-control" name="attendee_designation"
+                                           t-att-value="attendee.designation" disabled="true"
+                                           style="background-color: white;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-12">
+                                <label class="pb-2" for="attendee_company_name">Company Name</label>
+                                <div>
+                                    <input type="char" class="form-control" name="attendee_company_name"
+                                           t-att-value="attendee.company_name" disabled="true"
+                                           style="background-color: white;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-12">
+                                <label class="pb-2" for="attendee_event">Event</label>
+                                <div>
+                                    <input type="char" class="form-control" name="attendee_event"
+                                           t-att-value="attendee.event_id.name" disabled="true"
+                                           style="background-color: white;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-12">
+                                <label class="pb-2" for="attendee_activity_location">Select Location</label>
+                                <div>
+                                    <select class="form-control form-select" id="attendee_activity_location"
+                                            name="attendee_activity_location">
+                                        <option value=""/>
+                                        <t t-foreach="activity_locations" t-as="location">
+                                            <option t-att-value="location.id"
+                                                    t-att-selected="location.id in user.hall_ids.ids">
+                                                <t t-out="location.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-12">
+                                <label class="pb-2" for="exhibitor_name">Exhibitor</label>
+                                <div>
+                                    <select class="form-control form-select" id="exhibitor_name" name="exhibitor_name">
+                                        <option value=""/>
+                                        <t t-foreach="exhibitor_list" t-as="exhibitor">
+                                            <option t-att-value="exhibitor.name"
+                                                    t-att-selected="exhibitor.id == user.partner_id.id">
+                                                <t t-out="exhibitor.name"/>
+                                            </option>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-12">
+                                <label class="pb-2" for="stand_number">Stand Number</label>
+                                <div>
+                                    <input type="char" class="form-control" name="stand_number" id="stand_number"
+                                           t-att-value="user.stand_ids.stand_number"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </t>
+    </template>
+
+    <template id="portal_submit_event_registration_thanks_template" name="Event Registration Details Success">
+        <t t-call="website.layout">
+            <section class="pt32 pb32">
+                <div class="container">
+                    <div class="alert alert-success mb-4" role="alert">
+                        Success !!
+                        <span>Attendee registration confirmed</span>
+                    </div>
+                    <div class="text-center">
+                        <a href="/exhibitor_dashboard/scan_badge"
+                           title="Back to Scanning" aria-label="Back to Scanning" class="btn"
+                           style="background: #dd9933; color: white; text-transform: uppercase;">
+                            Scan another Badge
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </t>
+    </template>
+
+</odoo>

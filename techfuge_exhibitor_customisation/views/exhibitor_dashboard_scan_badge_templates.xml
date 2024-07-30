@@ -1,0 +1,65 @@
+<odoo>
+
+    <template id="portal_exhibitor_dashboard_scan_badge" name="Exhibitor Dashboard Scan Badge">
+        <t t-set="user" t-value="request.env.user"/>
+        <t t-set="partner" t-value="user.partner_id"/>
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-if="user.user_category in ['exhibitor', 'contractor']">
+                    <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                </t>
+                <div class='dashboard-app'>
+                    <t t-if="user.user_category in ['exhibitor', 'contractor']">
+                        <header class='dashboard-toolbar'>
+                            <a href="#!" class="menu-toggle d-block d-sm-none">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <div class="d-flex w-100">
+                                <div class="p-2 align-self-center">
+                                    <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                         alt="" width="100"/>
+                                </div>
+                                <div class="p-2 align-self-center w-100">
+                                    <h4 class="dashboard-toolbar-header">Scan Badge</h4>
+                                </div>
+                            </div>
+                        </header>
+                    </t>
+                    <t t-else="">
+                        <header class='dashboard-toolbar' style="left: 0px;">
+                            <div class="d-flex w-100">
+                                <div class="p-2 align-self-center">
+                                    <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                         alt="" width="100"/>
+                                </div>
+                                <div class="p-2 align-self-center w-100">
+                                    <h4 class="dashboard-toolbar-header">Scan Badge</h4>
+                                </div>
+                            </div>
+                        </header>
+                    </t>
+                    <div class='dashboard-content pt-2'>
+                        <div class='container badge-scan-container'>
+                            <div class="row text-center pt-2">
+                                <h4>Scan a Badge</h4>
+
+                                <a id="btn-scan-qr">
+                                    <img src="/techfuge_exhibitor_customisation/static/src/img/qr-code.png"/>
+                                </a>
+                                <p id="scan-qr-msg">Tap on QR code image to scan</p>
+
+                                <div hidden="" id="invalid-qr-msg" class="alert alert-danger mb-4" role="alert">
+                                    <span id="badge-qr-info"/>
+                                </div>
+
+                                <canvas hidden="" id="qr-canvas"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

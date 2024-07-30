@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+
+
+
+
+
+
+
+
+    <t t-name="AvailableSlotsWizard" owl="1">
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+
+
+<div class="container">
+
+<div class="row" t-if="state.available_slots">
+
+    <div>
+        <t t-if ="state.selected_slots">
+
+
+            <div class="alert alert-info" role="alert">
+  You have selected the slots      <strong> <t t-esc="state.selected_slots"></t> </strong></div>
+
+
+        </t>
+    </div>
+    <br></br>
+    <t t-foreach="state.available_slots.slots" t-as="available" t-key="available['datetime']">
+
+<t t-if="available.hours == state.selected_slots">
+          <div t-att-title="available.slot_duration" t-on-click="()=>this._selectAvailableSlotsWizard(available.slot_duration,available.datetime,available.hours)"  style="width:100px" class="col-2 btn btn-success"  >
+        <t t-esc="available.hours" ></t>
+             </div>
+</t>
+        <t t-else="available.hours == state.selected_slots">
+                     <div t-att-title="available.slot_duration" t-on-click="()=>this._selectAvailableSlotsWizard(available.slot_duration,available.datetime,available.hours)"  style="width:100px" class="col-2 btn btn-outline-info"  >
+        <t t-esc="available.hours" ></t>
+             </div>
+        </t>
+
+
+</t>
+
+</div>
+
+</div>
+
+
+
+
+
+
+    </t>
+
+</template>

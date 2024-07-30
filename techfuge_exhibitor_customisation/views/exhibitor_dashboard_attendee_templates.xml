@@ -1,0 +1,445 @@
+<odoo>
+
+    <template id="portal_exhibitor_dashboard_attendee_details" name="Exhibitor Dashboard Attendee Details">
+        <t t-call="website.layout">
+            <div class='dashboard'>
+
+            <style>
+<!--                 .select2-container {-->
+<!--      width:130px !important;-->
+<!--      height: 250px !important;-->
+<!--    }-->
+
+
+                .select2-hidden-accessible {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+}
+
+.select2-container--default .select2-selection--single,
+.select2-selection .select2-selection--single {
+    border: 1px solid #d2d6de;
+    border-radius: 0;
+    padding: 6px 12px;
+    height: 34px
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 4px
+}
+
+.select2-container .select2-selection--single {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 28px;
+    user-select: none;
+    -webkit-user-select: none
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-right: 10px
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    margin-top: -3px
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 28px
+}
+
+.select2-container--default .select2-selection--single,
+.select2-selection .select2-selection--single {
+    border: 1px solid #d2d6de;
+    border-radius: 0 !important;
+    padding: 6px 12px;
+    height: 40px !important
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 26px;
+    position: absolute;
+    top: 6px !important;
+    right: 1px;
+    width: 20px
+}
+
+            </style>
+
+
+
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-sm-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Attendee Badge Creation</h4>
+                            </div>
+                        </div>
+                    </header>
+                    <div class='dashboard-content pt-2'>
+                        <div class='container'>
+                            <div class="row">
+                                <div class="col-12 bg-blue rounded p-2" style="border-bottom:1px solid #B9E9F8;">
+                                    <h5 class="mb-0">Add Badge Creation</h5>
+                                </div>
+                            </div>
+
+                            <form action="/submit/attendee_badge_request" method="post" id="attendee_badge_request_form"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" id="space_type" t-att-value="space_type"/>
+                                <input type="hidden" id="no_of_badges" t-att-value="no_of_badges"/>
+                                <input type="hidden" id="remaining_badges" t-att-value="remaining_badges_count"/>
+                                <input type="hidden" id="selected_attendee" name="selected_attendee"
+                                       t-att-value="selected_attendee.id"/>
+                                <div class="row mt-4">
+                                    <t t-if="submission_success">
+                                        <div id="submission_success_msg" class="alert alert-success mb-4" role="status">
+                                            Successfully generated the badge. The attendee will receive the badge by
+                                            email soon !!!
+                                        </div>
+                                    </t>
+                                    <t t-if="badge_info_message">
+                                        <div class="alert alert-info mb-4" role="alert">
+                                            <span t-esc="badge_info_message"/>
+                                        </div>
+                                    </t>
+                                    <t t-if="error_message">
+                                        <div class="alert alert-danger mb-4" role="alert">
+                                            <span t-esc="error_message"/>
+                                        </div>
+                                    </t>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_attendee_title" class="font-weight-normal">
+                                                Title
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select data-show-content="true" class="form-control form-select"
+                                                    name="exh_attendee_title"
+                                                    required="required">
+                                                <option value="">Select an option</option>
+                                                <option value="Mr."
+                                                        t-att-selected="selected_attendee.title == 'Mr.'">
+                                                    Mr.
+                                                </option>
+                                                <option value="Ms."
+                                                        t-att-selected="selected_attendee.title == 'Ms.'">
+                                                    Ms.
+                                                </option>
+                                                <option value="Mrs."
+                                                        t-att-selected="selected_attendee.title == 'Mrs.'">
+                                                    Mrs.
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_attendee_first_name">
+                                                First Name
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" pattern="[A-Za-z0-9\s]*" class="form-control"
+                                                   placeholder="Enter your first name"
+                                                   id="exh_attendee_first_name" name="exh_attendee_first_name"
+                                                   required="required" t-att-value="selected_attendee.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_attendee_last_name">
+                                                Last Name
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" pattern="[A-Za-z0-9\s]*" class="form-control"
+                                                   placeholder="Enter your last name"
+                                                   id="exh_attendee_last_name" name="exh_attendee_last_name"
+                                                   required="required" t-att-value="selected_attendee.last_name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4 mb-md-0">
+                                        <div class="form-group">
+                                            <label for="exh_attendee_designation">
+                                                Designation
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" pattern="[A-Za-z0-9\s]*"
+                                                   placeholder="Enter your designation"
+                                                   id="exh_attendee_designation"
+                                                   name="exh_attendee_designation" required="required"
+                                                   t-att-value="selected_attendee.designation"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_attendee_mobile">
+                                                Mobile Number
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            <div class="dropdown show">
+                                                <div class="row">
+                                                    <div class="col-5">
+
+
+<select class="form-control" style="width: 100%;"  name="country_code">
+
+
+
+
+
+                                                            <t t-foreach="country_code" t-as="code">
+                                                                <t t-if="selected_attendee.country_code">
+                                                                            <t t-if="code.id == selected_attendee.country_code.id">
+                                                                              <option t-att-value="code.id" select="1"><t t-esc="code.country"></t>(<t
+                                                                        t-esc="code.code"></t>)
+
+                                                                </option>
+                                                                </t>
+                                                                     <t t-else="code.id == selected_attendee.country_code.id">
+                                                                                       <option t-att-value="code.id"><t t-esc="code.country"></t>(<t
+                                                                        t-esc="code.code"></t>)
+                                                                </option>
+                                                                </t>
+
+                                                                </t>
+                                                                <t t-else="selected_attendee.country_code">
+
+                                                                      <option t-att-value="code.id" select="1"><t t-esc="code.country"></t>(<t
+                                                                        t-esc="code.code"></t>)
+
+                                                                </option>
+
+                                                                </t>
+
+
+
+                                                            </t>
+
+                                                        </select>
+
+
+
+
+
+<!--                                                        <select  class="form-control select2 select2-hidden-accessible" id="mobile_phone_search" style="width:130px"-->
+<!--                                                                name="country_code">-->
+<!--
+
+                                            </select>-->
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <input type="text" class="form-control"
+                                                               placeholder="Enter your mobile number"
+                                                               id="exh_attendee_mobile" name="exh_attendee_mobile"
+                                                               required="required"
+                                                               pattern="[0-9\s]*"
+                                                               t-att-value="selected_attendee.mobile"/>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4 mb-md-0">
+                                        <div class="form-group">
+                                            <label for="exh_attendee_email">
+                                                Email
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="email" class="form-control" placeholder="mail@example.com"
+                                                   id="exh_attendee_email" name="exh_attendee_email"
+                                                   required="required" t-att-value="selected_attendee.email"
+                                                   t-att-readonly="selected_attendee"/>
+                                        </div>
+                                    </div>
+                                    <!--                                    custom code -->
+                                    <div class="col-md-4 mb-4" style="display:none">
+                                        <div class="form-group">
+                                            <label for="exh_attendee_passport">
+                                                Upload Passport Copy
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="file" class="form-control" id="exh_attendee_passport"
+                                                   name="exh_attendee_passport"
+                                            />
+                                            <!--<input type="file" class="form-control" id="exh_attendee_passport"-->
+                                            <!--                                                   name="exh_attendee_passport"-->
+                                            <!--                                                   t-att-required="not selected_attendee.passport_attachment_id"/>-->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4" style="display:none">
+                                        <div class="form-group">
+                                            <label for="exh_attendee_visa">
+                                                Upload Visa Copy
+                                            </label>
+                                            <input type="file" class="form-control" id="exh_attendee_visa"
+                                                   name="exh_attendee_visa"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4" style="display:none">
+                                        <div class="form-group">
+                                            <label for="exh_attendee_air_ticket">
+                                                Upload Air Ticket
+                                            </label>
+                                            <input type="file" class="form-control" id="exh_attendee_air_ticket"
+                                                   name="exh_attendee_air_ticket"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--custom code end-->
+                                <div class="row mt-0 mt-md-4">
+                                    <div class="col-12 p-0">
+                                        <div class="d-flex flex-sm-row flex-column justify-content-end">
+                                            <div class="mr-auto p-2">
+                                                <button type="submit" class="btn btn-orange w-100 btn-orange-padding"
+                                                        id="btn_generate_badge">
+                                                    Submit &amp; Generate Badge
+                                                </button>
+                                            </div>
+                                            <div class="p-2">
+                                                <button type="button" class="btn btn-red-light w-100"
+                                                        id="btn_clear_all">
+                                                    Clear All
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="row mt-4">
+                                <div class="col-12 bg-blue rounded p-2">
+                                    <h5 class="mb-0">All Attendees</h5>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-12 p-0">
+                                    <div class="table-responsive rounded">
+                                        <table class="table table-bordered text-center">
+                                            <tr class="bg-blue-light">
+                                                <th>Name</th>
+                                                <th>Designation</th>
+                                                <th>Mobile Number</th>
+                                                <th>Email</th>
+                                                <th>Badge Download</th>
+                                                <th>Edit</th>
+                                                <!--                                                <th>Delete</th>-->
+
+                                            </tr>
+                                            <tr t-foreach="attendees" t-as="attendee">
+                                                <td>
+                                                    <t t-if="attendee.attendee_full_name">
+                                                        <p t-esc="attendee.attendee_full_name.upper()"/>
+
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <t t-if="attendee.designation">
+                                                        <p t-esc="attendee.designation.upper()"/>
+
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="attendee.get_mobile_with_country_code()"/>
+                                                </td>
+                                                <td style="word-wrap:break-word">
+
+                                                    <p t-esc="attendee.email"/>
+                                                </td>
+                                                <td>
+                                                    <a t-attf-href="/web/content/#{attendee.badge_attachment_id.id}?download=true"
+                                                       title="Download Badge"
+                                                       style="text-decoration: none; color: #F9A115;">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>
+                                                    <p t-esc="attendee.attendee_full_name.upper()"/>
+                                                </td>
+                                                <td>
+                                                    <a t-att-href="'/exhibitor_dashboard/attendee_details?attendee_id=%s' % attendee.id"
+                                                       title="Edit Info" class="mr-auto p-2"
+                                                       style="text-decoration: none; color: #0274be;">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                </td>
+
+                                                <!--                                                              <td>-->
+                                                <!--                                                    <a t-att-href="'/delete/attendee?id=%s' % attendee.id"-->
+                                                <!--                                                       title="Delete Info" class="mr-auto p-2"-->
+                                                <!--                                                       style="text-decoration: none; color: #0274be;">-->
+                                                <!--                                                        <i class="fa fa-trash"></i>-->
+                                                <!--                                                    </a>-->
+                                                <!--                                                </td>-->
+
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

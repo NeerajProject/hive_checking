@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_report_branding_panel,report.branding.panel,model_report_branding_panel,,1,1,1,1
+access_report_stand_design,report.stand.design,model_report_stand_design,,1,1,1,1
+access_report_brand_category,report.brand.category,model_report_brand_category,,1,1,1,1
+access_report_hotel_booking,report.hotel.booking,model_report_hotel_booking,,1,1,1,1

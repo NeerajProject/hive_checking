@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_exhibitor_uploaded_documents_search" model="ir.ui.view">
+        <field name="name">exhibitor.uploaded.documents.search</field>
+        <field name="model">exhibitor.uploaded.documents</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="event_id" string="Event"/>
+                <field name="exhibitor_name"/>
+                                <field name="company_name"/>
+
+                <field name="exhibitor_contract_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Event" name="event" domain="[]" context="{'group_by':'event_id'}"/>
+                    <filter string="Exhibitor Contract" name="exhibitor_contract" domain="[]"
+                            context="{'group_by':'exhibitor_contract_id'}"/>
+                    <filter string="Document Type" name="document_type" domain="[]"
+                            context="{'group_by':'document_type_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_exhibitor_uploaded_documents_tree" model="ir.ui.view">
+        <field name="name">exhibitor.uploaded.documents.tree</field>
+        <field name="model">exhibitor.uploaded.documents</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <field name="event_id" string="Event"/>
+                <field name="exhibitor_name"/>
+                <field name="exhibitor_contract_id"/>
+                                <field name="company_name"/>
+
+                <field name="create_date" string="Uploaded Date"/>
+                <field name="document_type_id"/>
+                <field name="document_note"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_exhibitor_uploaded_documents" model="ir.actions.act_window">
+        <field name="name">Uploaded Documents</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">exhibitor.uploaded.documents</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_exhibitor_uploaded_documents_tree"/>
+    </record>
+
+    <menuitem name="Uploaded Documents"
+              id="menu_event_exhibitor_uploaded_documents"
+              action="action_exhibitor_uploaded_documents"
+              sequence="123"
+              parent="event.menu_reporting_events"
+              groups="event.group_event_user,techfuge_exhibitor_customisation.group_show_event_exhibitor_contract_report"/>
+
+</odoo>

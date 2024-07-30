@@ -1,0 +1,163 @@
+
+@font-face {
+    font-family: "Poppins-Black";
+    src: url("/techfuge_customisation/static/src/fonts/Poppins-Black.ttf") format("truetype");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Poppins-ExtraBold";
+    src: url("/techfuge_customisation/static/src/fonts/Poppins-ExtraBold.ttf") format("truetype");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Poppins-Medium";
+    src: url("/techfuge_customisation/static/src/fonts/Poppins-Medium.ttf") format("truetype");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Roboto-Black";
+    src: url("/techfuge_customisation/static/src/fonts/Roboto-Black.ttf") format("truetype");
+    font-weight: bold;
+}
+
+.badge_background {
+    background-image:url('/techfuge_customisation/static/src/img/buyer_badge.jpg');
+    background-size:250mm 350mm;
+    width:250mm;
+    height:350mm;
+    margin-left: -1rem;
+    margin-bottom: -1rem;
+}
+
+
+.vip_hosted_badge_background {
+    background-image:url('/techfuge_customisation/static/src/img/vip_hosted_buyer.jpg');
+    background-size:250mm 350mm;
+    width:250mm;
+    height:350mm;
+    margin-left: -1rem;
+    margin-bottom: -1rem;
+}
+
+
+.vip_badge_background {
+    background-image:url('/techfuge_customisation/static/src/img/vip_buyer_template.jpg');
+    background-size:250mm 350mm;
+    width:250mm;
+    height:350mm;
+    margin-left: -1rem;
+    margin-bottom: -1rem;
+}
+
+
+.contractor_badge_background {
+    background-image:url('/techfuge_customisation/static/src/img/contractor_badge.jpg');
+    background-size:250mm 350mm;
+    width:250mm;
+    height:350mm;
+    margin-left: -1rem;
+    margin-bottom: -1rem;
+}
+
+
+.exhibitor_badge_background {
+    background-image:url('/techfuge_customisation/static/src/img/exhibitor_badge.jpg');
+    background-size:250mm 350mm;
+    width:250mm;
+    height:350mm;
+    margin-left: -1rem;
+    margin-bottom: -1rem;
+}
+
+
+.visitor_info_section {
+    position: fixed;
+    margin-top: 190px;
+    margin-left: 0px;
+    width: 470px;
+    height: 270px;
+    text-align: center;
+}
+
+.visitor_info_section p, span {
+    line-height: 20pt !important;
+}
+
+.badge_qr {
+    max-width: 90px !important;
+    min-height: 90px;
+    margin-top: -0.4rem;
+    margin-bottom: -0.35rem;
+}
+
+.visitor_reg_no {
+    font-family: "Roboto-Black";
+    font-size:7pt;
+    text-align: center;
+}
+
+.visitor_name {
+    font-family: "Poppins-ExtraBold";
+    font-size: 22.27pt;
+    color: #3f4749;
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 0px 7.5px;
+    margin-top: 0.5rem;
+    margin-bottom: -0.5rem;
+}
+
+.visitor_designation {
+    font-family: "Poppins-Medium";
+    font-size: 20pt;
+    margin-bottom: -0.5rem;
+    color: #3f4749;
+    text-align: center;
+    word-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+}
+
+.visitor_company {
+    font-family: "Poppins-Medium";
+    font-size: 20pt;
+    margin-bottom: 0.2rem;
+    color: #3f4749;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 0.7rem;
+    padding: 0px 5px;
+}
+
+.visitor_country {
+    font-family: "Poppins-Medium";
+    font-size:12.64pt;
+    margin-bottom: -0.5rem;
+    color: #3f4749;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0px 12px;
+}
+
+.visitor_type_section {
+    position: fixed;
+    margin-top: 560px;
+    margin-left: 0px;
+    width: 470px;
+    height: 70px;
+    text-align: center;
+}
+
+.visitor_type {
+    font-family: "Poppins-Black";
+    font-size: 31.78pt;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+}

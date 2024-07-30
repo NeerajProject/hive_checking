@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="calendar_event_report_form_view" model="ir.ui.view">
+            <field name="name">calendar.event.report.form</field>
+            <field name="model">calendar.event.report</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                        <div class="oe_title">
+                            <sheet>
+                                <group>
+
+                            <field name="date_of_entry"></field>
+                            <field name="operation_type_id" widget="many2many_tags"></field>
+</group>
+                            </sheet>
+<footer>
+    <button name="action_download_report" type="object" string="Download Report"></button>
+</footer>
+                        </div>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="calendar_event_report_act_window" model="ir.actions.act_window">
+            <field name="name">Booking Report </field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">calendar.event.report</field>
+            <field name="view_mode">form</field>
+                        <field name="target">new</field>
+
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Booking Report.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Booking Report" id="calendar_event_report_menu" parent="appointment.menu_schedule_report" action="calendar_event_report_act_window"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,22 @@
+.exhibitor_report_page {
+    margin: 0px 20px 20px 20px;
+    border: 1px solid #848484;
+}
+
+.exhibitor_report_page.table {
+  border: none !important;
+}
+
+.exhibitor_report_company_logo {
+    width: 12%;
+    padding: 5px;
+}
+
+.exhibitor_report_company_info {
+    width: 38%;
+    text-align:left;
+    font-size: 14px;
+    line-height: normal;
+    vertical-align: top;
+    padding: 5px 0px;
+}

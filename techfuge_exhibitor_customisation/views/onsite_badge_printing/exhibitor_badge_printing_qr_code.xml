@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+    <template id="exhibitor_badge_printing_qr_code" name="Exhibitor Badge Printing">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+  <!-- Materialize JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
+</head>
+ <style>
+   /* Custom CSS */
+   body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #f5f5f5; /* Background color similar to Magento */
+   }
+   .banner {
+     background-color: #ff6600; /* Banner background color similar to Magento */
+     color: white; /* Banner text color */
+     text-align: center;
+     padding: 20px 0;
+   }
+   .banner h1 {
+     margin: 0;
+     font-size: 36px;
+   }
+   .split-screen {
+     display: flex;
+     height: 70vh;
+   }
+   .left-side,
+   .right-side {
+     flex: 1;
+     height: 100%;
+     overflow-y: auto;
+   }
+   .form-container {
+     background-color: #ffffff; /* Form container background color */
+     padding: 20px;
+   }
+   .form-group {
+     margin-bottom: 20px;
+   }
+   .badge-container {
+     background-color: #ff6600; /* Badge container background color similar to Magento */
+     padding: 20px;
+     color: white; /* Badge text color */
+   }
+   .badge {
+     background-color: #ff9933; /* Badge background color similar to Magento */
+     color: white; /* Badge text color */
+     padding: 10px;
+     border-radius: 5px;
+     margin-bottom: 10px;
+   }
+   /* Custom button color */
+   .btn-magento {
+     background-color: #ff6600 !important; /* Button color similar to Magento */
+   }
+   @media (max-width: 992px) {
+     .split-screen {
+       flex-direction: column;
+     }
+     .left-side,
+     .right-side {
+       flex: none;
+       width: 100%;
+     }
+   }
+ </style>
+
+        <div class="banner">
+   <h1>
+     <t t-esc="contract.company_name"></t> Badge Creation
+   </h1>
+ </div>
+ <br/>
+
+
+ <div  style="padding: 10px;">
+     <div class="split-screen">
+   <!-- Left Side - Registration Form -->
+   <div class="left-side">
+     <div class="form-container">
+       <h2>Registration Form</h2>
+
+       <hr></hr>
+       <br/>
+       <form action="/create/exhibitor/badge/onsite" method="post">
+         <div class="form-group">
+           <label for="title"  style="font-size:40px">Title</label>
+           <select class="browser-default"   style="font-size:30px" name="title">
+             <option style="font-size:30px" value="Mr.">Mr.</option>
+             <option style="font-size:30px" value="Ms.">Ms.</option>
+             <option style="font-size:30px" value="Mrs.">Mrs.</option>
+           </select>
+         </div>
+         <div class="form-group">
+           <label for="firstName"  style="font-size:40px">First Name</label>
+           <input type="text" id="firstName" style="font-size:30px" name="firstName"  required="1" placeholder="Enter First Name"/>
+         </div>
+         <div class="form-group"  >
+           <label for="lastName"  style="font-size:40px">Last Name</label>
+           <input type="text" id="lastName" required="1"  style="font-size:30px" name="lastName" placeholder="Enter Last Name"/>
+         </div>
+         <div class="form-group"  style="font-size:50px">
+           <label for="designation"  style="font-size:40px">Designation</label>
+           <input type="text" id="designation" required="1"  style="font-size:30px" name="designation" placeholder="Enter Designation"/>
+         </div>
+         <div class="form-group"  style="font-size:50px">
+           <label for="mobileNumber"  style="font-size:40px">Mobile Number</label>
+           <input type="tel" id="mobileNumber"  name="mobile"  style="font-size:30px" placeholder="Enter Mobile Number"/>
+         </div>
+         <div class="form-group"  style="font-size:40px">
+           <label for="email"  style="font-size:40px">Email</label>
+           <input type="text" name="id"  t-att-value="contract.id" style="display:none"/>
+           <input type="email" id="email"  style="font-size:30px" required="1" name="email" placeholder="Enter Email"/>
+         </div>
+         <button type="submit"   style="font-size:40px;" class="btn waves-effect waves-light btn-magento">Submit</button>
+       </form>
+     </div>
+   </div>
+   <!-- Right Side - Generated Badges -->
+
+   <div class="right-side">
+     <div class="badge-container">
+       <h2>Generated Badges</h2>
+       <hr></hr>
+       <br></br>
+       <t t-foreach="contract.badge_ids" t-as="o">
+         <br/>
+          <a t-att-href="'/web/exhibitor/badge/qrcode?id=%s' % o.id">
+
+
+       <div class="badge" style="font-size:40px" >
+         <i class="fa fa-download" style="font-size:40px" aria-hidden="true"></i>
+         <t t-esc="o.attendee_full_name" style="font-size:40px"></t> </div>
+              </a>
+       </t>
+       <!-- Badges will be displayed here -->
+
+       <!-- Add more badges as needed -->
+     </div>
+   </div>
+ </div>
+</div>
+
+
+
+
+ <!-- Materialize JavaScript -->
+
+
+
+    </template>
+    </data>
+</odoo>

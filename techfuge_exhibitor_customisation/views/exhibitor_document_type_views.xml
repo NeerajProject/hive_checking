@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_exhibitor_document_type_form" model="ir.ui.view">
+            <field name="name">exhibitor.document.type.form</field>
+            <field name="model">exhibitor.document.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <label for="document_size"/>
+                                <div>
+                                    <field name="document_size" class="oe_inline"/>
+                                    <span class="oe_inline">
+                                        MB
+                                    </span>
+                                </div>
+                                <field name="document_applicable_ids" widget="many2many_checkboxes"/>
+                            </group>
+                            <group>
+                                <field name="document_format"/>
+                                <field name="document_mandatory_ids" widget="many2many_checkboxes"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="document_note"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_exhibitor_document_type_tree" model="ir.ui.view">
+            <field name="name">exhibitor.document.type.tree</field>
+            <field name="model">exhibitor.document.type</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="document_size"/>
+                    <field name="document_format"/>
+                    <field name="document_mandatory_ids"/>
+                    <field name="document_applicable_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_view_exhibitor_document_type" model="ir.actions.act_window">
+            <field name="name">Document Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exhibitor.document.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_exhibitor_document_type_tree"/>
+        </record>
+
+        <menuitem name="Document Type"
+                  id="menu_exhibitor_document_type"
+                  action="action_view_exhibitor_document_type"
+                  sequence="111"
+                  parent="event.menu_event_configuration"
+                  groups="techfuge_customisation.group_event_create_or_edit_access"/>
+
+    </data>
+</odoo>

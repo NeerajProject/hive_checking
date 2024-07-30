@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_exhibitor_contract_form" model="ir.ui.view">
+            <field name="name">exhibitor.contract.form</field>
+            <field name="model">exhibitor.contract</field>
+            <field name="arch" type="xml">
+                <form create="false" delete="false">
+                    <header>
+                        <button name="grant_portal_access_to_exhibitor" string="Grant Portal Access"
+                                class="oe_highlight" type="object"
+                                attrs="{'invisible': [('dashboard_access', '=', 'granted')]}"/>
+
+
+
+
+
+
+
+
+
+
+
+
+                        <field name="dashboard_access" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_view_exhibitor_sale_orders" icon="fa-dollar"
+                                    type="object" attrs="{'invisible': [('exhibitor_sale_order_count', '=', 0)]}">
+                                <field name="exhibitor_sale_order_count" string="Sale Orders" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" name="action_view_exhibitor_other_requests" icon="fa-send"
+                                    type="object" attrs="{'invisible': [('exhibitor_other_request_count', '=', 0)]}">
+                                <field name="exhibitor_other_request_count" string="Other Requests" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" name="action_view_exhibitor_invoices"
+                                    icon="fa-pencil-square-o" type="object"
+                                    attrs="{'invisible': [('exhibitor_invoice_count', '=', 0)]}">
+                                <field name="exhibitor_invoice_count" string="Invoices" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" name="action_view_exhibitor_payments" icon="fa-money"
+                                    type="object" attrs="{'invisible': [('exhibitor_payments_count', '=', 0)]}">
+                                <field name="exhibitor_payments_count" string="Payments" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" name="action_view_contractor_details" icon="fa-user-circle"
+                                    type="object" attrs="{'invisible': [('contractor_details_count', '=', 0)]}">
+                                <field name="contractor_details_count" string="Contractors" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" string="Name"/>
+                            <h1>
+                                <field name="name" class="oe_inline"/>
+                            </h1>
+                        </div>
+                        <group col="3" class="mb16">
+                            <group>
+                                <field name="exhibitor_name"/>
+                                <field name="active" invisible="1"></field>
+                                                                <field name="company_name"/>
+                                <field name="brand_id" />
+
+                                <field name="reference_id" readonly="1" options="{'no_open': True}"/>
+                                <field name="event_id"/>
+                                <field name="company_address"/>
+                                <field name="email"/>
+                                <field name="mobile"/>
+
+                                <field name="landline"/>
+                                                    <field name="country_name"/>
+                                <field name="partner_id" readonly="1"/>
+                                                                <field name="exhibitor_user_id" readonly="1"/>
+                                <field name="agent_id" readonly="1"/>
+<field name="attendee_registration_link"></field>
+<!--                                <field name="enable_shipment_section"/>-->
+
+<!--                                <field name="enable_finance_section"/>-->
+<!--                                <field name="used_food_coupons" readonly="1"-->
+<!--                                       attrs="{'invisible': [('eligible_for_food_coupon', '=', False)]}"/>-->
+<!--                                <field name="partner_id" readonly="1"/>-->
+                            </group>
+                            <group>
+                                                                <field name="sale_order_id"/>
+                                <field name="space_type_id" options="{'no_open': True}"/>
+                                <field name="no_of_stands"/>
+                                <field name="so_amount_total" widget="monetary"></field>
+
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                                                                <field name="no_of_badges"/>
+
+
+                                <br></br>
+                                <br></br>
+                                  <field name="enable_finance_section"/>
+                                                                <field name="enable_shipment_section"/>
+                                                                <field name="enable_contractor_section"/>
+
+
+                            </group>
+                            <group>
+                                             <field name="enable_hotel_request"/>-->
+                                <field name="allowed_hotel_rooms"/>
+                                  <field name="allowed_no_of_nights"
+                                       attrs="{'invisible': [('enable_hotel_request', '=', False)]}"/>
+                                                                                                <field name="is_submited_hotel_request" string="Enable Portal HotelBooking"></field>
+
+                                <br></br>
+                                <br></br>
+                                <field name="eligible_for_food_coupon"
+                                       attrs="{'invisible': [('eligible_for_food_coupon', '=', False)]}"/>
+         <field name="eligible_for_food_coupon"
+                                       attrs="{'invisible': [('eligible_for_food_coupon', '=', False)]}"/>
+                                <field name="no_of_food_coupons"></field>
+                                <field name="used_food_coupons"></field>
+                                <field name="remaining_food_coupons"></field>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="commercial_details" string="Commercial Details">
+                                <field name="allow_edit_commercials" invisible="1"/>
+                                <field name="commercial_items_ids"
+                                       attrs="{'readonly': [('allow_edit_commercials', '=', False)]}">
+                                    <tree editable="bottom" no_open="1">
+                                        <field name="product_template_id"/>
+                                        <field name="name"/>
+                                        <field name="product_uom_qty"/>
+                                        <field name="product_uom_id" invisible="1"/>
+                                        <field name="price_unit"/>
+                                        <field name="tax_ids"  domain="[('type_tax_use','=','sale')]"  widget="many2many_tags"/>
+                                        <field name="price_subtotal"/>
+                                    </tree>
+                                </field>
+                                <group col="6" class="mt-2 mt-md-0">
+                                    <group colspan="4"/>
+                                    <group class="oe_subtotal_footer oe_right" colspan="2">
+                                        <field name="tax_totals" widget="account-tax-totals-field" nolabel="1"
+                                               colspan="2" readonly="1"/>
+                                    </group>
+                                    <div class="clearfix"/>
+                                </group>
+                            </page>
+                            <page name="stand_details" string="Stand Details">
+                                <group>
+                                    <group>
+                                        <field name="total_area" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="stall_dimensions" readonly="1"/>
+                                    </group>
+                                </group>
+                                <field name="stand_ids" >
+                                    <tree editable="bottom" no_open="1">
+                                        <field name="stand_id"/>
+                                        <field name="hall_id"/>
+                                        <field name="stand_description"/>
+                                        <field name="stand_width"/>
+                                        <field name="stand_depth"/>
+                                        <field name="stand_size"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="badge_details" string="Badge Details">
+                                <field name="badge_ids">
+                                    <tree editable="bottom">
+                                        <field name="attendee_full_name" string="Name" readonly="0"/>
+                                        <field name="designation"/>
+                                        <field name="email"/>
+                                        <field name="mobile"/>
+                                        <field name="phone" string="Landline"/>
+                                        <field name="passport_attachment_id" invisible="1"/>
+                                        <button name="download_exhibitor_attendee_attachments" string="Passport"
+                                                class="oe_highlight" type="object" icon="fa-download"
+                                                context="{'passport_copy': True}"
+                                                attrs="{'invisible': [('passport_attachment_id', '=', False)]}"/>
+                                        <field name="visa_attachment_id" invisible="1"/>
+                                        <button name="download_exhibitor_attendee_attachments" string="Visa"
+                                                class="oe_highlight" type="object" icon="fa-download"
+                                                context="{'visa_copy': True}"
+                                                attrs="{'invisible': [('visa_attachment_id', '=', False)]}"/>
+                                        <field name="air_ticket_attachment_id" invisible="1"/>
+                                        <button name="download_exhibitor_attendee_attachments" string="Air Ticket"
+                                                class="oe_highlight" type="object" icon="fa-download"
+                                                context="{'air_ticket': True}"
+                                                attrs="{'invisible': [('air_ticket_attachment_id', '=', False)]}"/>
+                                        <field name="badge_attachment_id" invisible="1"/>
+                                        <button name="download_exhibitor_attendee_attachments" string="Badge"
+                                                class="oe_highlight" type="object" icon="fa-download"
+                                                context="{'badge_attachment': True}"
+                                                attrs="{'invisible': [('badge_attachment_id', '=', False)]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="invitation_letter_requests" string="Invitation Letter Requests">
+                                <field name="invitation_letter_request_ids">
+                                    <tree editable="bottom" no_open="1" create="false" delete="false">
+                                        <field name="name" readonly="1"/>
+                                        <field name="passport_number" readonly="1"/>
+                                        <field name="date_of_issue" readonly="1"/>
+                                        <field name="date_of_expiry" readonly="1"/>
+                                        <field name="date_of_birth" readonly="1"/>
+                                        <field name="country_id" readonly="1"/>
+                                        <field name="from_date" readonly="1"/>
+                                        <field name="till_date" readonly="1"/>
+                                        <field name="no_of_days" readonly="1"/>
+                                        <button name="download_invitation_letter_attachment" string="Invitation Letter"
+                                                class="oe_highlight" type="object" icon="fa-download"/>
+                                        <field name="invitation_letter_signed" string="Upload Signed Letter"
+                                               widget="binary"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page name="hotel_requests" string="Hotel Requests"  >
+
+<group>
+                                                                                <field name="maximum_hotel_booking_delete"></field>
+
+</group>
+                                <field name="hotel_request_ids">
+
+                                    <tree editable="bottom" no_open="1" create="false" delete="false"  >
+                                        <button name="action_view_records" type="object" class="fa fa-fw o_button_icon fa-external-link" ></button>
+                                        <field name="attendee_full_name" string="Attendee Name"/>
+                                        <field name="room_id"></field>
+                                        <field name="no_of_rooms"/>
+                                        <field name="checkin_date" />
+                                        <field name="checkout_date" />
+                                        <field name="no_of_nights" readonly="1"/>
+                                        <field name="allowed_no_of_nights" readonly="1"/>
+                                        <field name="additional_no_of_nights" readonly="1"/>
+                                        <field name="additional_paid_amount" readonly="1"/>
+                                        <field name="hotel_name"/>
+                                                            <field name="hotel_address"></field>
+
+                                        <field name="hotel_booking_ref"/>
+<!--                                        <button name="download_hotel_uploaded_document" string="Document"-->
+<!--                                                class="oe_highlight" type="object" icon="fa-download"/>-->
+                                        <field name="file_name" invisible="1"/>
+
+                                        <field name="upload_voucher" widget="binary" filename="file_name"/>
+                                        <field name="booking_status" readonly="1"/>
+<!--                                        <field name="status"></field>-->
+                                            <field name="date_of_arrival_time"></field>
+                    <field name="payment_status"></field>
+                                        <button name="approve_hotel_request" string="Approve"
+                                                class="oe_highlight" type="object"
+                                                attrs="{'invisible': [('booking_status', '=', 'completed')]}"/>
+                                    </tree>
+                                </field>
+
+
+
+                                <br></br>
+                                <br></br>
+
+                            </page>
+                            <page name="uploaded_documents" string="Uploaded Documents">
+                                <button name="download_all_uploaded_documents" string="Download All Documents"
+                                        class="oe_highlight" type="object"
+                                        attrs="{'invisible': [('uploaded_document_ids', '=', [])]}"/>
+                                <group/>
+                                <field name="uploaded_document_ids">
+                                    <tree create="false" no_open="1" editable="bottom" delete="false">
+                                        <field name="document_type_id" readonly="1"/>
+                                        <field name="document_note" readonly="1"/>
+                                        <field name="document_attachment_id" invisible="1"/>
+                                        <button name="download_other_uploaded_document" string="Document"
+                                                class="oe_highlight" type="object" icon="fa-download"
+                                                attrs="{'invisible': [('document_attachment_id', '=', False)]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="shipment_details" string="Shipment Details">
+                                <group>
+                                    <group>
+                                        <field name="exceeding_charges"/>
+                                        <field name="is_readonly_shipping"></field>
+                                    </group>
+                                </group>
+                                <group/>
+
+
+
+                                <field name="shipment_detail_ids">
+                                    <tree editable="bottom" no_open="1" create="false" delete="false">
+                                        <field name="total_shipment_volume" readonly="1"/>
+                                        <field name="allowed_cbm" readonly="1"/>
+                                        <field name="extra_cbm" readonly="1"/>
+                                        <field name="exceeding_charges" readonly="1"/>
+                                        <field name="additional_charges" />
+                                        <field name="final_charges"/>
+                                        <field name="no_of_cartons" readonly="1"/>
+                                        <field name="net_weight" readonly="1"/>
+                                        <field name="gross_weight" readonly="1"/>
+                                        <field name="port_of_loading" readonly="1"/>
+                                        <field name="port_of_arrival_in_uae" readonly="1"/>
+                                        <field name="shipment_status"/>
+                                    </tree>
+                                </field>
+                                <group string="Relevant Documents"/>
+
+                                <button name="download_all_shipment_document"  type='object' class="btn btn-primary" string="Shipping Documents Download"></button>
+
+
+                                <field name="shipment_document_ids">
+                                    <tree create="false" no_open="1" editable="bottom" delete="false">
+                                        <field name="document_type_id" readonly="1"/>
+                                        <field name="document_note" readonly="1"/>
+                                        <field name="document_attachment_id" invisible="1"/>
+                                        <field name="status" readonly="1"></field>
+                                        <button name="download_shipment_uploaded_document" string="Document"
+                                                class="oe_highlight" type="object" icon="fa-download"
+                                                attrs="{'invisible': [('document_attachment_id', '=', False)]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="contractor_details" string="Contractor Details">
+                                <field name="contractor_ids">
+                                    <tree editable="bottom" no_open="1" create="false" delete="false">
+                                        <field name="contractor_full_name"/>
+                                        <field name="company_name"/>
+
+                                        <field name="mobile"/>
+                                        <field name="email"/>
+                                        <field name="contract_purpose_id"/>
+                                        <field name="landline" optional="hide"/>
+                                        <field name="designation" optional="hide"/>
+                                        <field name="company_address" optional="hide"/>
+                                        <field name="city_or_town" optional="hide"/>
+                                        <field name="state_or_province" optional="hide"/>
+                                        <field name="country_id" optional="hide"/>
+                                        <field name="upload_permit" widget="binary"/>
+                                        <field name="status"/>
+                                        <button name="approve_contractor" string="Approve" class="oe_highlight"
+                                                type="object" attrs="{'invisible': [('status', '=', 'approved')]}"/>
+                                    </tree>
+                                </field>
+
+                                                        <button name="download_all_contractor_documents" type="object"  class="btn btn-primary" string="Contractor Documents Download"></button>
+
+                                <group string="Relevant Documents"/>
+                                <field name="contractor_document_ids">
+                                    <tree create="false" no_open="1" editable="bottom" delete="false">
+                                        <field name="contractor_contractor_full_name"></field>
+                                        <field name="document_type_id" readonly="1"/>
+                                        <field name="document_note" readonly="1"/>
+                                        <field name="contractor_id" readonly="1"></field>
+                                        <field name="document_attachment_id" invisible="1"/>
+                                        <field name="status" readonly="1"></field>
+                                        <button name="download_contractor_uploaded_document" string="Document"
+                                                class="oe_highlight" type="object" icon="fa-download"
+                                                attrs="{'invisible': [('document_attachment_id', '=', False)]}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page name="payment_stages" string="Payment Stages">
+                                <field name="exhibitor_payment_stage_ids" readonly="1">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="payment_type"/>
+                                        <field name="paid_percentage"/>
+                                        <field name="exhibitor_contract_currency_id" invisible="1"/>
+                                        <field name="paid_amount" widget="monetary"
+                                               options="{'currency_field': 'exhibitor_contract_currency_id'}"/>
+                                        <field name="payment_due_date"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                                        <field name="activity_ids"/>
+
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_exhibitor_contract_tree" model="ir.ui.view">
+            <field name="name">exhibitor.contract.tree</field>
+            <field name="model">exhibitor.contract</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false">
+                    <field name="name" string="Name"/>
+                    <field name="exhibitor_name"/>
+                    <field name="company_name"/>
+                    <field name="agent_id"/>
+                    <field name="brand_id"/>
+                    <field name="reference_id"/>
+                    <field name="mobile"/>
+                    <field name="email"/>
+                    <field name="hall_number"/>
+                    <field name="no_of_stands"/>
+                    <field name="no_of_badges"/>
+                    <field name="country_name"/>
+                    <field name="sale_order_id" optional="show"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="so_amount_untaxed" sum="Total Tax Excluded" widget="monetary"
+                           options="{'currency_field': 'currency_id'}" optional="show"/>
+                    <field name="so_amount_tax" sum="Tax Total" widget="monetary" optional="show"/>
+                    <field name="so_amount_total" sum="Total Tax Included" widget="monetary" optional="show"/>
+                    <field name="sale_order_state"/>
+                    <field name="invoice_amount_total"/>
+                    <field name="payment_amount_total"/>
+                    <field name="lead_state"/>
+                    <field name="dashboard_access"/>
+                    <field name="partner_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_enable_sections_for_exhibitor_tree" model="ir.ui.view">
+            <field name="name">exhibitor.contract.enable.section.tree</field>
+            <field name="model">exhibitor.contract</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" create="false" delete="false">
+                    <field name="name" string="Name"/>
+                    <field name="exhibitor_name"/>
+                    <field name="company_name"/>
+                    <field name="mobile"/>
+                    <field name="email"/>
+                    <field name="country_name"/>
+                    <field name="agent_id"/>
+                    <field name="brand_id" optional="hide"/>
+                    <field name="reference_id" optional="show"/>
+                    <field name="enable_hotel_request"/>
+                    <field name="allowed_no_of_nights"/>
+                    <field name="allowed_hotel_rooms"/>
+                    <field name="enable_shipment_section"/>
+                    <field name="enable_contractor_section"/>
+                    <field name="enable_finance_section"/>
+                    <field name="eligible_for_food_coupon"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_exhibitor_contract_search" model="ir.ui.view">
+            <field name="name">exhibitor.contract.search</field>
+            <field name="model">exhibitor.contract</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="exhibitor_name"/>
+                    <field name="event_id"/>
+                    <field name="sale_order_id"/>
+                    <field name="company_name"/>
+                    <field name="brand_id"/>
+                    <field name="reference_id"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Event" name="group_by_event_id" domain="[]" context="{'group_by':'event_id'}"/>
+                        <filter string="Space Type" name="group_by_space_type_id" domain="[]"
+                                context="{'group_by':'space_type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_view_exhibitor_contracts" model="ir.actions.act_window">
+            <field name="name">Exhibitor Contracts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exhibitor.contract</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_exhibitor_contract_tree"/>
+            <field name="search_view_id" ref="view_exhibitor_contract_search"/>
+        </record>
+
+        <record id="action_view_enable_sections_for_exhibitors" model="ir.actions.act_window">
+            <field name="name">Enable Sections for Exhibitor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exhibitor.contract</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_enable_sections_for_exhibitor_tree"/>
+        </record>
+
+        <menuitem name="Exhibitor Contracts"
+                  id="menu_event_exhibitor_contracts"
+                  action="action_view_exhibitor_contracts"
+                  sequence="110"
+                  parent="event.menu_reporting_events"
+                  groups="event.group_event_user,techfuge_exhibitor_customisation.group_show_event_exhibitor_contract_report"/>
+
+        <menuitem name="Enable Sections for Exhibitor"
+                  id="menu_event_enable_sections_for_exhibitors"
+                  action="action_view_enable_sections_for_exhibitors"
+                  sequence="120"
+                  parent="event.menu_event_configuration"
+                  groups="event.group_event_user"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_lead_view_form_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">crm.lead.form.exhibitor</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_set_won_rainbowman']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='team_id']" position="after">
+                <field name="agent_id" options="{'no_edit': True, 'no_create': True}"/>
+                <field name="sent_registration_mails" readonly="1"/>
+                <field name="create_date" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='product_categories']" position="after">
+                <field name="source_of_registration"/>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="attributes">
+                <attribute name="options">{'fold_field': 'fold'}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="additional_email" required="1" string="Customer Email (Only reference purpose)"/>
+                <field name="desired_area_in_sqm"></field>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="attributes">
+                <attribute name="string">Business Email (To send all documents &amp; portal access)</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_case_tree_view_oppor_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">crm.lead.tree.inherit.exhibitor</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="partner_name"/>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="before">
+                <field name="create_date"/>
+            </xpath>
+            <xpath expr="//field[@name='activity_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='my_activity_date_deadline']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='expected_revenue']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(crm.action_lead_mail_compose)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_reschedule_meeting']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_snooze']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_name']" position="after">
+                <field name="agent_id"/>
+                <field name="brand_id"/>
+                <field name="reference_id"/>
+                <field name="desired_area_in_sqm"></field>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="after">
+                <field name="sale_order_state"/>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="attributes">
+                <attribute name="string">Business Email</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email_from']" position="after">
+                <field name="additional_email"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_case_opportunities_filter_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">crm.lead.filter.inherit.exhibitor</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='activity_state']" position="after">
+                <field name="brand_id"/>
+                <field name="reference_id"/>
+                <field name="partner_name"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+    <record id="crm_case_tree_view_oppor_sms_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">crm.lead.form.sms.inherit.exhibitor</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm_sms.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(crm_sms.crm_lead_act_window_sms_composer_single)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(crm_sms.crm_lead_act_window_sms_composer_multi)d']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_lead_view_form_enrich_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">crm.lead.form.enrich.inherit.exhibitor</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm_iap_enrich.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='iap_enrich']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

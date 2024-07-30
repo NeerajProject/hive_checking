@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <record id="exhibitor_stand_details_tree_view" model="ir.ui.view">
+            <field name="name">techfuge_exhibitor_customisation.exhibitor.stand.details.tree</field>
+            <field name="model">exhibitor.stand.details</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+<!--                    -->
+<!--     = fields.Many2one("event.event", string="Event")-->
+<!--     = fields.Many2one("event.activity.location", string="Hall")-->
+<!--    stand_number = fields.Char(string="Stand Number")-->
+<!--     = fields.Char(string="Description")-->
+<!--     = fields.Float(string="Width (m)")-->
+<!--     = fields.Float(string="Depth (m)")-->
+<!--    stand_size = fields.Float(string="Stand Size", compute="_compute_stand_size",digits='Stand Details Unit')-->
+
+                    <field name="stand_number"/>
+                    <field name="stand_description"/>
+                    <field name="stand_width"/>
+                    <field name="stand_depth"/>
+                    <field name="event_id"/>
+                    <field name="hall_id"></field>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="exhibitor_stand_details_act_window" model="ir.actions.act_window">
+            <field name="name">Event Stand Master</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exhibitor.stand.details</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Exhibitor stands details" id="exhibitor_stand_details_menu"  action="exhibitor_stand_details_act_window"/>
+
+    </data>
+</odoo>

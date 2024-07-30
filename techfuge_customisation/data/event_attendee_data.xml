@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Event Attendee Type Data -->
+        <record id="attendee_type_data_vip_buyer" model="event.attendee.type">
+            <field name="name">VIP Buyer</field>
+            <field name="type">visitor</field>
+            <field name="badge_mail_template_id"
+                   ref="techfuge_customisation.email_template_registration_mail_to_visitor"/>
+        </record>
+
+        <record id="attendee_type_data_buyer" model="event.attendee.type">
+            <field name="name">Buyer</field>
+            <field name="type">visitor</field>
+            <field name="badge_mail_template_id"
+                   ref="techfuge_customisation.email_template_registration_mail_to_visitor"/>
+        </record>
+
+        <record id="attendee_type_data_hosted_vip_buyer" model="event.attendee.type">
+            <field name="name">VIP Hosted Buyer</field>
+            <field name="type">vip_visitor</field>
+            <field name="badge_mail_template_id"
+                   ref="techfuge_customisation.email_template_registration_mail_to_visitor"/>
+        </record>
+
+        <record id="attendee_type_data_exhibitor" model="event.attendee.type">
+            <field name="name">Exhibitor</field>
+            <field name="type">exhibitor</field>
+        </record>
+
+        <record id="attendee_type_data_contractor" model="event.attendee.type">
+            <field name="name">Contractor</field>
+            <field name="type">contractor</field>
+        </record>
+
+        <record id="attendee_type_data_organizer" model="event.attendee.type">
+            <field name="name">Organizer</field>
+            <field name="type">organizer</field>
+        </record>
+        <!-- -->
+
+        <!-- Event Business Nature Data -->
+        <record id="business_nature_data_chain_stores" model="event.business.nature">
+            <field name="name">Chain Stores</field>
+        </record>
+
+        <record id="business_nature_data_independent_retailers" model="event.business.nature">
+            <field name="name">Independent Retailers</field>
+        </record>
+
+        <record id="business_nature_data_independent_wholesalers" model="event.business.nature">
+            <field name="name">Wholesalers/Dealers/Distributors</field>
+        </record>
+
+        <record id="business_nature_data_independent_e_commerce" model="event.business.nature">
+            <field name="name">E-commerce</field>
+        </record>
+
+        <record id="business_nature_data_independent_procurement_group" model="event.business.nature">
+            <field name="name">Procurement Group</field>
+        </record>
+
+        <record id="business_nature_data_project_real_estate_developers" model="event.business.nature">
+            <field name="name">Projects/Real Estate Developers</field>
+        </record>
+
+        <record id="business_nature_data_architects_interior_designers" model="event.business.nature">
+            <field name="name">Architects/Interior Designers</field>
+        </record>
+
+        <record id="business_nature_data_manufacturer" model="event.business.nature">
+            <field name="name">Manufacturer</field>
+        </record>
+
+        <record id="business_nature_data_horcea" model="event.business.nature">
+            <field name="name">HORECA</field>
+        </record>
+
+        <record id="business_nature_data_others" model="event.business.nature">
+            <field name="name">Others</field>
+        </record>
+        <!-- -->
+
+        <!-- Event Visit Purpose Data -->
+        <record id="visit_purpose_data_meet_existing_supplier" model="event.visit.purpose">
+            <field name="name">Meet Existing Suppliers</field>
+        </record>
+
+        <record id="visit_purpose_data_meet_new_supplier" model="event.visit.purpose">
+            <field name="name">Meet New Suppliers</field>
+        </record>
+
+        <record id="visit_purpose_data_source_new_products" model="event.visit.purpose">
+            <field name="name">Source New products</field>
+        </record>
+
+        <record id="visit_purpose_data_gather_info" model="event.visit.purpose">
+            <field name="name">Gather Information</field>
+        </record>
+
+        <record id="visit_purpose_data_seek" model="event.visit.purpose">
+            <field name="name">Seek Representative / Agent / Distributor</field>
+        </record>
+        <!--  -->
+
+        <!-- Event Knowledge Source Data -->
+        <record id="knowledge_source_data_meet_invitation_by_show_organizer" model="event.knowledge.source">
+            <field name="name">Invitation by Show Organizer</field>
+        </record>
+
+        <record id="knowledge_source_data_invitation_by_exhibitor" model="event.knowledge.source">
+            <field name="name">Invitation by Exhibitor</field>
+        </record>
+
+        <record id="knowledge_source_data_digital_media" model="event.knowledge.source">
+            <field name="name">Website/Instagram/Facebook/LinkedIn etc</field>
+        </record>
+
+        <record id="knowledge_source_data_association_info" model="event.knowledge.source">
+            <field name="name">Association Info.</field>
+        </record>
+
+        <record id="knowledge_source_data_newspaper" model="event.knowledge.source">
+            <field name="name">Newspaper Advertisement</field>
+        </record>
+
+        <record id="knowledge_source_data_online_publication" model="event.knowledge.source">
+            <field name="name">Online Publication</field>
+        </record>
+
+        <record id="knowledge_source_data_other" model="event.knowledge.source">
+            <field name="name">Other</field>
+        </record>
+        <!-- -->
+
+        <!-- Interested Product Categories Data -->
+        <record id="interested_product_categories_data_living_rooms" model="interested.product.categories">
+            <field name="name">Living Rooms</field>
+        </record>
+
+        <record id="interested_product_categories_data_bedrooms" model="interested.product.categories">
+            <field name="name">Bedrooms</field>
+        </record>
+
+        <record id="interested_product_categories_data_sofas" model="interested.product.categories">
+            <field name="name">Sofas</field>
+        </record>
+
+        <record id="interested_product_categories_data_dining_rooms" model="interested.product.categories">
+            <field name="name">Dining Rooms</field>
+        </record>
+
+        <record id="interested_product_categories_data_young_rooms" model="interested.product.categories">
+            <field name="name">Young Rooms</field>
+        </record>
+
+        <record id="interested_product_categories_data_outdoor" model="interested.product.categories">
+            <field name="name">Outdoor</field>
+        </record>
+
+        <record id="interested_product_categories_data_bed_linen" model="interested.product.categories">
+            <field name="name">Bed linen</field>
+        </record>
+
+        <record id="interested_product_categories_data_bath_linen_accessories" model="interested.product.categories">
+            <field name="name">Bath Linen and Accessories.</field>
+        </record>
+
+        <record id="interested_product_categories_data_floor_coverage" model="interested.product.categories">
+            <field name="name">Floor Covering/Carpets/ Rugs</field>
+        </record>
+
+        <record id="interested_product_categories_data_lighting" model="interested.product.categories">
+            <field name="name">Lighting</field>
+        </record>
+
+        <record id="interested_product_categories_data_lighting_table" model="interested.product.categories">
+            <field name="name">LightingTable Décor and Accessories</field>
+        </record>
+
+        <record id="interested_product_categories_data_wall_Art" model="interested.product.categories">
+            <field name="name">Wall Art and Decor</field>
+        </record>
+
+        <record id="interested_product_categories_data_kitchen_table" model="interested.product.categories">
+            <field name="name">Kitchen &amp; Table/Serve ware</field>
+        </record>
+
+        <record id="interested_product_categories_data_garden" model="interested.product.categories">
+            <field name="name">Garden – Indoor and Outdoor</field>
+        </record>
+        <!--  -->
+
+    </data>
+</odoo>

@@ -1,0 +1,821 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <data>
+<!--    <data>-->
+
+        <!-- Exhibitor registration mail to exhibitor -->
+        <record id="email_template_exhibitor_registration_mail_to_exhibitor" model="mail.template">
+            <field name="name">Exhibitor Registration: Mail to Exhibitor</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&lt;</field>
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="subject">Thank you for Registering !</field>
+                          <field name="email_cc">admin@omgexhibitions.com,exhibit@hivefurnitureshow.com</field>
+
+            <field name="description">Sent mail to exhibitor after the successful exhibitor registration</field>
+            <field name="body_html" type="html">
+                <table align="center" width="100%" style="width: 100%;">
+                    <tr>
+                        <td/>
+                        <td align="center" width="600" style="width: 600px;">
+                            <table align="center" border="0" width="100%" style="width: 100%;">
+                                <tr>
+                                    <td align="center">
+                                        <img src="/techfuge_customisation/static/src/img/exhibitor_registered_thanks_poster.jpg"
+                                             width="700" height="945"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding: 15px 0px 10px 0px;">
+                                        <table align="center" border="0" width="50%" style="width: 50%;">
+                                            <tr>
+                                                <td align="right">
+                                                    <a href="https://www.linkedin.com/sharing/share-offsite/?mini=true&amp;url=https://www.hivefurnitureshow.com/why-visit/"
+                                                       target="_blank" style="color: #FFFFFF;">
+                                                        <img src="/techfuge_customisation/static/src/img/linkedin_icon.png"
+                                                             class="img" width="80" height="80"
+                                                             style="border-radius: 5px;"/>
+                                                    </a>
+                                                </td>
+                                                <td align="left">
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.hivefurnitureshow.com/why-visit/"
+                                                       target="_blank">
+                                                        <img src="/techfuge_customisation/static/src/img/facebook_icon.png"
+                                                             class="img" width="80" height="80"
+                                                             style="border-radius: 5px; margin-left: 15px;"/>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="font-size: 14px; padding: 10px;">
+                                        <a href="https://www.hivefurnitureshow.com/faqs/"
+                                           target="_blank" style="color: black;">
+                                            <div style="width: 232px; height: 40px;">
+                                                <u>
+
+
+
+
+                                                    <h3 style="font-size: 16px;">
+                                                        Click here to view FAQs 2222
+                                                    </h3>
+                                                </u>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 14px;">
+                                        <div>
+                                            If you have any queries, please contact
+                                            <a href="mailto:info@hivefurnitureshow.com" target="_blank">
+                                                info@hivefurnitureshow.com
+                                            </a>
+                                            or call our landline +971 4 566 5205
+                                            <br/>
+                                            <br/>
+                                            Your sincerely,
+                                            <br/>
+                                            <br/>
+                                            Team HIVE
+                                            <br/>
+                                            OMG Exhibitions and Conferences
+                                            <br/>
+                                            Dubai, UAE
+                                            <br/>
+                                            <br/>
+                                            Landline : +971 4 566 5205
+                                            <br/>
+                                            Mobile 1 : +971 54 998 0154
+                                            <br/>
+                                            Mobile 2 : +971 50 462 3913
+                                            <br/>
+                                            www.hivefurnitureshow.com
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td/>
+                    </tr>
+                </table>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <!-- Exhibitor registration mail to planner -->
+        <record id="email_template_exhibitor_registration_mail_to_planner" model="mail.template">
+            <field name="name">Exhibitor Registration: Mail to Planner</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&lt;</field>
+                          <field name="email_cc">admin@omgexhibitions.com,exhibit@hivefurnitureshow.com</field>
+
+            <field name="email_to">&lt;exhibit@hivefurnitureshow.com&gt;</field>
+            <field name="subject">New Exhibitor Registration - {{ object.partner_full_name }}</field>
+            <field name="description">Sent mail to planner after the successful exhibitor registration</field>
+            <field name="body_html" type="html">
+                <table align="center" width="100%" style="width: 100%;">
+                    <tr>
+                        <td/>
+                        <td align="center" width="600" style="width: 600px;">
+                            <table align="center" border="0" width="100%" style="width: 100%;">
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Name</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.partner_full_name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Designation</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.function"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Business Email</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.email_from"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Mobile</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.mobile"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Company Name</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.partner_name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Company Website</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.website"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Company Address</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td style="text-align: justify;">
+                                        <t t-out="object.street"/>
+                                    </td>
+                                </tr>
+
+                                  <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Desired Area in SQM</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.desired_area_in_sqm"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>City / Town</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.city"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>State / Province</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.state_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Country</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.country_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Landline</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.phone"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Product Category</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td>
+                                        <t t-out="object.product_categories"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>About Company</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td style="text-align: justify;">
+                                        <t t-out="object.about_exhibitor_company"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="width: 150px;">
+                                        <b>Communication Permission</b>
+                                    </td>
+                                    <td style="padding: 0px 10px;">
+                                        -
+                                    </td>
+                                    <td style="text-align: justify;">
+                                        <t t-if="object.communication_permission">
+                                            I would like to be informed though email, about Advertisements,
+                                            announcements and developments related to the exhibition.
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td/>
+                    </tr>
+                    <br/>
+                    <br/>
+                    <tr>
+                        <td align="left" style="width: 150px;"/>
+                        <td align="center" style="padding: 40px 0 20px 30px;">
+                            <a href="/web/login" target="_blank"
+                               style="background-color: #eba52e; padding: 6px; text-decoration: none; color: #fff; border-radius: 10px; font-size:13px;">
+                                Go to Portal
+                            </a>
+                        </td>
+                        <td/>
+                    </tr>
+                </table>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <!-- Registration confirmation mail to exhibitor -->
+        <record id="email_template_exhibitor_registration_confirmed_mail" model="mail.template">
+            <field name="name">Exhibitor Registration: Dashboard Access Credentials Mail to Exhibitor</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&lt;</field>
+            <field name="email_to">{{ object.email_from }}</field>
+                          <field name="email_cc"> exhibit@hivefurnitureshow.com,admin@omgexhibitions.com</field>
+
+            <field name="subject">HFS 2024 /{{object.exhibitor_user_id.exhibitor_contract_id.company_name or ''}}/STAND NO  {{', '.join(object.exhibitor_user_id.exhibitor_contract_id.sale_order_id.stand_ids.mapped('stand_number'))}}	 /YOU HAVE WON ACCESS TO HFS EXHIBITOR PORTAL</field>
+            <field name="description">Sent the dashboard access credentials mail to exhibitor after confirming registration</field>
+            <field name="body_html" type="html">
+                <table align="center" width="100%" style="width: 100%;">
+                    <tr>
+                        <td/>
+                        <td align="center" width="600" style="width: 600px;">
+                            <table align="center" border="0" width="100%" style="width: 100%;">
+                                <tr>
+                                    <td style="font-size: 14px;">
+Dear Exhibitor,
+
+                                        <br/>
+                                        <br/>
+Hearty Congratulations!                                        <br/>
+                                        <br/>
+As per your Space booked with us for HFS 2024 here are your login credentials to access the Exhibitor Online dashboard/portal.                                         <br/>
+
+<br></br>
+                                        Through this portal you need to upload and or submit the following documents
+                                        <br></br>
+                                        <ul>
+                                            <li>Logo File</li>
+                                            <li>Product images</li>
+                                            <li>Testimonial Video</li>
+                                            <li>Signed Agreement Copy</li>
+                                            <li>Branding panel details</li>
+                                            <li>Product Categories for catalogue purpose</li>
+                                            <li>Stand Related Drawings for approval</li>
+                                        </ul>
+                                        <br></br>
+Upon updating attendee details you will receive the below
+                                        <br></br>
+                                        <ul>
+                                            <li>Badges</li>
+                                            <li>Invite Letters</li>
+                                        </ul>
+                                        <br></br>
+
+
+
+
+You will be able to Request                                        <br></br>
+                                        <ul>
+                                            <li>Hotel Booking (If eligible)</li>
+                                            <li>Additional Items or Services.</li>
+                                        </ul>
+                                        <br></br>
+
+
+                                        <table class="table">
+  <thead>
+
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>Login ID</td>
+      <td> <t t-out="object.exhibitor_user_login"/></td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td>  <t t-out="object.exhibitor_user_password"/></td>
+    </tr>
+    <tr>
+      <td>Go to Portal Link</td>
+      <td><a t-att-href="object.exhibitor_user_id.authentication_url" target="_blank">
+          <t t-esc="object.exhibitor_user_id.authentication_url"></t>
+
+                                        </a>
+      </td>
+    </tr>
+          <tr>
+      <td>QR code</td>
+      <td>                                        <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', object.exhibitor_user_id.authentication_url, 100, 100)"
+></img></td>
+    </tr>
+  </tbody>
+</table>
+                                    </td>
+                                </tr>
+                                <br/>
+                                <br/>
+                                <tr>
+                                    <td align="center">
+
+
+
+
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </td>
+                                </tr>
+                                <br/>
+                                <br/>
+                                <tr>
+                                    <td style="font-size: 14px;">
+                                        <div>
+                                            <br></br>
+                                            <br></br>
+                                          For a hassle-free execution, Your co-operation to update the portal with required information as guided, will be highly appreciated.
+                                            <br></br>
+                                            <br></br>
+In case of any further information or query, please feel to reach out to us at exhibit@hivefurnitureshow.com
+                                            <br></br>
+                                            <br></br>
+Our heartfelt gratitude to be with us to make HFS 2024 as great success.
+                                            <br></br>
+                                            <br></br>
+
+With Warm Regards,
+                                            <br></br>
+                                            <br></br>
+                                            <strong> TEAM HFS  </strong>
+                                            <br></br>
+                                            <br></br>
+OMG EXHIBITIONS AND CONFERENCE
+                                            <br></br>
+1605, Sidra Tower, PO Box 391299,
+                                            <br></br>
+Sheikh Zayed Road,
+                                            <br></br>
+Dubai, UAE.
+                                            <br></br>
+M: 971 504623913 / L: 971 45665205
+<br></br>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td/>
+                    </tr>
+                </table>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <!-- Visitor registration mail template -->
+        <record id="email_template_registration_mail_to_visitor" model="mail.template">
+            <field name="name">Visitor Registration: Mail to Visitor</field>
+            <field name="model_id" ref="event.model_event_registration"/>
+            <field name="email_from">HFS 2024 &lt;visit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">{{ object.email }}</field>
+            <field name="email_cc">visit@hivefurnitureshow.com,suraj@omgexhibitions.com</field>
+
+            <field name="subject">Your Badge for HFS 2024 is now ready !</field>
+            <field name="description">Sent mail to visitor after the successful visitor registration</field>
+            <field name="body_html" type="html">
+
+
+                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" >
+    <tr>
+      <td style="padding: 20px 0;">
+        <img src="/techfuge_customisation/static/src/img/banner/email_banner.jpeg" alt="Banner"  style="display: block; width:100%"/>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Email Content -->
+  <table role="presentation" width="100%">
+    <tr  style="width:800px">
+      <td>
+        <p>Dear      <span t-out="object.attendee_full_name or ''"></span>,</p>
+        <p>Thank you for registering for Hive Furniture Show 2024, the Middle East and Africa's Largest International Furniture Fair, scheduled to take place from May 21 - 23, 2024, at Expo Centre, Sharjah, UAE.</p>
+          <p></p>
+
+          <p>To ensure swift entry into the exhibition, please download the e-Badge to your mobile device or print it out.</p>
+
+          <p></p>
+          <p>Your Unique Reference Number (URN) for entry is: </p>
+
+
+                <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', object.badge_download_url, 100, 100)"
+                                                        ></img>
+          <p> <strong>
+               <span t-out="object.attendee_reg_no or  ''"></span>
+          </strong>
+             </p>
+          <p></p>
+          <p>Here are the exhibition timings:</p>
+    <p></p>
+ <ul>
+          <li>Tuesday, May 21, 2024: 10:00 am - 6:00 pm</li>
+          <li>Wednesday, May 22, 2024: 10:00 am - 6:00 pm</li>
+          <li>Thursday, May 23, 2024: 10:00 am - 8:00 pm</li>
+        </ul>
+<p></p>
+    <p>Venue: EXPO CENTRE, SHARJAH, UAE</p>
+          <p></p>
+
+<!--          Linkdin icons-->
+
+
+          <p>We wish you a successful and rewarding experience at the event. For any inquiries, please feel free to contact us via email at visit@hivefurnitureshow.com.</p>
+          <p></p>
+          <p>We eagerly anticipate meeting you at Hive Furniture Show 2024!</p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p>Warm regards,</p>
+<p>Team Hive Furniture Show</p>
+      </td>
+    </tr>
+  </table>
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+            <field name="report_template" ref="techfuge_customisation.action_report_visitor_badge"/>
+ <field name="report_name">{{ object.attendee_full_name  }}</field>
+
+        </record>
+
+
+<!--            vip vistors badge-->
+
+           <record id="email_template_registration_mail_to_vip_visitor" model="mail.template">
+            <field name="name">Vip Buyer Registration: Mail to Visitor</field>
+            <field name="model_id" ref="event.model_event_registration"/>
+            <field name="email_from">HFS 2024 &lt;visit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">{{ object.email }}</field>
+            <field name="email_cc">visit@hivefurnitureshow.com,suraj@omgexhibitions.com</field>
+
+            <field name="subject">Your Badge for HFS 2024 is now ready !</field>
+            <field name="description">Sent mail to visitor after the successful visitor registration</field>
+            <field name="body_html" type="html">
+
+
+                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" >
+    <tr>
+      <td style="padding: 20px 0;">
+        <img src="/techfuge_customisation/static/src/img/banner/email_banner.jpeg" alt="Banner"  style="display: block; width:100%"/>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Email Content -->
+  <table role="presentation" width="100%">
+    <tr  style="width:800px">
+      <td>
+        <p>Dear      <span t-out="object.attendee_full_name or ''"></span>,</p>
+
+
+          <p>Thank you for visiting Hive Furniture Show in June 2023 which has made you our VIP Buyer for 2024!</p>
+
+
+
+        <p>We are pleased to invite you once again to the Middle East and Africa's Largest International Furniture Trade Exhibition, scheduled to take place from May 21 - 23, 2024, at Expo Centre, Sharjah, UAE.</p>
+          <p></p>
+          <p>As a Privilege for you, Please download the e-Badge to your mobile device or print it out, since we have already Registered you so that you don’t have to! </p>
+
+
+          <p></p>
+          <p>Your Unique Reference Number (URN) for entry is: </p>
+
+
+                <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', object.badge_download_url, 100, 100)"
+                                                        ></img>
+          <p> <strong>
+               <span t-out="object.attendee_reg_no or  ''"></span>
+          </strong>
+             </p>
+          <p></p>
+          <p>Here are the exhibition timings:</p>
+    <p></p>
+ <ul>
+          <li>Tuesday, May 21, 2024: 10:00 am - 6:00 pm</li>
+          <li>Wednesday, May 22, 2024: 10:00 am - 6:00 pm</li>
+          <li>Thursday, May 23, 2024: 10:00 am - 8:00 pm</li>
+        </ul>
+<p></p>
+    <p>Venue: EXPO CENTRE, SHARJAH, UAE</p>
+          <p></p>
+<p>Stay updated about the show by following us on LinkedIn &amp; Instagram:</p>
+<!--          Linkdin icons-->
+
+
+          <p>We wish you a successful and rewarding experience at the event. For any inquiries, please feel free to contact us via email at visit@hivefurnitureshow.com.</p>
+
+          <p></p>
+          <p>We eagerly anticipate meeting you at Hive Furniture Show 2024!</p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p>Warm regards,</p>
+<p>Team Hive Furniture Show</p>
+      </td>
+    </tr>
+  </table>
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+            <field name="report_template" ref="techfuge_customisation.action_report_visitor_badge"/>
+ <field name="report_name">{{ object.attendee_full_name  }}</field>
+
+        </record>
+
+        <!-- Already registered visitor mail template -->
+        <record id="email_template_already_registered_mail_to_visitor" model="mail.template">
+            <field name="name">Visitor Registration: Already Registered Visitor Mail</field>
+            <field name="model_id" ref="event.model_event_registration"/>
+            <field name="email_from">HFS 2024 &lt;visit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">{{ object.email }}</field>
+            <field name="subject">You are our Privileged Visitor for 2024!</field>
+            <field name="description">Sent mail to already registered visitor</field>
+            <field name="body_html" type="html">
+                <table align="center" width="100%" style="width: 100%;">
+                    <tr>
+                        <td/>
+                        <td align="center" width="600" style="width: 600px;">
+                            <table align="center" border="0" width="100%" style="width: 100%;">
+                                <tr>
+                                    <td align="center">
+                                        <img src="/techfuge_customisation/static/src/img/already_registered_mail_poster.jpg"
+                                             width="700" height="1068"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding: 15px 0px 10px 0px;">
+                                        <table align="center" border="0" width="50%" style="width: 50%;">
+                                            <tr>
+                                                <td align="right">
+                                                    <a href="https://www.linkedin.com/sharing/share-offsite/?mini=true&amp;url=https://www.hivefurnitureshow.com/why-visit/"
+                                                       target="_blank" style="color: #FFFFFF;">
+                                                        <img src="/techfuge_customisation/static/src/img/linkedin_icon.png"
+                                                             class="img" width="80" height="80"
+                                                             style="border-radius: 5px;"/>
+                                                    </a>
+                                                </td>
+                                                <td align="left">
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.hivefurnitureshow.com/why-visit/"
+                                                       target="_blank">
+                                                        <img src="/techfuge_customisation/static/src/img/facebook_icon.png"
+                                                             class="img" width="80" height="80"
+                                                             style="border-radius: 5px; margin-left: 15px;"/>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="font-size: 14px; padding: 10px;">
+                                        <a href="https://www.hivefurnitureshow.com/faqs/"
+                                           target="_blank" style="color: black;">
+                                            <div style="width: 232px; height: 40px;">
+                                                <u>
+                                                    <h3 style="font-size: 16px;">
+                                                        Click here to view FAQs
+                                                    </h3>
+                                                </u>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 14px;">
+                                        <div>
+                                            If you have any queries, please contact
+                                            <a href="mailto:info@hivefurnitureshow.com" target="_blank">
+                                                info@hivefurnitureshow.com
+                                            </a>
+                                            or call our landline +971 4 566 5205
+                                            <br/>
+                                            <br/>
+                                            Your sincerely,
+                                            <br/>
+                                            <br/>
+                                            Team HIVE
+                                            <br/>
+                                            OMG Exhibitions and Conferences
+                                            <br/>
+                                            Dubai, UAE
+                                            <br/>
+                                            <br/>
+                                            Landline : +971 4 566 5205
+                                            <br/>
+                                            Mobile 1 : +971 54 998 0154
+                                            <br/>
+                                            Mobile 2 : +971 50 462 3913
+                                            <br/>
+                                            www.hivefurnitureshow.com
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td/>
+                    </tr>
+                </table>
+            </field>
+            <field name="auto_delete" eval="False"/>
+            <field name="report_template" ref="techfuge_customisation.action_report_visitor_badge"/>
+            <field name="report_name">Visitor Badge</field>
+        </record>
+
+        <!-- Badge reminder mail template -->
+        <record id="email_template_badge_reminder_mail_to_visitor" model="mail.template">
+            <field name="name">Visitor Registration: Badge Reminder Mail to Visitor</field>
+            <field name="model_id" ref="event.model_event_registration"/>
+            <field name="email_from">HFS 2024 &lt;visit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">{{ object.email }}</field>
+            <field name="subject">A little reminder from HFS 2023 about your BADGE</field>
+            <field name="description">Sent badge reminder mail to visitor</field>
+            <field name="body_html" type="html">
+                <table align="center" width="100%" style="width: 100%;">
+                    <tr>
+                        <td/>
+                        <td align="center" width="600" style="width: 600px;">
+                            <table align="center" border="0" width="100%" style="width: 100%;">
+                                <tr>
+                                    <td align="center">
+                                        <img src="/techfuge_customisation/static/src/img/reminder_mail_poster.jpg"
+                                             width="700" height="1068"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding: 15px 0px 10px 0px;">
+                                        <table align="center" border="0" width="50%" style="width: 50%;">
+                                            <tr>
+                                                <td align="right">
+                                                    <a href="https://www.linkedin.com/sharing/share-offsite/?mini=true&amp;url=https://www.hivefurnitureshow.com/why-visit/"
+                                                       target="_blank" style="color: #FFFFFF;">
+                                                        <img src="/techfuge_customisation/static/src/img/linkedin_icon.png"
+                                                             class="img" width="80" height="80"
+                                                             style="border-radius: 5px;"/>
+                                                    </a>
+                                                </td>
+                                                <td align="left">
+                                                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.hivefurnitureshow.com/why-visit/"
+                                                       target="_blank">
+                                                        <img src="/techfuge_customisation/static/src/img/facebook_icon.png"
+                                                             class="img" width="80" height="80"
+                                                             style="border-radius: 5px; margin-left: 15px;"/>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="font-size: 14px; padding: 10px;">
+                                        <a href="https://www.hivefurnitureshow.com/faqs/"
+                                           target="_blank" style="color: black;">
+                                            <div style="width: 232px; height: 40px;">
+                                                <u>
+                                                    <h3 style="font-size: 16px;">
+                                                        Click here to view FAQs
+                                                    </h3>
+                                                </u>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 14px;">
+                                        <div>
+                                            If you have any queries, please contact
+                                            <a href="mailto:info@hivefurnitureshow.com" target="_blank">
+                                                info@hivefurnitureshow.com
+                                            </a>
+                                            or call our landline +971 4 566 5205
+                                            <br/>
+                                            <br/>
+                                            Your sincerely,
+                                            <br/>
+                                            <br/>
+                                            Team HIVE
+                                            <br/>
+                                            OMG Exhibitions and Conferences
+                                            <br/>
+                                            Dubai, UAE
+                                            <br/>
+                                            <br/>
+                                            Landline : +971 4 566 5205
+                                            <br/>
+                                            Mobile 1 : +971 54 998 0154
+                                            <br/>
+                                            Mobile 2 : +971 50 462 3913
+                                            <br/>
+                                            www.hivefurnitureshow.com
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td/>
+                    </tr>
+                </table>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+    </data>
+
+</odoo>

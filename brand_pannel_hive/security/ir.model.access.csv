@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_furniture_branding_type,furniture.branding.type,model_furniture_branding_type,,1,1,1,1
+access_accessories_branding_type,accessories.branding.type,model_accessories_branding_type,,1,1,1,1
+access_exhibitor_contract_portal,exhibitor.contract.portal,techfuge_exhibitor_customisation.model_exhibitor_contract,base.group_portal,1,1,1,1
+access_branding_update_line,branding.update.line,brand_pannel_hive.model_branding_update_line,,1,1,1,1
+access_booth_design_line,booth.design.line,brand_pannel_hive.model_booth_design_line,,1,1,1,1
+access_booth_design_type,booth.design.type,brand_pannel_hive.model_booth_design_type,,1,1,1,1
+access_res_country_code_master,res.country.code.master,brand_pannel_hive.model_res_country_code_master,,1,1,1,1
+access_branding_panel_badge,branding.panel.badge,brand_pannel_hive.model_branding_panel_badge,,1,1,1,1

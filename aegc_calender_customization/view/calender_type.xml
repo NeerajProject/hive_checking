@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <record id="aegc_booking_screen_view" model="ir.actions.client">
+        <field name="name">Appointment</field>
+        <field name="tag">AegcBookingScreen</field>
+    </record>
+
+
+
+              <record id="appointment_type_view_form" model="ir.ui.view">
+        <field name="name">appointment.type.view.form.inherit.crm</field>
+        <field name="model">appointment.type</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="appointment.appointment_type_view_form" />
+        <field name="arch" type="xml">
+
+
+
+
+
+
+            <xpath expr="//page[@name='options']/group/group[@name='options_left_details']/field[@name='location_id']" position="after">
+<!--                <field name="appointment_save_details" groups="aegc_calender_customization.group_default_search_group_screen"></field>-->
+                 <field name="is_eighteen_points" groups="aegc_calender_customization.group_default_search_group_screen"></field>
+                <field name="eighteen_point_appointment_type"    attrs="{'invisible': [('is_eighteen_points','not in',[True])]}" groups="aegc_calender_customization.group_default_search_group_screen"> </field>
+                <field name="span_of_eighteen_points"   attrs="{'invisible': [('is_eighteen_points','not in',[True])]}" groups="aegc_calender_customization.group_default_search_group_screen"></field>
+                            <field name="span_of_eighteen_points_screeen" groups="aegc_calender_customization.group_default_search_group_screen"></field>
+                            <field name="is_visible_in_screen" groups="aegc_calender_customization.group_default_search_group_screen"></field>
+            </xpath>
+
+
+        </field>
+              </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </data>
+</odoo>

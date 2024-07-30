@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+
+    <t t-name="AegcClubDetailsSlots">
+        <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col"><i class="o_ActivityButtonView_icon fa fa-fw fa-lg text-muted fa-clock-o"></i></th>
+      <th scope="col" t-attr-id="o.id">
+        <t t-esc="o.name"></t>
+
+
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+
+       <t t-foreach="o.slots" t-as="rec">
+            <tr>
+      <th scope="row"><t t-esc="rec.time_in_text"></t></th>
+      <td >
+
+
+
+<!--event area-->
+
+          <t t-if="rec.is_event">
+
+
+    <t t-if="rec.is_blocked">
+
+
+
+<t t-if="rec.is_already_created" >
+   <t t-if="rec.payment_status == 'not_invoiced'">
+      <div  class="alert alert-danger" t-att-value="rec.id"  t-attf-style="background-color: {{rec.color}};height:120px;" role="alert">
+
+          <t t-esc="rec.name"></t>
+          1
+              <hr></hr>
+
+         <ol>
+            <t t-foreach="rec.partner_ids" t-as="partner">
+               <li style=" font-size: 60%;">
+                  <t t-esc="partner"></t>
+               </li>
+            </t>
+         </ol>
+      </div>
+   </t>
+   <t t-if="rec.payment_status == 'not_paid'">
+      <div class="alert alert-danger"  t-att-value="rec.id" t-attf-style="background-color: {{rec.color}};height:120px" role="alert">
+
+
+                     <t t-esc="rec.name"></t>
+          2
+              <hr></hr>
+         <ol>
+            <t t-foreach="rec.partner_ids" t-as="partner">
+               <li style=" font-size: 60%;">
+                  <t t-esc="partner"></t>
+               </li>
+            </t>
+         </ol>
+      </div>
+   </t>
+   <t t-if="rec.payment_status == 'paid'">
+      <div  class="alert alert-danger" t-att-value="rec.id"  t-attf-style="background-color: {{rec.color}};height:120px"    role="alert">
+
+                     <t t-esc="rec.name"></t>
+          3
+              <hr></hr>
+         <ol>
+            <t t-foreach="rec.partner_ids" t-as="partner">
+               <li style=" font-size: 60%;">
+                  <t t-esc="partner"></t>
+               </li>
+            </t>
+         </ol>
+      </div>
+   </t>
+</t>
+<t t-else="rec.is_already_created">
+   <div class="alert alert-danger"  t-att-href="rec.attendee_type_id" t-att-value="rec.start"  t-attf-style="background-color: {{rec.color}};height:120px"   t-att-title="rec.slot_duration"    >
+
+              <t t-esc="rec.name"></t>
+           4
+              <hr></hr>
+   </div>
+</t>
+
+
+
+          </t>
+
+
+
+
+<t t-else="rec.is_blocked">
+
+    <t t-if="rec.is_already_created">
+   <t t-if="rec.payment_status == 'not_invoiced'">
+      <div  class="alert alert-info"  id="open_already_booked_button" t-att-value="rec.id"   t-attf-style="background-color: {{rec.color}};height:120px" role="alert">
+              <t t-esc="rec.name"></t>
+    <hr></hr>
+         <ol>
+            <t t-foreach="rec.partner_ids" t-as="partner">
+               <li style=" font-size: 60%;">
+                  <t t-esc="partner"></t>
+               </li>
+            </t>
+         </ol>
+      </div>
+   </t>
+   <t t-if="rec.payment_status == 'not_paid'">
+      <div  class="alert alert-info"   id="open_already_booked_button" t-att-value="rec.id"   t-attf-style="background-color: {{rec.color}};height:120px" role="alert">
+              <t t-esc="rec.name"></t>
+    <hr></hr>
+         <ol>
+            <t t-foreach="rec.partner_ids" t-as="partner">
+               <li style=" font-size: 60%;">
+                  <t t-esc="partner"></t>
+               </li>
+            </t>
+         </ol>
+      </div>
+   </t>
+   <t t-if="rec.payment_status == 'paid'">
+      <div  class="alert alert-info"  id="open_already_booked_button" t-att-value="rec.id"    t-attf-style="background-color: {{rec.color}};height:120px" role="alert">
+              <span t-esc="rec.name"></span>
+    <hr></hr>
+         <ol>
+            <t t-foreach="rec.partner_ids" t-as="partner">
+               <li style=" font-size: 60%;">
+                  <t t-esc="partner"></t>
+               </li>
+            </t>
+         </ol>
+      </div>
+   </t>
+</t>
+<t t-else="rec.is_already_created">
+   <div class="alert alert-info" id="create_appointment"  t-att-href="rec.attendee_type_id" t-att-value="rec.start"  t-att-title="rec.slot_duration"
+        t-attf-style="background-color: {{rec.color}};height:120px">
+
+           <t t-esc="rec.name"></t>
+    <hr></hr>
+   </div>
+</t>
+
+
+
+</t>
+
+
+
+
+</t>
+
+<!--          Non event area-->
+
+          <t t-else="rec.is_event">
+
+
+<t t-if="rec.is_already_created">
+   <t t-if="rec.payment_status == 'not_invoiced'">
+      <div  class="alert alert-warning" id="open_already_booked_button"  t-att-value="rec.id" style="height:120px;" role="alert">
+         <ol>
+            <t t-foreach="rec.partner_ids" t-as="partner">
+               <li style=" font-size: 60%;">
+                  <t t-esc="partner"></t>
+               </li>
+            </t>
+         </ol>
+      </div>
+   </t>
+   <t t-if="rec.payment_status == 'not_paid'">
+      <div  class="alert alert-warning" id="open_already_booked_button"  t-att-value="rec.id" style="height:120px;" role="alert">
+         <ol>
+            <t t-foreach="rec.partner_ids" t-as="partner">
+               <li style=" font-size: 60%;">
+                  <t t-esc="partner"></t>
+               </li>
+            </t>
+         </ol>
+      </div>
+   </t>
+   <t t-if="rec.payment_status == 'paid'">
+      <div  class="alert alert-success" id="open_already_booked_button"  t-att-value="rec.id" style="height:120px;" role="alert">
+         <ol>
+            <t t-foreach="rec.partner_ids" t-as="partner">
+               <li style=" font-size: 60%;">
+                  <t t-esc="partner"></t>
+               </li>
+            </t>
+         </ol>
+      </div>
+   </t>
+</t>
+<t t-else="rec.is_already_created">
+   <div class="alert alert-dark" id="create_appointment"  t-att-href="rec.attendee_type_id" t-att-value="rec.start"  t-att-title="rec.slot_duration" style="height:120px;">
+   </div>
+</t>
+
+
+
+
+
+          </t>
+
+
+
+
+
+
+
+
+
+
+
+
+      </td>
+
+    </tr>
+       </t>
+
+
+
+  </tbody>
+</table>
+    </t>
+
+
+<t t-name="AegcContainerTables">
+<div class="container">
+<table class="table table-striped">
+
+<t t-foreach="widget.all_slots_available.slots_list" t-as="o">
+    <td>
+        <t t-call="AegcClubDetailsSlots"></t>
+
+    </td>
+    </t>
+
+
+
+
+
+
+
+</table>
+
+</div>
+
+</t>
+</template>

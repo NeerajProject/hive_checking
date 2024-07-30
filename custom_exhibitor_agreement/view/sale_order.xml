@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="agreement_generate_order_form_view" model="ir.ui.view">
+        <field name="name">rental.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <button name="action_quotation_send" position="before">
+
+                <button name="action_generate_agreement" type="object" string="Print Agreement"  attrs="{'invisible': [('state', 'in', ['draft','sent','quote_accepted'])]}"></button>
+            </button>
+
+
+            <xpath expr="//group[@name='include_special']" position="inside">
+                <field name="include_special_condition_section_b" ></field>
+                  <field  name="special_section_b"
+                                   attrs="{'invisible': [('include_special_condition_section_b', '=', False)]}"/>
+</xpath>        </field>
+
+
+
+
+    </record>
+
+
+
+
+
+</odoo>

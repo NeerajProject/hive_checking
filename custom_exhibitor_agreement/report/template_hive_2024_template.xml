@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <record id="action_report_exhibitor_agreement_iif2023" model="ir.actions.report">
+        <field name="name">IIFF 2023 Exhibitor Agreement</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_exhibitor_agreement.exhibitor_agreement_layout_iif_2024</field>
+        <field name="report_file">custom_exhibitor_agreement.exhibitor_agreement_layout_iif_2024</field>
+        <field name="print_report_name">'AGREEMENT - %s - %s' % (object.event_id.name,object.partner_id.parent_id.name or '')</field>
+        <field name="binding_model_id" ref="model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="techfuge_exhibitor_customisation.paperformat_exhibitor_agreement"/>
+    </record>
+
+
+
+          <record id="mail_template_sale_exhibitor_agreement_iif2023" model="mail.template">
+            <field name="name">Exhibitor Registration : IIFF 2023</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+              <field name="subject"> IIFF2023 /{{object.partner_id.parent_id.name or object.partner_id.name or ''}}/ STAND NO {{', '.join(object.stand_ids.mapped('stand_number'))}}/  AGREEMENT / {{ object.name }}</field>
+              <field name="email_from">INDIA INTERNATIONAL FURNITURE FAIR - IIFF 2023 &lt;exhibit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">{{ object.partner_id.email }}</field>
+              <field name="email_cc">admin@omgexhibitions.com,swapnali@iiffglobal.com</field>
+            <field name="description">Sent exhibitor agreement to customers on order confirmation</field>
+            <field name="body_html" type="html">
+
+
+<strong>Dear Exhibitor,</strong>
+<br></br>
+                <p></p>
+                   <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 12px;">
+
+
+                        A warm welcome at IIFF2023 in advance!
+                        <br></br>
+                        <br></br>
+With regards to your acceptance of the Quote and Terms of  participation at IIFF2023, we are pleased to send you the AGREEMENT CONTRACT         <span t-out="object.name or  ''"></span> , as attached with details as follows -
+
+                        <br></br>
+                        <br></br>
+
+
+                        <div style="padding:20px">
+
+
+
+                             <table class="table"  style="width:100% !important">
+  <thead>
+
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>HALL NO</td>
+      <td>  <t t-if="object.hall_ids">
+                                <span t-out="', '.join(object.hall_ids.mapped('name'))"></span>
+                            </t>
+      </td>
+    </tr>
+    <tr>
+      <td>Stand No</td>
+      <td>  <t t-if="object.stand_ids">
+                                <span t-out="', '.join(object.stand_ids.mapped('stand_number'))"></span>
+                            </t></td>
+    </tr>
+ <tr>
+      <td>Area in SQM</td>
+      <td>   <span t-out="object.total_area or ''"></span>
+      </td>
+    </tr>
+
+<tr>
+      <td>Total Value including all taxes in</td>
+      <td>   <span t-out="object.currency_id.name or ''"/>                           <span t-out="object.amount_total or ''"></span>
+
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+                        </div>
+
+                        <br></br>
+                        <br></br>
+
+
+
+
+
+                        To ensure your Space is reserved, please send this Agreement as a scanned copy with company Stamp &amp; Signed by Authorized Person , within 7 days of receipt of this mail. <br></br>
+Next, kindly transfer the payment as per schedule given within the Agreement, for Final Booking, within 15 days of confirmation. <br></br>
+In case of any further information or query, please feel to reach out to us at exhibit@hivefurnitureshow.com<br></br>
+We wish you a successful and long association with us for this and all future events. <br></br>
+With Best Regards, <br></br>
+                        <br></br>
+                        <br></br>
+
+               <strong>
+                   Accounts Manager - IIFF
+               </strong>         <br></br>
+OMG EXHIBITIONS AND CONFERENCE<br></br>
+1605, Sidra Tower, PO Box <strong> 391299,  </strong><br></br>
+Sheikh Zayed Road,<br></br>
+Dubai, UAE.<br></br>
+
+
+
+                    </p>
+
+
+
+
+
+
+
+
+
+                </div>
+            </field>
+            <field name="report_template" ref="custom_exhibitor_agreement.action_report_exhibitor_agreement_iif2023"/>
+            <field name="report_name">{{ 'AGREEMENT - %s - %s' % (object.event_id.name,object.partner_id.parent_id.name or '') }}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="is_exihibitor_mail"  eval="True"/>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+<!--    hive 2024-->
+
+
+
+    <record id="action_report_exhibitor_agreement_hive2024" model="ir.actions.report">
+        <field name="name">Hive 2024 Exhibitor Agreement</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_exhibitor_agreement.exhibitor_agreement_layout_hive_2024</field>
+        <field name="report_file">custom_exhibitor_agreement.exhibitor_agreement_layout_hive_2024</field>
+        <field name="print_report_name">'AGREEMENT - %s - %s' % (object.event_id.name,object.partner_id.parent_id.name or '')</field>
+        <field name="binding_model_id" ref="model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="techfuge_exhibitor_customisation.paperformat_exhibitor_agreement"/>
+    </record>
+
+
+
+              <record id="mail_template_sale_exhibitor_agreement_hive2024" model="mail.template">
+            <field name="name">Exhibitor Registration : Hive 2024</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">{{object.event_id.name}} : AGREEMENT FOR {{ object.partner_id.parent_id.name }} DATED {{ object.date_order.strftime('%d-%B-%Y') }}</field>
+            <field name="email_from">exhibit@hivefurnitureshow.com</field>
+            <field name="email_to">{{ object.partner_id.email }}</field>
+              <field name="email_cc">admin@omgexhibitions.com,exhibit@hivefurnitureshow.com</field>
+            <field name="description">Sent exhibitor agreement to customers on order confirmation</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 12px;">
+<p> <strong> Dear Exhibitor, </strong> </p>
+                        <p></p>
+                    A warm welcome at HFS 2024 in advance!
+With regards to your acceptance of the Quote and Terms of  participation at HFS 2024, we are pleased to send you the <strong> AGREEMENT CONTRACT    <t t-if="object.name">
+<t t-esc="object.name"></t>
+                            </t>
+                    </strong> , as attached with details as follows -
+
+<br></br>
+
+
+                             <table class="table"  style="width:100% !important">
+  <thead>
+
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>HALL NO</td>
+      <td>  <t t-if="object.hall_ids">
+                                <span t-out="', '.join(object.hall_ids.mapped('name'))"></span>
+                            </t>
+      </td>
+    </tr>
+    <tr>
+      <td>Stand No</td>
+      <td>  <t t-if="object.stand_ids">
+                                <span t-out="', '.join(object.stand_ids.mapped('stand_number'))"></span>
+                            </t></td>
+    </tr>
+ <tr>
+      <td>Area in SQM</td>
+      <td>   <span t-out="object.total_area or ''"></span>
+      </td>
+    </tr>
+
+<tr>
+      <td>Total Value including all taxes in</td>
+      <td>   <span t-out="object.currency_id.name or ''"/>                           <span t-out="object.amount_total or ''"></span>
+
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+                        <br></br>
+
+
+
+                        To ensure your Space is reserved, please send this Agreement as a scanned copy with company Stamp &amp; Signed by Authorized Person , within 7 days of receipt of this mail.
+Next, kindly transfer the payment as per schedule given within the Agreement, for Final Booking, within 15 days of confirmation.
+                        <br></br>
+In case of any further information or query, please feel to reach out to us at exhibit@hivefurnitureshow.com
+                        <br></br>
+We wish you a successful and long association with us for this and all future events.
+                        <br></br>
+                        <br></br>
+With Best Regards, <br></br>
+<strong>Accounts Manager -HFS </strong><br></br>
+OMG EXHIBITIONS AND CONFERENCE <br></br>
+1605, Sidra Tower, PO Box <strong> 391299 </strong>,<br></br>
+Sheikh Zayed Road,<br></br>
+Dubai, UAE.<br></br>
+Mobile: 971 504623913 / Landline: 971 45665205<br></br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--                        Hello,-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        With reference to-->
+<!--                        <b>-->
+<!--                            Quotation no #-->
+<!--                            <span t-out="object.name or ''"/>-->
+<!--                        </b>-->
+<!--                        approved by your company, please find attached-->
+<!--                        <b>-->
+<!--                            Space allocation Agreement for Hall no.-->
+<!--                            <t t-if="object.hall_ids">-->
+<!--                                <span t-out="', '.join(object.hall_ids.mapped('name'))"/>-->
+<!--                            </t>-->
+<!--                            , Stall no.-->
+<!--                            <t t-if="object.stand_ids">-->
+<!--                                <span t-out="', '.join(object.stand_ids.mapped('stand_number'))"/>-->
+<!--                            </t>-->
+<!--                            , Area-->
+<!--                            <span t-out="object.total_area or ''"/>-->
+<!--                            SQM and <span t-out="object.currency_id.symbol or ''"></span>-->
+<!--                            <span t-out="object.amount_total or ''"/>-->
+<!--                            Including VAT.-->
+<!--                        </b>-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        Please review all details of the agreement to be correct as per agreed terms.-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        Kindly arrange to send Signed and Stamp Copy of the Agreement &amp; send back to us on mail as-->
+<!--                        acknowledgement of your participation for HFS 2024!-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        Request to please create a Single PDF File only of all pages.-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        In case of any queries, please feel free to reach out to us.-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        We look forward to having you on board at HFS 2024-->
+<!--                        and have a very successful event.-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        Thanks and Regards-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        <b>Accounts Department</b>-->
+<!--                        <br/>-->
+<!--                        OMG Exhibitions and Conference-->
+<!--                        <br/>-->
+<!--                        1605, Sidra Towers, PO Box 3051, Sheikh Zayed Road,-->
+<!--                        <br/>-->
+<!--                        Dubai, UAE-->
+<!--                        <br/>-->
+<!--                        <b>Cell no : +971 50 462 3913</b>-->
+<!--                        <br/>-->
+<!--                        <b>Landline : +971 4 566 5205</b>-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="custom_exhibitor_agreement.action_report_exhibitor_agreement_hive2024"/>
+            <field name="report_name">{{ 'AGREEMENT - %s - %s' % (object.event_id.name,object.partner_id.parent_id.name or '') }}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="is_exihibitor_mail"  eval="True"/>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+    <record id="action_report_exhibitor_agreement_hive2024_turkey" model="ir.actions.report">
+        <field name="name">Hive 2024 Exhibitor Agreement Turkey</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_exhibitor_agreement.exhibitor_agreement_layout_hive_2024_turkey</field>
+        <field name="report_file">custom_exhibitor_agreement.exhibitor_agreement_layout_hive_2024_turkey</field>
+        <field name="print_report_name">'AGREEMENT - %s - %s' % (object.event_id.name,object.partner_id.parent_id.name or '')</field>
+        <field name="binding_model_id" ref="model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="techfuge_exhibitor_customisation.paperformat_exhibitor_agreement"/>
+    </record>
+
+
+
+          <record id="mail_template_sale_exhibitor_agreement_hive2024_turkey" model="mail.template">
+            <field name="name">Exhibitor Registration : Hive 2024 Turkey</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">{{object.event_id.name}} : AGREEMENT FOR {{ object.partner_id.parent_id.name }} DATED {{ object.date_order.strftime('%d-%B-%Y') }}</field>
+            <field name="email_from">exhibit@hivefurnitureshow.com</field>
+            <field name="email_to">{{ object.partner_id.email }}</field>
+              <field name="email_cc">admin@omgexhibitions.com,exhibit@hivefurnitureshow.com</field>
+            <field name="description">Sent exhibitor agreement to customers on order confirmation</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 12px;">
+<p> <strong> Dear Exhibitor, </strong> </p>
+                        <p></p>
+                    A warm welcome at HFS 2024 in advance!
+With regards to your acceptance of the Quote and Terms of  participation at HFS 2024, we are pleased to send you the <strong> AGREEMENT CONTRACT    <t t-if="object.name">
+<t t-esc="object.name"></t>
+                            </t>
+                    </strong> , as attached with details as follows -
+
+<br></br>
+
+
+                             <table class="table"  style="width:100% !important">
+  <thead>
+
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>HALL NO</td>
+      <td>  <t t-if="object.hall_ids">
+                                <span t-out="', '.join(object.hall_ids.mapped('name'))"></span>
+                            </t>
+      </td>
+    </tr>
+    <tr>
+      <td>Stand No</td>
+      <td>  <t t-if="object.stand_ids">
+                                <span t-out="', '.join(object.stand_ids.mapped('stand_number'))"></span>
+                            </t></td>
+    </tr>
+ <tr>
+      <td>Area in SQM</td>
+      <td>   <span t-out="object.total_area or ''"></span>
+      </td>
+    </tr>
+
+<tr>
+      <td>Total Value including all taxes in</td>
+      <td>   <span t-out="object.currency_id.name or ''"/>                           <span t-out="object.amount_total or ''"></span>
+
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+                        <br></br>
+
+
+
+                        To ensure your Space is reserved, please send this Agreement as a scanned copy with company Stamp &amp; Signed by Authorized Person , within 7 days of receipt of this mail.
+Next, kindly transfer the payment as per schedule given within the Agreement, for Final Booking, within 15 days of confirmation.
+                        <br></br>
+In case of any further information or query, please feel to reach out to us at exhibit@hivefurnitureshow.com
+                        <br></br>
+We wish you a successful and long association with us for this and all future events.
+                        <br></br>
+                        <br></br>
+With Best Regards, <br></br>
+<strong>Accounts Manager -HFS </strong><br></br>
+OMG EXHIBITIONS AND CONFERENCE <br></br>
+1605, Sidra Tower, PO Box <strong> 391299 </strong>,<br></br>
+Sheikh Zayed Road,<br></br>
+Dubai, UAE.<br></br>
+Mobile: 971 504623913 / Landline: 971 45665205<br></br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--                        Hello,-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        With reference to-->
+<!--                        <b>-->
+<!--                            Quotation no #-->
+<!--                            <span t-out="object.name or ''"/>-->
+<!--                        </b>-->
+<!--                        approved by your company, please find attached-->
+<!--                        <b>-->
+<!--                            Space allocation Agreement for Hall no.-->
+<!--                            <t t-if="object.hall_ids">-->
+<!--                                <span t-out="', '.join(object.hall_ids.mapped('name'))"/>-->
+<!--                            </t>-->
+<!--                            , Stall no.-->
+<!--                            <t t-if="object.stand_ids">-->
+<!--                                <span t-out="', '.join(object.stand_ids.mapped('stand_number'))"/>-->
+<!--                            </t>-->
+<!--                            , Area-->
+<!--                            <span t-out="object.total_area or ''"/>-->
+<!--                            SQM and <span t-out="object.currency_id.symbol or ''"></span>-->
+<!--                            <span t-out="object.amount_total or ''"/>-->
+<!--                            Including VAT.-->
+<!--                        </b>-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        Please review all details of the agreement to be correct as per agreed terms.-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        Kindly arrange to send Signed and Stamp Copy of the Agreement &amp; send back to us on mail as-->
+<!--                        acknowledgement of your participation for HFS 2024!-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        Request to please create a Single PDF File only of all pages.-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        In case of any queries, please feel free to reach out to us.-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        We look forward to having you on board at HFS 2024-->
+<!--                        and have a very successful event.-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        Thanks and Regards-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+<!--                        <b>Accounts Department</b>-->
+<!--                        <br/>-->
+<!--                        OMG Exhibitions and Conference-->
+<!--                        <br/>-->
+<!--                        1605, Sidra Towers, PO Box 3051, Sheikh Zayed Road,-->
+<!--                        <br/>-->
+<!--                        Dubai, UAE-->
+<!--                        <br/>-->
+<!--                        <b>Cell no : +971 50 462 3913</b>-->
+<!--                        <br/>-->
+<!--                        <b>Landline : +971 4 566 5205</b>-->
+<!--                        <br/>-->
+<!--                        <br/>-->
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="custom_exhibitor_agreement.action_report_exhibitor_agreement_hive2024_turkey"/>
+            <field name="report_name">{{ 'AGREEMENT - %s - %s' % (object.event_id.name,object.partner_id.parent_id.name or '') }}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="is_exihibitor_mail"  eval="True"/>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+
+
+
+
+
+
+
+</odoo>
+
+

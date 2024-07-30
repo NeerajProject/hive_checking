@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+          <record id="mail_template_hotel_voucher_exhibitor" model="mail.template">
+            <field name="name">Exhibitor Registration: Send Hotel Voucher</field>
+            <field name="model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_hotel_request"/>
+            <field name="subject"> HFS 2024 /{{object.exhibitor_contract_id.partner_id.parent_id.name or object.exhibitor_contract_id.partner_id.name or ''}}/ STAND NO {{', '.join(object.exhibitor_contract_id.sale_order_id.stand_ids.mapped('stand_number'))}}/   HOTEL VOUCHER FOR  / {{ object.attendee_id.name }}</field>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&lt;</field>
+            <field name="email_to">{{ object.partner_id.email }}</field>
+                            <field name="email_cc"> exhibit@hivefurnitureshow.com,admin@omgexhibitions.com</field>
+
+            <field name="description">Sent proforma invoice to exhibitor</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 12px;">
+
+
+
+
+
+
+
+
+
+                    </p>
+                </div>
+            </field>
+<!--            <field name="report_template" ref="sale.action_report_pro_forma_invoice"/>-->
+<!--            <field name="report_name">{{ 'PRO-FORMA - %s - %s' % (object.name, object.partner_id.parent_id.name) }}</field>-->
+<!--            <field name="lang">{{ object.partner_id.lang }}</field>-->
+<!--            <field name="auto_delete" eval="False"/>-->
+        </record>
+
+
+
+
+    </data>
+</odoo>

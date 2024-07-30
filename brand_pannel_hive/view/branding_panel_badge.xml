@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="branding_panel_badge_form_view" model="ir.ui.view">
+            <field name="name">brand_pannel_hive.branding.panel.badge.form</field>
+            <field name="model">branding.panel.badge</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+                        <group>
+
+                            <field name="name"></field>
+    <field name="country_id"></field>
+
+                        </group>
+                        <group>
+                            <field name="event_id"></field>
+                            <field name="background_image"></field>
+                            <field name="background_image_report"></field>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="branding_panel_badge_tree_view" model="ir.ui.view">
+            <field name="name">brand_pannel_hive.branding.panel.badge.tree</field>
+            <field name="model">branding.panel.badge</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                            <field name="name"></field>
+                            <field name="country_id"></field>
+                            <field name="event_id"></field>
+                            <field name="background_image"></field>
+                            <field name="background_image_report"></field>
+
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="branding_panel_badge_act_window" model="ir.actions.act_window">
+            <field name="name">Brand Design</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">branding.panel.badge</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new Brand Design.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Branding Panel Design" id="branding_panel_badge_menu"  parent="event.menu_event_configuration" action="branding_panel_badge_act_window"/>
+
+    </data>
+</odoo>

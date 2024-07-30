@@ -1,0 +1,353 @@
+<odoo>
+
+    <template id="portal_exhibitor_dashboard_other_requests" name="Exhibitor Dashboard Exhibitor Other Requests">
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-lg-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Other Requests</h4>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class='dashboard-content pt-3 pt-md-2'>
+                        <div class='container'>
+
+
+                            <div class="row">
+
+                                <div class="d-flex col-12 bg-blue rounded p-2"
+                                     style="border-bottom:1px solid #B9E9F8;">
+                                    <div class="w-100">
+                                        <h5 class="mb-0">Add Request Details</h5>
+                                    </div>
+
+                                    <div class="align-self-center w-100 text-end cart_info">
+                                        <a href="/exhibitor_dashboard/other_requests/invoices" title="View Details">
+                                            <i class="fa fa-fw o_button_icon fa-send" style="font-size:36px"/>Invoices
+                                            <sup class="badge" t-esc="invoice_count"/>
+                                        </a>
+
+<!--                                        <a href="my/invoices" title="View Details">-->
+<!--                                           <i class="fa fa-fw o_button_icon fa-send"/>-->
+<!--                                            Invoices2-->
+
+<!--                                        </a>-->
+
+
+                                        <a href="/exhibitor_dashboard/other_requests/details" title="View Details">
+                                            <i class="fa fa-shopping-cart" style="font-size:36px"></i>
+                                            Cart
+                                            <sup class="badge" t-esc="other_request_count"/>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                                               <br></br>
+                    <div class="alert alert-info" role="alert">
+                    Select/Add Item and Go to Cart.
+</div>
+                            <div class="row mt-4">
+                                <t t-if="submission_success">
+                                    <div id="submission_success_msg" class="alert alert-success mb-4" role="status">
+                                        Your Order request has been submitted successfully, you will receive invoice for
+                                        payment shortly !!!
+                                    </div>
+                                </t>
+
+                                <t t-if="error_message">
+                                    <div class="alert alert-danger mb-4" role="alert">
+                                        <span t-esc="error_message"/>
+                                    </div>
+                                </t>
+
+                                <form action="/exhibitor_dashboard/other_requests">
+                                    <div class="o_search input-group ms-auto col-8 col-sm-6 col-md-4 col-xl-3"
+                                         role="search" style="width: 50% !important;">
+                                        <input type="search" name="search" class="form-control border-info"
+                                               placeholder="Search for a product or service" t-att-value="search"/>
+                                        <button type="submit" class="btn btn-info" aria-label="Search" title="Search"
+                                                style="background: #0274be; border: 1px solid #0274be;">
+                                            <i class="fa fa-search"/>
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <div class="accordion accordion-flush mt-4" id="accordionExhibitorOtherRequest">
+                                    <div class="accordion-item">
+                                        <t t-foreach="products_by_category" t-as="category">
+                                            <h2 class="accordion-header other-request-accordion-h"
+                                                t-attf-id="other_request_acc_header_{{category.id}}">
+                                                <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        t-attf-data-bs-target="#other_request_acc_collapse_{{category.id}}"
+                                                        aria-expanded="false"
+                                                        t-attf-aria-controls="other_request_acc_collapse_{{category.id}}">
+                                                    <span t-esc="category.name"/>
+                                                </button>
+                                            </h2>
+                                            <div t-attf-id="other_request_acc_collapse_{{category.id}}"
+                                                 class="accordion-collapse collapse"
+                                                 t-attf-aria-labelledby="other_request_acc_header_{{category.id}}"
+                                                 data-bs-parent="#accordionExhibitorOtherRequest">
+                                                <div class="accordion-body">
+                                                    <div class="row">
+                                                        <t t-foreach="products_by_category[category]"
+                                                           t-as="product">
+                                                            <div class="col-md-4 col-lg-3">
+                                                                <div class="product-card mb-4">
+                                                                    <div class="product-image">
+                                                                        <img t-if="product.image_256"
+                                                                             t-att-src="'data:image/png;base64,%s' % product.image_256.decode('utf-8')"
+                                                                             alt="Product Image" height="256"/>
+                                                                        <img t-else=""
+                                                                             t-att-src="'/web/image/product.template/%s/image_256' % product.id"
+                                                                             alt="Product Image" height="256"/>
+                                                                    </div>
+                                                                    <div class="product-details">
+                                                                        <h6>
+                                                                            <span>
+                                                                                <t t-esc="product.display_name"/>
+                                                                            </span>
+                                                                        </h6>
+                                                                        <p/>
+                                                                        <div class="product-bottom-details">
+                                                                            <div class="product-price">
+                                                                                <t t-set="product_price"
+                                                                                   t-value="price_list._get_product_price(product, 1.0)"/>
+                                                                                <t t-esc="product_price"
+                                                                                   t-options='{"widget": "monetary", "display_currency": price_list.currency_id}'/>
+                                                                            </div>
+                                                                            <div class="product-links">
+                                                                                <a t-att-href="'/add/other_request?product_id=%s' % product.id"
+                                                                                   title="Add to Cart">
+                                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="mt-3 mb-3"/>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_exhibitor_dashboard_other_requests_details"
+              name="Exhibitor Dashboard Exhibitor Other Requests Details">
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-lg-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Request Details</h4>
+                            </div>
+                        </div>
+                    </header>
+                    <div class='dashboard-content pt-3 pt-md-2'>
+                        <div class='container'>
+                            <div class="row">
+                                <div class="col-12 bg-blue rounded p-2" style="border-bottom:1px solid #B9E9F8;">
+                                    <h5 class="mb-0">Review Request Details</h5>
+                                </div>
+                            </div>
+
+                            <br></br>
+<div t-if="other_requests" class="alert alert-info" role="alert">
+Confirm and Go back to Check and View Invoice.
+</div>
+                            <br></br>
+<form action="/submit/other_requests" method="post">
+     <div class="row mt-2">
+                                <div class="col-12 p-0">
+
+                                    <div t-if="not other_requests" class="alert alert-info">
+                                        You are not added any request!
+                                    </div>
+                                    <table t-if="other_requests" class="mb16 table table-striped table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th class="td-img" style="width: 10%;">Product</th>
+                                                <th style="width: 60%;"></th>
+                                                <th class="text-center td-qty">
+                                                    UOM
+                                                </th>
+                                                <th class="text-center td-qty">
+                                                    Quantity
+                                                </th>
+                                                <th class="text-center td-price">Price</th>
+                                                <th class="text-center td-action"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="other_requests" t-as="other_req">
+                                                <tr>
+                                                    <td t-if="not other_req.product_template_id" colspan="2"
+                                                        class='td-img'/>
+                                                    <t t-else="">
+                                                        <td align="left" class='td-img'>
+                                                            <span t-if="other_req.product_template_id.image_128">
+                                                                <img t-att-src="image_data_uri(other_req.product_template_id.image_128)"
+                                                                     class="img o_image_64_max rounded"/>
+                                                            </span>
+                                                            <span t-else=""
+                                                                  t-field="other_req.product_template_id.image_128"
+                                                                  t-options="{'widget': 'image', 'qweb_img_responsive': False, 'class': 'rounded o_image_64_max'}"
+                                                            />
+                                                        </td>
+                                                        <td align="left" class='td-product_name'>
+                                                            <div>
+                                                                <strong t-field="other_req.name"/>
+                                                            </div>
+                                                        </td>
+                                                    </t>
+
+                                                    <td class="text-center td-qty">
+                                                        <t t-esc="other_req.product_template_id.uom_id.name"/>
+
+                                                    </td>
+                                                    <td class="text-center td-qty">
+                                                        <div class="css_quantity input-group mx-auto justify-content-center">
+                                                            <a t-attf-href="#"
+                                                               class="btn btn-link other_request_change_qty d-none d-md-inline-block"
+                                                               aria-label="Remove one" title="Remove one">
+                                                                <i class="fa fa-minus"></i>
+                                                            </a>
+                                                            <input type="text"
+                                                                   class="other_request_quantity form-control text-center"
+                                                                   t-att-value="int(other_req.product_uom_qty)"
+                                                                   t-att-data-other-req-id="other_req.id"/>
+                                                            <a t-attf-href="#"
+                                                               class="btn btn-link float_left other_request_change_qty d-none d-md-inline-block"
+                                                               aria-label="Add one" title="Add one">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center td-price" name="price">
+                                                        <t t-esc="other_req.price_unit"
+                                                           t-options='{"widget": "monetary", "display_currency": other_req.price_list_id.currency_id}'/>
+                                                    </td>
+                                                    <td class="td-action">
+                                                        <a t-att-href="'/delete/exhibitor_data?record_id=%s&amp;model=exhibitor.other.request' % other_req.id"
+                                                           title="Delete" class="no-decoration" style="color: red;">
+                                                            <small>
+                                                                <i class="fa fa-trash-o"></i>
+                                                            </small>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <table class="table mb-0">
+                                    <tr id="empty">
+                                        <t t-if='not no_rowspan'>
+                                            <td rowspan="10" class="border-0">
+                                                <textarea rows="4" name="exhibitor_comment"
+                                                          id="exh_other_request_comment"
+                                                          placeholder="Your comment..." class="form-control"/>
+                                            </td>
+                                        </t>
+                                        <td class="col-md-2 col-3 border-0"></td>
+                                        <td class="col-md-2 col-3 border-0"></td>
+                                    </tr>
+                                    <tr id="order_total_untaxed">
+                                        <td class="text-end border-0">Subtotal:</td>
+                                        <td class="text-xl-end border-0">
+                                            <span t-esc="amount_untaxed" class="monetary_field"
+                                                  style="white-space: nowrap;"
+                                                  t-options="{'widget': 'monetary', 'display_currency': price_list.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr id="order_total_taxes">
+                                        <td class="text-end border-0">Taxes:</td>
+                                        <td class="text-xl-end border-0">
+                                            <span t-esc="amount_tax" class="monetary_field"
+                                                  style="white-space: nowrap;"
+                                                  t-options="{'widget': 'monetary', 'display_currency': price_list.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                    <tr id="order_total">
+                                        <td class="text-end border-top border-bottom-0">
+                                            <strong>Total:</strong>
+                                        </td>
+                                        <td class="text-xl-end border-top border-bottom-0">
+                                            <strong t-esc="amount_total" class="monetary_field"
+                                                    t-options='{"widget": "monetary", "display_currency": price_list.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                            <div class="row mt-5">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <a role="button" href="/exhibitor_dashboard/other_requests"
+                                           class="btn btn-red-light mb32">
+                                            <span class="fa fa-chevron-left"/>
+                                            <span>
+                                                Back
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <button type="submit"
+                                           class="btn btn-orange float-end confirm_other_request">
+                                            <span>Confirm</span>
+                                            <span class="fa fa-chevron-right"/>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+</form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

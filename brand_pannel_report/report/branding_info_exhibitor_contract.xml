@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+
+
+ <record id="action_branding_panel_category_badge" model="ir.actions.report">
+            <field name="name">Branding Category Panel</field>
+            <field name="model">exhibitor.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">brand_pannel_report.branding_panel_category_report_template</field>
+            <field name="report_file">brand_pannel_report.branding_panel_category_report_template</field>
+             <field name="print_report_name">'Branding Panel Category - %s' % (object.company_name)</field>
+
+            <field name="binding_model_id" ref="brand_pannel_hive.model_exhibitor_contract"/>
+            <field name="binding_type">report</field>
+             <field name="paperformat_id" ref="brand_pannel_report.paperformat_branding_panel"/>
+
+        </record>
+
+
+
+
+
+
+
+
+
+
+ <record id="action_branding_panel_badge" model="ir.actions.report">
+            <field name="name">Branding Panel Badge</field>
+            <field name="model">exhibitor.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">brand_pannel_report.report_branding_panel_template</field>
+            <field name="report_file">brand_pannel_report.report_branding_panel_template</field>
+            <field name="print_report_name">'Branding Panel - %s' % (object.company_name)</field>
+            <field name="binding_model_id" ref="brand_pannel_hive.model_exhibitor_contract"/>
+            <field name="binding_type">report</field>
+                  <field name="paperformat_id" ref="brand_pannel_report.paperformat_branding_panel"/>
+
+        </record>
+
+    </data>
+</odoo>

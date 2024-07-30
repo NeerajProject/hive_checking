@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="event.QRCodeScanning.FormView" t-inherit="web.FormView" t-inherit-mode="extension">
+        <xpath expr="//Layout/t[@t-set-slot='control-panel-status-indicator']" position="inside">
+            <t t-if="props.resModel == 'attendee.registration.confirm'">
+                <button type="button" class="btn btn-primary" data-hotkey="q" t-on-click="onClickConfirmAttendeeRegistration">
+                        Confirm
+                </button>
+                <button type="button" class="ml8 btn btn-primary" data-hotkey="q" t-on-click="onClickPrintBadge">
+                        Print Badge
+                </button>
+            </t>
+        </xpath>
+    </t>
+
+</templates>

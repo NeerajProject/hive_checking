@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<record id="view_mail_template_form_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">mail.template.form.inherit</field>
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form"/>
+    <field name="arch" type="xml">
+
+                        <xpath expr="//page[@name='email_configuration']" position="inside">
+                            <group>
+                                <field name="is_event_related_issue"></field>
+
+
+                            </group>
+
+                        </xpath>
+    </field></record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,553 @@
+<odoo>
+
+    <template id="portal_exhibitor_dashboard_contractor_details" name="Exhibitor Dashboard Contractor Details">
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-lg-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Contractor Details</h4>
+                            </div>
+                        </div>
+                    </header>
+                    <div class='dashboard-content pt-3 pt-md-2'>
+                        <div class='container'>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="row">
+                                <div class="col-12 bg-blue rounded p-2">
+                                    <h5 class="mb-0">Add Contractor Details</h5>
+                                </div>
+                            </div>
+
+                            <form action="/submit/contractor_details" method="post" id="exhibitor_contractor_form"
+                                  enctype="multipart/form-data">
+                                <div class="row mt-4">
+                                    <t t-if="submission_success">
+                                        <div id="submission_success_msg" class="alert alert-success mb-4" role="status">
+                                            Successfully submitted the contractor details !!!
+                                        </div>
+                                    </t>
+
+                                    <t t-if="error_message">
+                                        <div class="alert alert-danger mb-4" role="alert">
+                                            <span t-esc="error_message"/>
+                                        </div>
+                                    </t>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_title" class="font-weight-normal">
+                                                Title
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-control form-select" name="exh_contractor_title"
+                                                    id="exh_contractor_title" required="required">
+                                                <option>Select an option</option>
+                                                <option>Mr.</option>
+                                                <option>Ms.</option>
+                                                <option>Mrs.</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_first_name">
+                                                First Name
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" placeholder="Enter your first name"
+                                                   id="exh_contractor_first_name" name="exh_contractor_first_name"
+                                                   pattern="[A-Za-z0-9\s]*"
+                                                   required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_last_name">
+                                                Last Name
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input
+
+                                                    pattern="[A-Za-z0-9\s]*"
+                                                    type="text" class="form-control" placeholder="Enter your last name"
+                                                   id="exh_contractor_last_name" name="exh_contractor_last_name"
+                                                   required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_company_name" class="font-weight-normal">
+                                                Company Name
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="Enter your company name"
+                                                   pattern="[A-Za-z0-9\s]*"
+                                                   id="exh_contractor_company_name" name="exh_contractor_company_name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_mobile">
+                                                Mobile Number
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            <div class="row">
+                                                <div class="col-4">
+
+
+
+                                            <select class="form-select" style="width:130px" name="country_code">
+
+                                                        <option>Select a code</option>
+
+                                                        <t t-foreach="country_code" t-as="code">
+                                                            <option t-att-value="code.code"><t t-esc="code.country"></t>(<t
+                                                                    t-esc="code.code"></t>)
+                                                            </option>
+                                                        </t>
+
+
+                                                    </select>
+
+                                                </div>
+                                                <div class="col">
+                                                          <input type="text" class="form-control"
+                                                   placeholder="Enter your mobile number"
+                                                   id="exh_contractor_mobile" pattern="[0-9]*"  name="exh_contractor_mobile"
+                                                   required="required"/>
+                                            <small>Please add country code (ex : +971)</small>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_email">
+                                                Email
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="email" class="form-control" placeholder="mail@example.com"
+                                                   id="exh_contractor_email" name="exh_contractor_email"
+                                                   required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_landline">
+                                                Landline Number
+                                            </label>
+                                            <input type="text" class="form-control"
+                                                   placeholder="Enter your landline number"  pattern="[0-9]*"
+                                                   id="exh_contractor_landline" name="exh_contractor_landline"/>
+                                            <small>Please add country code (ex : +971)</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_designation">
+                                                Designation
+                                            </label>
+                                            <input pattern="[A-Za-z0-9\s]*" type="text" class="form-control" placeholder="Enter your designation"
+                                                   id="exh_contractor_designation" name="exh_contractor_designation"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_company_address">
+                                                Company Address
+                                            </label>
+                                            <input type="text" class="form-control" placeholder="Enter Company Address"
+                                                   id="exh_contractor_company_address"
+                                                   name="exh_contractor_company_address"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_city">
+                                                City or Town
+                                            </label>
+                                            <input type="text" class="form-control" pattern="[A-Za-z0-9\s]*"
+                                                   placeholder="Enter your city or town"
+                                                   id="exh_contractor_city" name="exh_contractor_city"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_state">
+                                                State or Province
+                                            </label>
+                                            <input type="text" class="form-control" pattern="[A-Za-z0-9\s]*"
+                                                   placeholder="Enter your state or province"
+                                                   id="exh_contractor_state" name="exh_contractor_state"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_country" class="font-weight-normal">
+                                                Country
+                                            </label>
+                                            <select class="form-control form-select" name="exh_contractor_country"
+                                                    id="exh_contractor_country">
+                                                <option value="">Select an option</option>
+                                                <t t-foreach="countries or []" t-as="country">
+                                                    <option t-att-value="country.id">
+                                                        <t t-esc="country.name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_contractor_purpose" class="font-weight-normal">
+                                                Contract Purpose
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-control form-select" name="exh_contractor_purpose"
+                                                    id="exh_contractor_purpose" required="required">
+                                                <option value="">Select an option</option>
+                                                <t t-foreach="contract_purposes or []" t-as="purpose">
+                                                    <option t-att-value="purpose.id">
+                                                        <t t-esc="purpose.name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-0 mt-md-4">
+
+                                    <div class="col-12 p-0">
+                                        <div class="d-flex flex-sm-row flex-column justify-content-end">
+                                            <div class="mr-auto p-0 p-md-2 mb-3">
+                                                <button type="submit" class="btn btn-orange w-100 btn-orange-padding">
+                                                    Submit
+                                                </button>
+                                            </div>
+
+                                            <div class="p-0 p-md-2 mb-3">
+                                                <button type="button" class="btn btn-red-light w-100"
+                                                        id="btn_clear_all">
+                                                    Clear All
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                            <div class="row">
+                                <small>
+                                    <em>
+                                        Uploading documents on behalf of contractors is optional , please make sure that
+                                        contractors submit all mandatory documents before they proceed with work on site
+                                    </em>
+                                </small>
+                            </div>
+
+
+
+
+
+                              <div class="row mt-4">
+                                <div class="col-12 bg-blue rounded p-2">
+                                    <h5 class="mb-0">All Contractors</h5>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-12 p-0">
+                                    <div class="table-responsive rounded">
+                                        <table class="table table-bordered text-center">
+                                            <tr class="bg-blue-light">
+                                                <th>Name</th>
+                                                                                                <th>Contract Purpose</th>
+
+                                                <th>Company Name</th>
+                                                <th>Mobile</th>
+                                                <th>Email</th>
+                                                <th style="width: 10%;"/>
+                                            </tr>
+
+                                            <tr t-foreach="contractor_details" t-as="contractor">
+                                                <td>
+
+                                                    <p t-esc="contractor.contractor_full_name"/>
+                                                </td>
+                                                     <td>
+                                                          <t t-if="contractor.contract_purpose_id">
+                                                                    <p t-esc="contractor.contract_purpose_id.name"></p>
+                                                          </t>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="contractor.company_name"/>
+                                                </td>
+
+                                                <td>
+                                                    <p t-esc="contractor.mobile"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="contractor.email"/>
+                                                </td>
+                                                <td>
+                                                    <a t-att-href="'/delete/exhibitor_data?record_id=%s&amp;model=exhibitor.contractor.details' % contractor.id"
+                                                       title="Delete" class="mr-auto p-2"
+                                                       style="text-decoration: none; color: red;">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                            <div class="row bg-blue rounded p-2 mt-4 ">
+
+                                <div class="col-md-9 align-self-center add-relevant mb-3 mb-md-0 mt-3 mt-md-0">
+                                    <h5 class="mb-0">Add Relevant Documents</h5>
+                                </div>
+
+                            </div>
+
+                            <form action="/submit/contractor_uploaded_documents" method="post"
+                                  id="contractor_upload_document_form"
+                                  enctype="multipart/form-data">
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="row mt-4">
+                                    <t t-if="error_message">
+                                        <div class="alert alert-danger mb-4" role="alert">
+                                            <span t-esc="error_message"/>
+                                        </div>
+                                    </t>
+
+
+                                   <div class="col-md-6 mb-4">
+                                        <t t-set="mandatory_doc"
+                                           t-value="env.ref('techfuge_exhibitor_customisation.document_mandatory_contractor_section')"/>
+                                        <div class="form-group">
+                                            <label for="ehx_contractor_document_type" class="font-weight-normal">
+Contractor*
+
+
+                                            </label>
+
+                                            <select class="form-control form-select" name="ehx_contractor_id" required="True"
+                                                   >
+                                                <option value="">Select an option</option>
+                                                <t t-foreach="exhibitor_contract.contractor_ids or []" t-as="contractors">
+                                                    <option t-att-value="contractors.id">
+                                                        <t t-esc="contractors.company_name"/>
+                                                                      </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <t t-set="mandatory_doc"
+                                           t-value="env.ref('techfuge_exhibitor_customisation.document_mandatory_contractor_section')"/>
+                                        <div class="form-group">
+                                            <label for="ehx_contractor_document_type" class="font-weight-normal">
+                                                Document Type
+                                            </label>
+                                            <select class="form-control form-select" name="ehx_contractor_document_type"
+                                                    id="ehx_contractor_document_type">
+                                                <option value="">Select an option</option>
+                                                <t t-foreach="document_types or []" t-as="type">
+                                                    <option t-att-value="type.id">
+                                                        <t t-esc="type.name"/>
+                                                        <t t-if="mandatory_doc.id in type.document_mandatory_ids.ids">
+                                                            <span class="text-danger">
+                                                                *
+                                                            </span>
+                                                        </t>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-group">
+                                            <label for="ehx_contractor_document" class="font-weight-normal">
+                                                Upload File
+                                            </label>
+                                            <input type="file" class="form-control" id="ehx_contractor_document"
+                                                   name="ehx_contractor_document"/>
+                                        </div>
+                                    </div>
+
+                                    <small>
+                                        <em class="text-danger">
+                                            <p id="document_format_msg" class="mb-4"/>
+                                            <p id="document_additional_msg" class="mb-4"/>
+                                        </em>
+                                    </small>
+
+                                    <div class="col-md-12 mb-4">
+                                        <div class="form-group">
+                                            <label for="ehx_contractor_document_note">
+                                                Notes
+                                            </label>
+                                            <textarea rows="3" class="form-control" id="ehx_contractor_document_note"
+                                                      name="ehx_contractor_document_note"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-0 mt-md-4">
+
+                                    <div class="col-12 p-0">
+
+                                        <div class="d-flex flex-sm-row flex-column justify-content-end">
+<!--                                                    <a t-att-href="'/submit/hfs/contractor_documents?id=%s' %exhibitor_contract.id">-->
+<!--                                                         <div class="mr-auto p-0 p-md-2 mb-3">-->
+<!--                                                      <button type="button" class="btn btn-orange w-100 btn-orange-padding">-->
+<!--Submit                                                </button>-->
+<!--                                            </div>-->
+
+<!--                                                    </a>-->
+
+
+
+                                            <div class="mr-auto p-0 p-md-2 mb-3">
+                                                <button type="submit" class="btn btn-orange w-100 btn-orange-padding">
+                                                    Submit Document
+                                                </button>
+                                            </div>
+
+                                            <div class="p-0 p-md-2 mb-3">
+                                                <button type="button" class="btn btn-red-light w-100"
+                                                        id="btn_clear_all">
+                                                    Clear All
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                            <div class="row mt-4">
+                                <div class="col-12 bg-blue rounded p-2">
+                                    <h5 class="mb-0">All Documents</h5>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-12 p-0">
+                                    <div class="table-responsive rounded">
+                                        <table class="table table-bordered text-center">
+                                            <tr class="bg-blue-light">
+                                                <th>Contractor</th>
+                                                <th>Document Type</th>
+                                                <th>File</th>
+                                                <th>Notes</th>
+                                                <th style="width: 10%;"/>
+                                            </tr>
+
+                                            <tr t-foreach="uploaded_documents" t-as="document">
+                                                <td>
+                                                    <t t-if="document.contractor_id">
+                                                                                                            <p t-esc="document.contractor_id.contractor_full_name"/>
+
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="document.document_type_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-if="document.document_attachment_id">
+                                                        <a t-attf-href="/web/content/#{document.document_attachment_id.id}?download=true"
+                                                           title="Download"
+                                                           style="text-decoration: none; color: #2b343b;">
+                                                            <i class="fa fa-download"></i>
+                                                            <span t-esc="document.document_attachment_id.name"/>
+                                                        </a>
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="document.document_note"/>
+                                                </td>
+                                                <td>
+                                                    <a t-att-href="'/delete/exhibitor_data?record_id=%s&amp;model=contractor.uploaded.documents' % document.id"
+                                                       title="Delete" class="mr-auto p-2"
+                                                       style="text-decoration: none; color: red;">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="mt-3 mb-3"/>
+
+
+                            <hr class="mt-3 mb-3"/>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

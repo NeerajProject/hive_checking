@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_event_attendee_activities_form" model="ir.ui.view">
+            <field name="name">event.attendee.activities.form</field>
+            <field name="model">event.attendee.activities</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="1"/>
+                                <field name="event_id" readonly="1" options="{'no_open': True}"/>
+                                <field name="attendee_activity_group" readonly="1"/>
+                                <field name="exhibitor_name" readonly="1"/>
+                                <field name="attendee_activity_datetime" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="attendee_full_name" readonly="1"/>
+                                <field name="activity_location_type_id" readonly="1"/>
+                                <field name="user_id" readonly="1" options="{'no_open': True}"/>
+                                <field name="stand_number" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_event_attendee_activities_tree" model="ir.ui.view">
+            <field name="name">event.attendee.activities.tree</field>
+            <field name="model">event.attendee.activities</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false">
+                    <field name="barcode"></field>
+                    <field name="event_id"/>
+                    <field name="event_reference" optional="hide"/>
+                    <field name="attendee_full_name"/>
+                    <field name="attendee_type_id"></field>
+                    <field name="attendee_company_name"/>
+                    <field name="attendee_designation"/>
+                    <field name="country_id"/>
+                    <field name="attendee_id"></field>
+                    <field name="attendee_ref_id" optional="hide"/>
+                    <field name="name"/>
+                    <field name="activity_location_type_id"/>
+                    <field name="user_id"/>
+                    <field name="exhibitor_name"/>
+                    <field name="stand_number"/>
+                    <field name="attendee_activity_datetime"/>
+                    <field name="attendee_activity_group"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_event_attendee_activities_pivot" model="ir.ui.view">
+            <field name="name">event.attendee.activities.pivot</field>
+            <field name="model">event.attendee.activities</field>
+            <field name="arch" type="xml">
+                <pivot display_quantity="1" sample="1">
+                    <field name="event_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_event_attendee_activities_search" model="ir.ui.view">
+            <field name="name">event.attendee.activities.search</field>
+            <field name="model">event.attendee.activities</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="event_id"/>
+                    <field name="attendee_id"/>
+                    <field name="activity_location_type_id"/>
+                    <field name="exhibitor_name"/>
+                    <field name="user_id"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Event" name="group_by_event_id" domain="[]" context="{'group_by':'event_id'}"/>
+                        <filter string="Attendee" name="group_by_attendee_id" domain="[]"
+                                context="{'group_by':'attendee_id'}"/>
+                        <filter string="Exhibitor" name="group_by_exhibitor_name" domain="[]"
+                                context="{'group_by':'exhibitor_name'}"/>
+                        <filter string="User" name="group_by_user_id" domain="[]" context="{'group_by':'user_id'}"/>
+                        <filter string="Type" name="group_by_activity_location_type_id" domain="[]"
+                                context="{'group_by':'activity_location_type_id'}"/>
+                        <filter string="Group" name="group_by_attendee_activity_group" domain="[]"
+                                context="{'group_by':'attendee_activity_group'}"/>
+                        <filter string="Activity Date" name="group_by_attendee_activity_datetime"
+                                context="{'group_by':'attendee_activity_datetime:day'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_view_event_attendee_activities" model="ir.actions.act_window">
+            <field name="name">Attendee Event Activities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">event.attendee.activities</field>
+            <field name="view_mode">pivot,tree,form</field>
+            <field name="view_id" ref="view_event_attendee_activities_tree"/>
+            <field name="search_view_id" ref="view_event_attendee_activities_search"/>
+        </record>
+
+        <menuitem name="Attendee Event Activities"
+                  id="menu_event_attendee_activities"
+                  action="action_view_event_attendee_activities"
+                  sequence="101"
+                  parent="event.menu_reporting_events"/>
+
+    </data>
+</odoo>

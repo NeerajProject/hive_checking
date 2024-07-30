@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <record id="booth_design_line_tree_view" model="ir.ui.view">
+            <field name="name">booth.design.line.tree</field>
+            <field name="model">booth.design.line</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="partner_id"/>
+                    <field name="exhibitor_contract_id"/>
+                    <field name="stand_id"/>
+                    <field name="booth_design_id"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="booth_design_line_act_window" model="ir.actions.act_window">
+            <field name="name">Booth Plan </field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">booth.design.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Booth Plan" id="booth_design_line_menu" parent="event.menu_reporting_events" action="booth_design_line_act_window"/>
+
+    </data>
+</odoo>

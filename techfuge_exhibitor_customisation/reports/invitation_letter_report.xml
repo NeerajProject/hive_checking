@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="paperformat_exhibitor_invitation_letter" model="report.paperformat">
+        <field name="name">Exhibitor Invitation Letter Paper Format</field>
+        <field name="default" eval="False"/>
+        <field name="disable_shrinking" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">38</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_spacing">20</field>
+        <field name="dpi">96</field>
+    </record>
+
+    <template id="exhibitor_invitation_letter_layout">
+
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <div class="header" style="height:25px !important">
+
+        <div style="  text-align: center;">
+            <div class="container">
+                <div class="col-12">
+                    <img style="width:100%"
+                         src="/techfuge_exhibitor_customisation/static/src/img/hive_header.png"></img>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+        </div>
+
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0"/>
+        </div>
+
+        <div class="footer" style="height:300px">
+
+            <center>
+                <div>
+                    <div class="container">
+                        <div class="col-12">
+                            <img style="width:100%"
+                                 src="/techfuge_exhibitor_customisation/static/src/img/footer_hfs.png"></img>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </center>
+
+
+        </div>
+
+    </template>
+
+    <template id="report_exhibitor_invitation_letter">
+        <t t-call="web.html_container">
+            <t t-call="techfuge_exhibitor_customisation.exhibitor_invitation_letter_layout">
+                <div class="page" style=" background-repeat: no-repeat; background-size: contain;">
+                    <div t-foreach="docs" t-as="o">
+                        <!--                        <h5 style="font-weight: bold; text-align: center;">-->
+                        <!--                            <u>Invitation Letter</u>-->
+
+
+                        <!--                        </h5>-->
+                        <p style="font-size: 10.5pt; line-height: 2;">
+                            <br/>
+
+                            Date :
+                            <t t-esc="o.invitation_letter_date.strftime('%d/%m/%Y')"></t>
+                            <br></br>
+                            To,
+                            <br/>
+                            Visa Counsellor Office,
+                            <br/>
+
+
+
+
+                            Consulate of  <t t-if="o.exhibitor_contract_id.event_id.embassy_details">
+                                <span t-esc="o.exhibitor_contract_id.event_id.embassy_details"></span>
+
+                            </t>
+
+                            <br></br>
+<!--                            <t t-if="o.exhibitor_contract_id.country_name">-->
+<!--                                <span t-esc="o.exhibitor_contract_id.country_name"></span>-->
+
+<!--                            </t>-->
+
+
+                            <br/>
+                            <p class="mt-4">
+                                <b>Subject : Visa Application for  <t t-if="o.exhibitor_contract_id.event_id.embassy_details">
+                                <span t-esc="o.exhibitor_contract_id.event_id.embassy_details"></span>
+
+                            </t></b>
+                            </p>
+                        </p>
+                        <p style="font-size: 10pt; text-align: justify;" class="mt-4">
+                            Dear Sir/Madam,
+                            <br/>
+                            We would like to invite
+                            <b>
+                                <t t-esc="o.name"></t>
+                            </b>
+                            <b>
+                                from
+                            </b>
+                            <b>
+
+
+                                <t t-if="o.exhibitor_contract_id.country_name">
+                                    <span t-esc="o.exhibitor_contract_id.country_name"></span>
+
+                                </t>
+                            </b>
+                            to visit UAE for attending Hive Furniture Show (HFS) 2024 , a trade exhibition being held
+                            from May 21 - 23, 2024 at Expo centre Sharjah, UAE.
+                            <br/>
+                            Below are the details -
+                            <ul style="font-weight: bold; font-size: 10pt; line-height: 1.2;">
+                                <li>
+                                    Full Name :
+                                    <span t-esc="o.name"/>
+                                </li>
+                                <li>
+                                    Passport No :
+                                    <span t-esc="o.passport_number"/>
+                                </li>
+                                <li>
+                                    Date of Issue :
+                                    <span t-esc="o.date_of_issue.strftime('%d/%m/%Y')"/>
+                                </li>
+                                <li>
+                                    Date of Expiry :
+                                    <span t-esc="o.date_of_expiry.strftime('%d/%m/%Y')"/>
+                                </li>
+                                <li>
+                                    Date of Birth :
+                                    <span t-esc="o.date_of_birth.strftime('%d/%m/%Y')"/>
+                                </li>
+                                <li>
+                                    Nationality :
+                                    <span t-esc="o.country_id.name.upper()"/>
+                                </li>
+                                <li>
+                                    Travel Date From :
+                                    <span t-esc="o.from_date.strftime('%d/%m/%Y')"/>
+                                    -
+                                    <span t-esc="o.till_date.strftime('%d/%m/%Y')"/>
+                                </li>
+                                <li>
+                                    No of days :
+                                    <span t-esc="o.no_of_days"/>
+                                </li>
+                            </ul>
+                            <p style="font-size: 10pt; text-align: justify;">
+
+
+                                Hive furniture Show (HFS) 2024 is organized by OMG Exhibition Organizing LLC company. It
+                                is a furniture trade exhibition where manufactures from various countries participate to
+                                meet and explore future business collaborations with potential buyers from the industry.
+                                We hereby request you to grant necessary visa, so that the above said person can attend
+                                the Exhibition.
+                                <br/>
+
+                            </p>
+                        </p>
+                        <p style="font-size: 10.5pt; line-height: 2;">
+                            <span style="font-size: 10pt;">With Regards,</span>
+                            <br/>
+                            <b>Manish Bhatia</b>
+                            <p></p>
+                            <br/>
+                            OMG Exhibition Organizing L.L.C
+                            <br/>
+                            <div style="margin-left:250px;margin-top:-50px">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/sign_of_owner.jpg"
+                                     style="width:250px;"></img>
+                            </div>
+
+
+                        </p>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_exhibitor_invitation_letter" model="ir.actions.report">
+        <field name="name">Invitation Letter</field>
+        <field name="model">exhibitor.invitation.letter.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">techfuge_exhibitor_customisation.report_exhibitor_invitation_letter</field>
+        <field name="report_file">techfuge_exhibitor_customisation.report_exhibitor_invitation_letter</field>
+        <field name="print_report_name">'Invitation Letter - %s' % (object.name or '',)</field>
+        <field name="binding_model_id" ref="model_exhibitor_invitation_letter_request"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_exhibitor_invitation_letter"/>
+    </record>
+
+
+</odoo>
+
+

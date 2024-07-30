@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Exhibitor Space Type Data -->
+        <record id="exhibitor_space_type_data_space_only" model="exhibitor.space.type">
+            <field name="name">Space Only</field>
+        </record>
+
+        <record id="exhibitor_space_type_data_package_stand" model="exhibitor.space.type">
+            <field name="name">HFS Package Stand</field>
+        </record>
+
+        <record id="techfuge_customisation.attendee_type_data_exhibitor" model="event.attendee.type">
+            <field name="badge_mail_template_id"
+                   ref="techfuge_exhibitor_customisation.email_template_send_badge_mail_to_exhibitor"/>
+        </record>
+
+        <record id="document_applicable_document_section" model="exhibitor.document.applicable">
+            <field name="name">Document Section</field>
+        </record>
+
+        <record id="document_applicable_shipment_section" model="exhibitor.document.applicable">
+            <field name="name">Shipment Section</field>
+        </record>
+
+        <record id="document_applicable_contractor_section" model="exhibitor.document.applicable">
+            <field name="name">Contractor Section</field>
+        </record>
+
+        <record id="document_mandatory_document_section" model="exhibitor.document.mandatory">
+            <field name="name">Document Section</field>
+        </record>
+
+        <record id="document_mandatory_shipment_section" model="exhibitor.document.mandatory">
+            <field name="name">Shipment Section</field>
+        </record>
+
+        <record id="document_mandatory_contractor_section" model="exhibitor.document.mandatory">
+            <field name="name">Contractor Section</field>
+        </record>
+
+        <record id="contract_purpose_stand_construction" model="contract.purpose">
+            <field name="name">Stand Construction</field>
+        </record>
+
+        <record id="contract_purpose_carpentry" model="contract.purpose">
+            <field name="name">Carpentry</field>
+        </record>
+
+        <record id="contract_purpose_painting" model="contract.purpose">
+            <field name="name">Painting</field>
+        </record>
+
+        <record id="contract_purpose_shipping_agent" model="contract.purpose">
+            <field name="name">Shipping Agent</field>
+        </record>
+
+        <record id="special_inclusion_hotel_data" model="special.inclusion.info">
+            <field name="name">25. SPECIAL INCLUSIONS</field>
+            <field name="description" type="html">
+                <p style="margin-left: 15px; line-height: 1.4;">
+                    25. SPECIAL INCLUSIONS
+                </p>
+                <p style="margin-left: 30px; line-height: 1.4;">
+                    <ul style="margin-left: 30px; line-height: 1.4;">
+                        <li>
+                            Stand construction for MDF stall with lighting &amp; power supply and carpet Flooring
+                        </li>
+                        <li>
+                            Shipment Port to Port till venue with Onsite Goods Handling till stand.
+                        </li>
+                        <li>Goods to be shipped as per 1 cbm / 10 sqm basis.</li>
+                        <li>
+                            4 Nights hotel stay with breakfast, for 2 person, Twin Sharing room x 1, with transfers to
+                            and from venue.
+                        </li>
+                        <li>Furniture Assembly Assistance</li>
+                    </ul>
+                </p>
+            </field>
+        </record>
+
+        <record id="product_product_hotel_booking_additional_night" model="product.product">
+            <field name="name">Hotel Booking - Additional Night</field>
+            <field name="list_price">120</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_day"/>
+            <field name="uom_po_id" ref="uom.product_uom_day"/>
+            <field name="sale_ok" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

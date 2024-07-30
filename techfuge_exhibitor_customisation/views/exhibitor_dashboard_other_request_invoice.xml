@@ -1,0 +1,120 @@
+<odoo>
+
+
+    <template id="portal_exhibitor_dashboard_other_requests_invoice"
+              name="Exhibitor Dashboard Exhibitor Other Requests Details">
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-lg-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Other Requests</h4>
+                            </div>
+                        </div>
+                    </header>
+
+
+                    <div class='dashboard-content pt-3 pt-md-2'>
+                        <div class='container'>
+                            <div class="row">
+
+                                <div class="d-flex col-12 bg-blue rounded p-2"
+                                     style="border-bottom:1px solid #B9E9F8;">
+                                    <div class="w-100">
+                                        <h5 class="mb-0">Other Request Invoice</h5>
+                                    </div>
+
+
+                                </div>
+                                <br></br>
+                                <br></br>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Reference</th>
+                                            <th scope="col">Invoice Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Download</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="invoices" t-as="inv">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="inv.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="inv.invoice_date"></t>
+                                                </td>
+                                                <td>
+                                                    <t t-if="inv.payment_state == 'not_paid'">
+                                                        Not Paid
+                                                    </t>
+                                                    <t t-elif="inv.payment_state == 'in_payment'">
+                                                        In payment
+                                                    </t>
+
+                                                    <t t-elif="inv.payment_state == 'paid'">
+                                                        Paid
+                                                    </t>
+                                                    <t t-elif="inv.payment_state == 'partial'">
+                                                        Partially Paid
+                                                    </t>
+                                                    <t t-elif="inv.payment_state == 'reversed'">
+                                                        Reversed
+                                                    </t>
+                                                    <t t-else="">
+                                                        Invoicing App Legacy
+                                                    </t>
+
+<!--                                                    <t t-esc="inv.payment_state"></t>-->
+
+                                                </td>
+                                                <td>
+                                                    <a t-att-href="'/place_order/invoice/download?id=%s' % inv.id">
+                                                        <button type="button" class="btn btn-secondary">Download
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+
+                                    </tbody>
+                                </table>
+
+                                <div class="col-12 p-0">
+                                    <div class="d-flex flex-sm-row flex-column justify-content-end">
+                                        <div class="mr-auto p-0 p-md-2 mb-3">
+                                            <a href="/exhibitor_dashboard/other_requests">
+                                                <button class="btn btn-orange w-100 btn-orange-padding">
+                                                    Back
+                                                </button>
+                                            </a>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

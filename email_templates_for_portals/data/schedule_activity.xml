@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_sent_" model="ir.cron">
+        <field name="name">Send Exhibitors  : STAND DESIGN SPECIFICATIONS </field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="brand_pannel_hive.model_exhibitor_contract"/>
+        <field name="code">model.is_sent_notification_exhibitor_floor_plans()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>

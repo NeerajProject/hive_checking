@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_exhibitor_shipment_details_search" model="ir.ui.view">
+        <field name="name">exhibitor.shipment.details.search</field>
+        <field name="model">exhibitor.shipment.details</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="event_id" string="Event"/>
+                <field name="exhibitor_name"/>
+                <field name="exhibitor_contract_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Event" name="event" domain="[]" context="{'group_by':'event_id'}"/>
+                    <filter string="Exhibitor Contract" name="exhibitor_contract" domain="[]"
+                            context="{'group_by':'exhibitor_contract_id'}"/>
+                    <filter string="Status" name="shipment_status" domain="[]"
+                            context="{'group_by':'shipment_status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_exhibitor_shipment_details_tree" model="ir.ui.view">
+        <field name="name">exhibitor.shipment.details.tree</field>
+        <field name="model">exhibitor.shipment.details</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <field name="event_id" string="Event"/>
+                <field name="exhibitor_name"/>
+                <field name="exhibitor_contract_id"/>
+                <field name="create_date" string="Request Submission Date"/>
+                <field name="total_shipment_volume"/>
+                <field name="allowed_cbm"/>
+                <field name="extra_cbm"/>
+                <field name="exceeding_charges"/>
+                <field name="additional_charges"/>
+                <field name="final_charges"/>
+                <field name="no_of_cartons"/>
+                <field name="net_weight"/>
+                <field name="gross_weight"/>
+                <field name="port_of_loading"/>
+                <field name="port_of_arrival_in_uae"/>
+                <field name="shipment_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_exhibitor_shipment_details" model="ir.actions.act_window">
+        <field name="name">Shipment Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">exhibitor.shipment.details</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_exhibitor_shipment_details_tree"/>
+    </record>
+
+    <menuitem name="Shipment Details"
+              id="menu_event_exhibitor_shipment_details"
+              action="action_exhibitor_shipment_details"
+              sequence="122"
+              parent="event.menu_reporting_events"
+              groups="event.group_event_user,techfuge_exhibitor_customisation.group_show_event_exhibitor_contract_report"/>
+
+
+</odoo>

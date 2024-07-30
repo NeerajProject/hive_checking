@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    New code -->
+    <record id="action_send_exhibitor_registration_mails_contractor" model="ir.actions.server">
+        <field name="name">Send Exhibitor Registration Mails</field>
+        <field name="model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_contract"/>
+        <field name="binding_model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_contract"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_send_exhibitor_registration_mails()
+        </field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+
+<!--    end code-->
+    <record id="action_send_exhibitor_registration_mails" model="ir.actions.server">
+        <field name="name">Send Exhibitor Registration Mails</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="binding_model_id" ref="crm.model_crm_lead"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_send_exhibitor_registration_mails()
+        </field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="action_send_quotation_to_exhibitor" model="ir.actions.server">
+        <field name="name">Send Quotation</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_quotation_send()
+        </field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="action_send_agreement_to_exhibitor" model="ir.actions.server">
+        <field name="name">Send Agreement</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.send_exhibitor_agreement(from_action=True)
+        </field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="action_grant_portal_access_to_exhibitor" model="ir.actions.server">
+        <field name="name">Grant Portal Access</field>
+        <field name="model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_contract"/>
+        <field name="binding_model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_contract"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.grant_portal_access_to_exhibitor()
+        </field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="action_update_exhibitor_contract_details" model="ir.actions.server">
+        <field name="name">Update Exhibitor Contract Details</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="binding_model_id" ref="base.model_res_users"/>
+        <field name="state">code</field>
+        <field name="code">records.action_update_exhibitor_contract_details()</field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="action_update_quotation_brand_and_reference" model="ir.actions.server">
+        <field name="name">Update Brand and Reference</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">records.action_update_quotation_brand_and_reference()</field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+        <record id="action_update_invoice" model="ir.actions.server">
+        <field name="name">Update Invoice</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">records.change_invoice_sales()</field>
+        <field name="groups_id" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>

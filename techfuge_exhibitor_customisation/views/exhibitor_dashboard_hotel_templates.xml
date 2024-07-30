@@ -1,0 +1,370 @@
+<odoo>
+
+    <template id="portal_exhibitor_dashboard_hotel_requests" name="Exhibitor Dashboard Exhibitor Hotel Requests">
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-lg-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">Hotel Booking</h4>
+                            </div>
+                        </div>
+                    </header>
+                    <div class='dashboard-content pt-3 pt-md-2'>
+                        <div class='container'>
+                            <div class="row">
+                                <div class="col-12 bg-blue rounded p-2" style="border-bottom:1px solid #B9E9F8;">
+                                    <h5 class="mb-0">Add Booking Details</h5>
+                                </div>
+                            </div>
+
+                            <form action="/submit/hotel_booking_request" method="post" id="hotel_booking_request_form"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" id="remaining_hotel_rooms" t-att-value="remaining_rooms"/>
+                                <input type="hidden" id="rate_per_additional_night"
+                                       t-att-value="rate_per_additional_night"/>
+                                <input type="hidden" id="event_year" t-att-value="event.date_end.strftime('%Y')"/>
+                                <div class="row mt-4">
+                                    <!--                                    <t t-if="submission_success">-->
+                                    <!--                                        <div id="submission_success_msg" class="alert alert-success mb-4" role="status">-->
+                                    <!--                                           Please proceed to book for the next Guest,till all assigned number of rooms are used-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </t>-->
+
+
+                                    <t t-if="exhibitor_contract.get_first_and_last_room_for_notfication()">
+
+                                        <div id="submission_success_msg" class="alert alert-success mb-4">
+                                            Please proceed to book for the next Guest, till all assigned number of rooms
+                                            are used.
+
+                                        </div>
+
+
+                                    </t>
+                                    <div class="alert alert-info mb-4" role="status">
+                                        <span t-esc="exhibitor_contract.get_booked_rooms()"/>
+                                        room(s) used out of
+                                        <span t-esc="allowed_hotel_rooms"/>
+                                        room(s)
+                                    </div>
+
+                                    <t t-if="error_message">
+                                        <div class="alert alert-danger mb-4" role="alert">
+                                            <span t-esc="error_message"/>
+                                        </div>
+                                    </t>
+
+
+                                    <div class="col-md-6 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_hotel_attendee" class="font-weight-normal">
+                                                Room
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-control form-select" name="room_id"
+                                                    required="required">
+                                                <option value="">Select an Room</option>
+                                                <t t-foreach="exhibitor_contract.get_available_room() or []"
+                                                   t-as="room">
+                                                    <option t-att-value="room">
+                                                        <t t-esc="room"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+
+
+                                        <div class="form-group">
+                                            <label for="exh_hotel_attendee" class="font-weight-normal">
+                                                Attendee
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-control form-select" name="exh_hotel_attendee"
+                                                    required="required">
+                                                <option value="">Select an attendee</option>
+                                                <t t-foreach="exhibitor_attendees or []" t-as="attendee">
+                                                    <option t-att-value="attendee.id">
+                                                        <t t-esc="attendee.attendee_full_name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="col-md-4 mb-4 mb-md-0">
+                                        <div class="form-group">
+                                            <label for="exh_hotel_checkin_date">
+                                                Check-in Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" class="form-control" id="exh_hotel_checkin_date"
+                                                   name="exh_hotel_checkin_date"
+                                                   t-att-min="exhibitor_contract.event_id.checkin_date"
+                                                   t-att-max="exhibitor_contract.event_id.checkout_date"
+                                                   t-att-value="exhibitor_contract.event_id.checkin_date"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_hotel_checkout_date">
+                                                Checkout Date
+
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" class="form-control" id="exh_hotel_checkout_date"
+                                                   name="exh_hotel_checkout_date"
+                                                   t-att-min="exhibitor_contract.event_id.checkin_date"
+                                                   t-att-max="exhibitor_contract.event_id.checkout_date"
+                                                   t-att-value="exhibitor_contract.event_id.checkout_date"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4 mb-md-0">
+                                        <div class="form-group">
+                                            <label for="exh_hotel_nights">
+                                                Number of Nights
+                                            </label>
+                                            <input type="text" class="form-control" id="exh_hotel_nights"
+                                                   name="exh_hotel_nights" disabled="disabled"/>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_hotel_checkout_date">
+                                                Arrival Time to Hotel on Check in Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="time" class="form-control"
+                                                   name="exh_hotel_arrival_date"
+                                                   t-att-min="exhibitor_contract.event_id.checkin_date"
+                                                   t-att-max="exhibitor_contract.event_id.checkout_date"
+                                                   t-att-value="exhibitor_contract.event_id.checkout_date"/>
+                                        </div>
+                                    </div>
+                                    <br></br>
+                                    <br></br>
+
+
+                                    <br></br>
+
+                                    <div class="alert alert-warning" role="alert">
+                                        Please book maximum 4 night per room as per no of rooms assigned for your
+                                        company.
+                                    </div>
+                                    <div class="col-md-4 mb-4 mb-md-0 additional_hotel_info d-none">
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <!--                                <t t-if="exhibitor_contract.is_submited_hotel_request">-->
+                                <div class="row mt-0 mt-md-4">
+
+                                    <t t-if="true">
+                                        <t t-if="exhibitor_contract._is_hotel_booking_day_is_over()">
+
+                                            <div class="col-12 p-0">
+                                                <div class="d-flex flex-sm-row flex-column justify-content-end">
+                                                    <div class="mr-auto p-0 p-md-2 mb-3">
+                                                        <button type="submit"
+                                                                class="btn btn-orange w-100 btn-orange-padding"
+                                                                t-att-disabled="not exhibitor_contract.is_submited_hotel_request"
+                                                                id="btn_book_hotel">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+
+
+                                                    <div class="p-0 p-md-2 mb-3">
+                                                        <button type="button" class="btn btn-red-light w-100"
+                                                                id="btn_clear_all"
+                                                                t-att-disabled="not exhibitor_contract.is_submited_hotel_request">
+                                                            Clear all
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </t>
+                                </div>
+
+                                <!--                                </t>-->
+                            </form>
+
+                            <div class="row mt-4">
+                                <div class="col-12 bg-blue rounded p-2">
+                                    <h5 class="mb-0">All Bookings</h5>
+                                </div>
+                            </div>
+                            <br></br>
+                            <div class="alert alert-success mb-4" t-if="hotel_booking_successful" role="status">
+                                The hotel booking was successfully submitted
+                            </div>
+
+
+                            <div t-if="exhibitor_contract.warning_message_for_booking_block()"
+                                 class="alert alert-warning" role="alert">
+                                Details once submitted , cannot be amended.
+                                The Booking Reference &amp; Voucher will be uploaded soon.
+                            </div>
+
+
+                            <br></br>
+                            <div class="row mt-2">
+                                <div class="col-12 p-0">
+                                    <div class="table-responsive rounded">
+                                        <table class="table table-bordered text-center">
+                                            <tr class="bg-blue-light">
+                                                <th>Attendee Name</th>
+                                                <th>Room</th>
+                                                <th>Check-in Date</th>
+                                                <th>Checkout Date</th>
+                                                <th>No. of Nights</th>
+                                                <th>Allowed No. of Nights</th>
+                                                <!--                                                <th>Additional No. of Nights</th>-->
+                                                <!--                                                <th>Additional Payment ($)</th>-->
+                                                <th>Hotel Name</th>
+                                                <th>Hotel Address</th>
+                                                <th>Booking Reference</th>
+                                                <th>Hotel Voucher</th>
+                                                <th>Arrival Time to Hotel on Check in Date
+                                                    <span class="text-danger">*</span>
+                                                </th>
+                                                <!--                                                <th>Payment Status</th>-->
+                                                                                                <th>Remove</th>
+
+                                            </tr>
+                                            <tr t-foreach="hotel_requests" t-as="hotel">
+                                                <td>
+                                                    <t t-if="hotel.attendee_full_name">
+                                                        <p t-esc="hotel.attendee_full_name.upper()"/>
+
+                                                    </t>
+                                                </td>
+
+                                                <td>
+                                                    <p t-esc="hotel.room_id"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="hotel.checkin_date.strftime('%d-%B-%Y')"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="hotel.checkout_date.strftime('%d-%B-%Y')"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="hotel.no_of_nights"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="hotel.allowed_no_of_nights"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="hotel.hotel_name"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="hotel.hotel_address"/>
+                                                </td>
+
+                                                <td>
+
+                                                    <p t-esc="hotel.hotel_booking_ref"/>
+                                                </td>
+                                                <td style=" overflow:hidden;">
+                                                    <t t-if="hotel.upload_voucher">
+                                                        <a t-attf-href="#{hotel.voucher_attachment_id.local_url}"
+                                                           title="Download Voucher"
+                                                           style="text-decoration: none; color: #F9A115;">
+                                                            <i class="fa fa-download"></i>
+                                                            <t t-if="hotel.file_name">
+                                                                <t t-esc="hotel.file_name"></t>
+                                                            </t>
+
+
+                                                        </a>
+                                                    </t>
+                                                </td>
+
+
+                                                <td>
+                                                    <t t-esc="hotel.date_of_arrival_time"></t>
+                                                </td>
+
+
+                                                <!--                                                                                        <td>-->
+
+
+                                                <!--&lt;!&ndash;<t t-esc="hotel.payment_status "/>&ndash;&gt;-->
+
+                                                <!-- <t t-if="hotel.payment_status == 'payment_by_exhibitor'">-->
+                                                <!--                                                        <span>Payment By Exhibitor</span>-->
+
+                                                <!--                                                    </t>-->
+                                                <!--                                                    <t t-if="hotel.payment_status == 'payment_by_hive'">-->
+                                                <!--                                                        <span>Payment By OMG</span>-->
+
+                                                <!--                                                    </t>-->
+
+
+                                                <!--                                                </td>-->
+                                                <!--                                                <td>-->
+                                                <!--                                                    <t t-if="hotel.hotel_name">-->
+
+                                                <!--                                                    <p t-esc="hotel.hotel_name.upper()"/>-->
+                                                <!--                                               </t>-->
+                                                <!--                                                </td>-->
+                                                                                                    <td>
+
+                                                                                                        <t t-if="exhibitor_contract._is_hotel_booking_day_is_over()">
+                                                      <t t-if="exhibitor_contract.is_submited_hotel_request and not hotel.voucher_attachment_id" >
+                                                 <a t-att-href="'/delete/exhibitor_data?record_id=%s&amp;model=exhibitor.hotel.request' % hotel.id"
+                                                                                                       title="Delete" class="mr-auto p-2"
+                                                                                                       style="text-decoration: none; color: red;">
+                                                                                                        <i class="fa fa-trash-o"></i>
+                                                                                                    </a>
+                                                                                                    </t>
+
+
+                                                </t>
+
+
+                                                                                                    </td>
+
+
+                                            </tr>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="mt-3 mb-3"/>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

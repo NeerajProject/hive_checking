@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="exhibitor_contract_id" invisible="1"/>
+                <button name="action_view_exhibitor_contract"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        string="Exhibitor Contract"
+                        attrs="{'invisible': [('exhibitor_contract_id', '=', False)]}">
+                </button>
+            </xpath>
+            <xpath expr="//header/button[5]" position="attributes">
+                <attribute name="string">Send Quotation</attribute>
+            </xpath>
+            <xpath expr="//header/button[6]" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': ['|', ('state', '!=', 'sale'), ('invoice_count','&gt;=',1)]}
+                </attribute>
+            </xpath>
+            <xpath expr="//header/button[7]" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': [('state', '!=', 'sent')]}
+                </attribute>
+            </xpath>
+            <xpath expr="//header/button[8]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//header/button[9]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//header/button[10]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@id='action_confirm']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': [('state', '!=', 'in_progress')]}
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm']" position="before">
+                <button name="send_exhibitor_agreement" string="Generate Agreement &amp; Send" type="object"
+                        class="btn-primary" data-hotkey="v"
+                        attrs="{'invisible': [('state', 'not in', ['quote_accepted', 'review_quote'])]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="before">
+                <button name="action_accept_quotation" string="Accept Quotation" type="object"
+                        class="btn-primary" data-hotkey="v"
+                        attrs="{'invisible': [('state', '!=', 'sent')]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': ['|', ('state', '=', 'cancel'), ('id', '=', False)]}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar"
+                       statusbar_visible="draft,sent,quote_accepted,review_quote,in_progress,sale"/>
+            </xpath>
+            <xpath expr="//page[@name='optional_products']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='customer_signature']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='other_information']" position="inside">
+                <group>
+                    <field name="exhibitor_other_request_comment"/>
+                    <field name="note_text" invisible="1"/>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='other_information']" position="after">
+                <page name="package_components" string="Package Components"
+                      attrs="{'invisible': [('so_type', '=', 'normal_quote')]}">
+                    <field name="exhibitor_package_component_ids">
+                        <tree editable="bottom">
+                            <field name="product_id"/>
+                            <field name="name"/>
+                            <field name="quantity"/>
+                            <field name="uom_id"/>
+                            <field name="price"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="total_price" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                        </tree>
+                    </field>
+                    <group class="oe_subtotal_footer oe_right">
+                        <div class="oe_inline o_td_label">
+                            <label for="component_amount_total" string="Total"/>
+                        </div>
+                        <field name="component_amount_total" nolabel="1" sum="Total amount"
+                               style="font-size: 1.3em; font-weight: bold;"/>
+                    </group>
+                    <div class="clearfix"/>
+                </page>
+                <page name="agreement_details" string="Agreement Details"
+                      attrs="{'invisible': [('so_type', '=', 'normal_quote')]}">
+                    <group>
+                        <group>
+                            <field name="space_type_id" options="{'no_create':True, 'no_create_edit':True}"
+                                   attrs="{'required': [('so_type', '=', 'agreement')]}"/>
+                            <field name="rate_per_m2" readonly="1" force_save="1"/>
+                            <field name="rate_per_m2_with_vat" readonly="1" force_save="1"/>
+                            <field name="hall_ids" widget="many2many_tags"
+                                   options="{'no_create':True, 'no_create_edit':True}"
+                                   attrs="{'required': [('so_type', '=', 'agreement')]}"/>
+                            <field name="total_area"/>
+                            <field name="stall_dimensions"/>
+                            <field name="enable_shipment_section"/>
+                            <field name="enable_hotel_request"/>
+                            <field name="enable_contractor_section"/>
+                        </group>
+                        <group name="include_special">
+                            <field name="include_special_condition"/>
+                            <field colspan="2" name="hotel_special_inclusion_info" nolabel="1"
+                                   attrs="{'invisible': [('include_special_condition', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <group string="Stand Details"/>
+                    <field name="stand_ids" readonly="0">
+                        <tree editable="bottom" no_open="1">
+                            <field name="stand_id" required="1" domain="[('hall_id', 'in', parent.hall_ids)]"
+                                   options="{'no_create':True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="hall_id" optional="hide"/>
+                            <field name="stand_number" invisible="1"/>
+                            <field name="stand_description"/>
+                            <field name="stand_width"/>
+                            <field name="stand_depth"/>
+                            <field name="stand_size"/>
+                        </tree>
+                    </field>
+                </page>
+                <page name="payment_stages" string="Payment Stages"
+                      attrs="{'invisible': [('so_type', '=', 'normal_quote')]}">
+                    <button name="%(techfuge_exhibitor_customisation.action_generate_payment_stages_wizard)d"
+                            type="action" string="Generate Payment Stages" class="btn-primary"/>
+                    <group/>
+                    <field name="exhibitor_payment_stage_ids">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="payment_type"/>
+                            <field name="paid_percentage" sum="Percentage(%)"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="paid_amount" sum="Amount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <field name="payment_due_date"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//group[@name='sales_person']" position="before">
+                <group string="Other Information">
+                    <field name="delivery_note"/>
+                    <field name="buyer_order_no"/>
+                    <field name="other_reference"/>
+                    <field name="buyer_order_date"/>
+                    <field name="dispatched_document_no"/>
+                    <field name="dispatched_through"/>
+                    <field name="destination"/>
+                    <field name="brand_id"/>
+                    <field name="reference_id"/>
+                    <field name="so_type"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_quotation_tree_with_onboarding_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="agent_id"/>
+                <field name="brand_id"/>
+                <field name="reference_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_quotation_search_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">sale.order.search.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='campaign_id']" position="after">
+                <field name="brand_id"/>
+                <field name="reference_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sales_order_line_filter_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">sale.order.line.search.inherit</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='salesman_id']" position="after">
+                <field name="event_event_id" string="Event"/>
+                <field name="brand_id"/>
+                <field name="agent_id"/>
+                <field name="reference_id"/>
+            </xpath>
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter string="Event" name="event" domain="[]" context="{'group_by':'event_event_id'}"/>
+                <filter string="Brand" name="brand" domain="[]" context="{'group_by':'brand_id'}"/>
+                <filter string="Agent" name="agent" domain="[]" context="{'group_by':'agent_id'}"/>
+                <filter string="Reference" name="group_by_reference" domain="[]" context="{'group_by':'reference_id'}"/>
+                <filter string="SO Type" name="order_type" domain="[]" context="{'group_by':'order_type'}"/>
+                <filter string="Customer" name="group_by_customer" domain="[]"
+                        context="{'group_by':'order_partner_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_details_tree" model="ir.ui.view">
+        <field name="name">sale.order.details.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <button string="View" name="action_view_sale_order" type="object"></button>
+                <field name="event_event_id" string="Event"/>
+                <field name="order_id" string="Order No."/>
+                <field name="order_partner_id"/>
+<!--                New tabs added -->
+                <field name="hall_ids" widget="many2many_tags"></field>
+                <field name="stand_ids"></field>
+                <field name="exhibitor_comments"></field>
+                <field name="name"></field>
+
+                <field name="agent_id"/>
+                <field name="brand_id"/>
+                <field name="reference_id"/>
+                <field name="create_date"/>
+                <field name="order_type"/>
+                <field name="price_subtotal"/>
+                <field name="price_tax" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+                <field name="price_total"/>
+                <field name="order_invoiced_amount" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+                <field name="order_paid_amount" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+                <field name="product_id"/>
+                <field name="product_uom_qty"/>
+                <field name="product_uom"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="price_unit" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+                <field name="price_total" widget="monetary" string="Line Total"
+                       options="{'currency_field': 'currency_id'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_order_customer_wise_revenue_tree" model="ir.ui.view">
+        <field name="name">customer.wise.revenue.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <field name="event_event_id" string="Event"/>
+                <field name="order_partner_id"/>
+                <field name="price_total"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="order_invoiced_amount" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+                <field name="order_paid_amount" widget="monetary"
+                       options="{'currency_field': 'currency_id'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_order_customer_wise_revenue_pivot" model="ir.ui.view">
+        <field name="name">customer.wise.revenue.pivot</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Customer Wise Revenue" sample="1">
+                <field name="price_total" type="measure" string="Order Total"/>
+                <field name="order_invoiced_amount" type="measure"/>
+                <field name="order_paid_amount" type="measure"/>
+                <field name="event_id" type="row"/>
+                <field name="order_partner_id" type="row"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_exhibitor_order_details" model="ir.actions.act_window">
+        <field name="name">Order Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_order_details_tree"/>
+    </record>
+
+    <menuitem name="Order Details"
+              id="menu_event_exhibitor_order_details"
+              action="action_exhibitor_order_details"
+              sequence="120"
+              parent="event.menu_reporting_events"
+              groups="event.group_event_user,techfuge_exhibitor_customisation.group_show_event_exhibitor_contract_report"/>
+
+    <record id="action_order_customer_wise_revenue" model="ir.actions.act_window">
+        <field name="name">Customer Wise Revenue</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_mode">tree,pivot</field>
+        <field name="view_id" ref="view_order_customer_wise_revenue_tree"/>
+        <field name="context">{'search_default_group_by_customer': True}</field>
+    </record>
+
+    <menuitem name="Customer Wise Revenue"
+              id="menu_event_customer_wise_revenue"
+              action="action_order_customer_wise_revenue"
+              sequence="125"
+              parent="event.menu_reporting_events"
+              groups="event.group_event_user,techfuge_exhibitor_customisation.group_show_event_exhibitor_contract_report"/>
+
+
+</odoo>

@@ -1,0 +1,89 @@
+<odoo>
+
+    <template id="portal_exhibitor_list_view" name="list">
+<tr>
+                        <td>
+                            <t t-esc="o.name"></t>
+                        </td>
+                        <td class="text-end">
+                            <t t-if="o.brand_id">
+                                <t t-esc="o.brand_id.name"></t>
+                            </t>
+
+
+
+                                                </td>
+                        <td class="text-center">
+                            <t t-if="o.event_id">
+                                <t t-esc="o.event_id.name"></t>
+                            </t>
+                        </td>
+                        <td class="text-end">
+ <a t-attf-href="/my/agreement/download?id={{o.sale_order_id.id}}">
+                Download  </a>
+
+                        </td>
+                    </tr>
+
+    </template>
+
+
+    <template id="portal_exhibitor_agreement_finance" name="Exhibitor">
+        <t t-call="website.layout">
+
+<nav class="navbar navbar-light navbar-expand-lg border py-0 mb-2 o_portal_navbar  mt-3 rounded">
+
+        <ol class="o_portal_submenu breadcrumb mb-0 py-2 flex-grow-1">
+            <li class="breadcrumb-item ms-1"><a href="/exhibitor_dashboard" aria-label="Home" title="Home"><i class="fa fa-home"></i></a></li>
+            <li class="breadcrumb-item active ">
+Agreement
+
+            </li>
+        </ol>
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#o_portal_navbar_content" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle filters">
+                <span class="navbar-toggler-icon small"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="o_portal_navbar_content">
+                <div class="nav flex-column flex-lg-row ms-auto p-0 mb-3 mb-lg-0 mt-1 mt-lg-0">
+
+
+                </div>
+            </div>
+        </nav>
+
+
+            <br></br>
+<div class="container">
+
+            <div class="table-responsive border rounded border-top-0 ">
+            <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+
+                <thead>
+                    <tr class="active">
+                        <th>
+                            <span class="d-none d-md-inline">Agreement #</span>
+                            <span class="d-block d-md-none">Ref.</span>
+                        </th>
+                        <th class="text-end">Brand</th>
+                        <th class="text-center">Event</th>
+                        <th class="text-end">Download</th>
+                    </tr>
+                </thead>
+                    <tbody>
+
+                        <t t-foreach="contract" t-as="o">
+                            <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_list_view"></t>
+
+                        </t>
+            </tbody></table>
+        </div>
+</div>
+
+
+        </t>
+    </template>
+</odoo>

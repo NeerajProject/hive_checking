@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_generate_payment_stage_wizard_form" model="ir.ui.view">
+        <field name="name">generate.payment.stage.wizard.form</field>
+        <field name="model">generate.payment.stage.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="no_of_stages" required="True"/>
+                </group>
+                <footer>
+                    <button name="generate_payment_stages" string="Generate" type="object"
+                            class="oe_highlight" data-hotkey="q"/>
+                    <button string="Cancel" class="oe_highlight" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_generate_payment_stages_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Payment Stages</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">generate.payment.stage.wizard</field>
+        <field name="view_id" ref="view_generate_payment_stage_wizard_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
+

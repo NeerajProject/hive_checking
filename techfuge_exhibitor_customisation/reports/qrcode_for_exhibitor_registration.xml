@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<record id="paperformat_onsite_registration_exhibitor_panel" model="report.paperformat">
+            <field name="name">Qrcode of Company Paper</field>
+            <field name="default" eval="True" />
+            <field name="format">custom</field>
+            <field name="page_height">100</field>
+            <field name="page_width">100</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">10</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <template id="report_exhibitor_contract_qrcode_onsite_badge">
+            <t t-call="web.html_container">
+                <t t-call="techfuge_customisation.visitor_badge_layout">
+                    <t t-foreach="docs" t-as="o">
+
+        <p class="text-center">
+                                    <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', o.attendee_registration_link, 250, 250)"
+                                         />
+            <br></br>
+            <br></br>
+           <strong>    <t t-esc="o.name"></t>     </strong>
+                        <br></br>
+                        <t t-esc="o.company_name"></t>
+                        <br></br>
+                        <span t-field="o.brand_id"></span>
+                                </p>
+
+
+
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_qrcode_of_badge_generation" model="ir.actions.report">
+            <field name="name">Qrcode for Onsite  Badge</field>
+            <field name="model">exhibitor.contract</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">techfuge_exhibitor_customisation.report_exhibitor_contract_qrcode_onsite_badge</field>
+            <field name="report_file">techfuge_exhibitor_customisation.report_exhibitor_contract_qrcode_onsite_badge</field>
+            <field name="binding_model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_contract"/>
+            <field name="paperformat_id" ref="paperformat_onsite_registration_exhibitor_panel"/>
+        </record>
+
+    </data>
+</odoo>

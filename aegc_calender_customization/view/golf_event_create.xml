@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="golf_event_create_form_view" model="ir.ui.view">
+            <field name="name">aegc_calender_customization.golf_event_create.form</field>
+            <field name="model">golf.event.create</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="name" required="true"></field>
+                                    <field name="start" required="true"></field>
+                                                        <field name="end" required="true"></field>
+
+                                <field name="is_blocked"></field>
+
+                            </group>
+                            <group>
+                                <field name="appointment_type_id" required="true"></field>
+                                <field name="color_event"  widget="color"></field>
+
+                                <field name="date_of_event"></field>
+                            </group>
+                        </group>
+
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="golf_event_create_tree_view" model="ir.ui.view">
+            <field name="name">aegc_calender_customization.golf_event_create.tree</field>
+            <field name="model">golf.event.create</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                            <field name="start"></field>
+                        <field name="end"></field>
+                        <field name="appointment_type_id"></field>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="golf_event_create_act_window" model="ir.actions.act_window">
+            <field name="name">Golf Events</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">golf.event.create</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+        <menuitem name="Booking" id="menu_golf_event_create_menu"  parent="menu_golf_booking_slots" action="golf_event_create_act_window"/>
+        <menuitem name="Events" id="menu_golf_event_create_menu"  parent="menu_golf_booking_slots" action="golf_event_create_act_window"/>
+
+        <menuitem name="Report" id="menu_report_golf_event_create_menu"  parent="menu_golf_booking_slots" action="calendar_event_report_act_window"/>
+        <menuitem name="Report" id="menu_report_golf_event_create_menu_parent"  parent="menu_report_golf_event_create_menu" action="calendar_event_report_act_window"/>
+
+    </data>
+</odoo>

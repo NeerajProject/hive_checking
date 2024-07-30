@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <report
+    id="action_calendar_event_report_xls"
+    model="calendar.event.report"
+    string="Golf calender Event Report Excel"
+    report_type="xlsx"
+    name="aegc_calender_customization.report_calendar_xls"
+    file="aegc_calender_customization.report_calendar_xls"
+    attachment_use="False"
+/>
+
+
+</odoo>

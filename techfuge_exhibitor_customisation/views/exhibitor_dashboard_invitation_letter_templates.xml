@@ -1,0 +1,278 @@
+<odoo>
+
+    <template id="portal_exhibitor_dashboard_invitation_letter_requests"
+              name="Exhibitor Dashboard Invitation Letter Request">
+        <t t-call="website.layout">
+            <div class='dashboard'>
+                <t t-call="techfuge_exhibitor_customisation.portal_exhibitor_dashboard_side_nav_bar"/>
+                <div class='dashboard-app'>
+                    <header class='dashboard-toolbar'>
+                        <a href="#!" class="menu-toggle d-block d-sm-none">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="d-flex w-100">
+                            <div class="p-2 align-self-center">
+                                <img src="/techfuge_exhibitor_customisation/static/src/img/hfs_logo_white.png"
+                                     alt="" width="100"/>
+                            </div>
+                            <div class="p-2 align-self-center w-100">
+                                <h4 class="dashboard-toolbar-header">
+                                    Invitation Letter Request
+                                </h4>
+                            </div>
+                        </div>
+                    </header>
+                    <div class='dashboard-content pt-2'>
+                        <div class='container'>
+                            <div class="row">
+                                <div class="col-12 bg-blue rounded p-2" style="border-bottom:1px solid #B9E9F8;">
+                                    <h5 class="mb-0">Add Details</h5>
+                                </div>
+                            </div>
+
+                            <form action="/submit/invitation_letter_request" method="post"
+                                  id="invitation_letter_request_form"
+                                  enctype="multipart/form-data">
+                                <div class="row mt-4">
+                                    <t t-if="submission_success">
+                                        <div id="submission_success_msg" class="alert alert-success mb-4" role="status">
+                                            Successfully submitted the invitation letter request. We will provide you
+                                            with the invitation letter soon !!!
+                                        </div>
+                                    </t>
+
+                                    <t t-if="error_message">
+                                        <div class="alert alert-danger mb-4" role="alert">
+                                            <span t-esc="error_message"/>
+                                        </div>
+                                    </t>
+
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_letter_attendee" class="font-weight-normal">
+                                                Attendee
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-control form-select" name="exh_letter_attendee"
+                                                    required="required">
+                                                <option value="">Select an attendee</option>
+                                                <t t-foreach="exhibitor_attendees or []" t-as="attendee">
+                                                    <option t-att-value="attendee.id">
+                                                        <t t-esc="attendee.attendee_full_name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4 mb-md-0">
+                                        <div class="form-group">
+                                            <label for="exh_letter_passport_no">
+                                                Passport Number
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="exh_letter_passport_no"
+                                                   name="exh_letter_passport_no" required="required"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_letter_issue_date">
+                                                Date of Issue
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" class="form-control" required="required"
+                                                   id="exh_letter_issue_date" name="exh_letter_issue_date"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_letter_expiry_date">
+                                                Date of Expiry
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" class="form-control" required="required"
+                                                   id="exh_letter_expiry_date" name="exh_letter_expiry_date"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_letter_birth_date">
+                                                Date of Birth
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" class="form-control" required="required"
+                                                   id="exh_letter_birth_date" name="exh_letter_birth_date"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_letter_country" class="font-weight-normal">
+                                                Nationality
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-control form-select" name="exh_letter_country"
+                                                    required="required">
+                                                <option value="">Select a country</option>
+                                                <t t-foreach="countries or []" t-as="country">
+                                                    <option t-att-value="country.id">
+                                                        <t t-esc="country.name"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_letter_from_date">
+                                                Travel Date From
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" class="form-control" required="required"
+                                                   id="exh_letter_from_date" name="exh_letter_from_date"
+                                                   t-att-value="travel_from_date"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="exh_letter_till_date">
+                                                Travel Date Till
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="date" class="form-control" required="required"
+                                                   id="exh_letter_till_date" name="exh_letter_till_date"
+                                                   t-att-value="travel_till_date"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 mb-4 mb-md-0">
+                                        <div class="form-group">
+                                            <label for="exh_letter_no_of_days">
+                                                No. of Days
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="exh_letter_no_of_days"
+                                                   name="exh_letter_no_of_days" readonly="readonly"/>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row mt-0 mt-md-4">
+                                    <div class="col-12 p-0">
+                                        <div class="d-flex flex-sm-row flex-column justify-content-end">
+                                            <div class="mr-auto p-2">
+                                                <button type="submit" class="btn btn-orange w-100 btn-orange-padding">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                            <div class="p-2">
+                                                <button type="button" class="btn btn-red-light w-100"
+                                                        id="btn_clear_all">
+                                                    Clear All
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="row mt-4">
+                                <div class="col-12 bg-blue rounded p-2">
+                                    <h5 class="mb-0">All Requests</h5>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-12 p-0">
+                                    <div class="table-responsive rounded">
+                                        <table class="table table-bordered text-center">
+                                            <tr class="bg-blue-light">
+                                                 <th>Serial No.</th>
+                                                <th>Attendee Name</th>
+                                                <th>Passport No.</th>
+                                                <th>Nationality</th>
+                                                <th>From Date</th>
+                                                <th>Till Date</th>
+                                                <th>No. of Days</th>
+                                                <th>Invitation Letter</th>
+                                                <th style="width: 10%;">Remove Invitation Letter</th>
+<!--                                                <th style="width: 10%;"/>-->
+                                            </tr>
+                                            <tr t-foreach="letter_requests" t-as="letter">
+                                                <td>
+                                                        <p t-esc="letter.reference_no"/>
+                                                </td>
+                                                <td>
+                                                    <t if="letter.name">
+                                                        <p t-esc="letter.name"/>
+
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <t t-if="letter.passport_number">
+                                                                                                            <p t-esc="letter.passport_number"/>
+
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <t t-if="letter.country_id">
+                                                                                                            <p t-esc="letter.country_id.name.upper()"/>
+
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="letter.from_date.strftime('%d-%m-%Y')"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="letter.till_date.strftime('%d-%m-%Y')"/>
+                                                </td>
+                                                <td>
+                                                    <p t-esc="letter.no_of_days"/>
+                                                </td>
+                                                <td>
+      <a t-att-href="'/invitation_letter/download?id=%s' % letter.id">
+
+    <button type="button" class="btn btn-primary btn-md o_website_form_send">Download</button>
+</a>
+
+<!--                                                    <t t-if="letter.signed_letter_attachment_id">-->
+<!--                                                        <a t-attf-href="/web/content/#{letter.signed_letter_attachment_id.id}?download=true"-->
+<!--                                                           title="Download Letter"-->
+<!--                                                           style="text-decoration: none; color: #F9A115;">-->
+<!--                                                            <i class="fa fa-download"></i>-->
+<!--                                                            Download-->
+<!--                                                        </a>-->
+<!--                                                    </t>-->
+                                                </td>
+
+                                                
+
+
+                                                <td>
+                                                    <a t-att-href="'/delete/exhibitor_data?record_id=%s&amp;model=exhibitor.invitation.letter.request' % letter.id"
+                                                       title="Delete" class="mr-auto p-2"
+                                                       style="text-decoration: none; color: red;">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

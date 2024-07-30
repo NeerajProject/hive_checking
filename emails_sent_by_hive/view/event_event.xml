@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<record id="view_event_form_inherit_exhibitor" model="ir.ui.view">
+        <field name="name">event.event.form.inherit</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="arch" type="xml">
+
+               <xpath expr="//notebook" position="inside">
+            <page name="email_template" string="Email Template ">
+
+
+
+                   <group>
+                       <group>
+
+                           <field name="event_contractor_registration"></field>
+
+                               <field name="event_exhibitor_confirmation"/>
+    <field name="event_exhibitor_mail_to_exhibitor"/>
+    <field name="event_exhibitor_mail_to_planner"/>
+
+
+
+
+                       </group>
+                       <group>
+
+                           <field name="event_exhibitor_send_invoice_to_exhibitor"/>
+                           <field name="event_exhibitor_pro_forma_to_exhibitor"/>
+<field name="event_exhibitor_send_quotation_to_exhibitor"/>
+<field name="event_exhibitor_already_registered_visitor"/>
+
+
+
+                       </group>
+                   </group>
+
+            </page>
+
+               </xpath>
+        </field>
+</record>
+    </data>
+</odoo>

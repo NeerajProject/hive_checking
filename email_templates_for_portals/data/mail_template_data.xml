@@ -1,0 +1,989 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <data>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--    <data>-->
+
+        <!-- Exhibitor Hotel Voacher-->
+        <record id="email_template_exhibitor_hotel_request" model="mail.template">
+            <field name="name">Exhibitor Registration: HOTEL VOUCHER</field>
+            <field name="model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_hotel_request"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">{{ object.exhibitor_contract_id.email }}</field>
+            <field name="email_cc">exhibit@hivefurnitureshow.com,admin@omgexhibitions.com</field>
+
+            <field name="subject">HFS 2024 /{{object.exhibitor_contract_id.company_name}}/ STAND NO {{','.join(object.exhibitor_contract_id.sale_order_id.stand_ids.mapped('stand_number'))}}/HOTEL VOUCHER FOR /{{object.attendee_full_name}}
+            </field>
+            <field name="body_html" type="html">
+
+                <p>Dear Exhibitor,</p>
+                <br/>
+
+                <p>Welcome to HFS 2024 !</p>
+                <br></br>
+                <p>
+                    Please find attached herewith your hotel voucher as a sign of confirmation of booking having below
+                    details –
+                </p>
+
+                <br></br>
+                <br></br>
+
+                <table style="width:100%;  border: 1px solid black;">
+
+                    <tr style="  border: 1px solid black;">
+                        <td style="  border: 1px solid black;">Hotel Name &amp; Address.</td>
+                        <td style="  border: 1px solid black;">
+                            <span t-out="object.hotel_name or ''"></span>
+                            <p></p>
+                            <span t-out="object.hotel_address or ''"></span>
+                            <p></p>
+
+                        </td>
+                    </tr>
+                    <tr style="  border: 1px solid black;">
+                        <td style="  border: 1px solid black;">Booking Reference Number</td>
+                        <td style="  border: 1px solid black;">
+
+                            <span t-out="object.hotel_booking_ref or ''"></span>
+
+                        </td>
+                    </tr>
+                    <tr style="  border: 1px solid black;">
+                        <td style="  border: 1px solid black;">Guest Name</td>
+                        <td style="  border: 1px solid black;">
+                            <span t-out="object.attendee_full_name or ''"></span>
+
+                        </td>
+                    </tr>
+
+                    <tr style="  border: 1px solid black;">
+                        <td style="  border: 1px solid black;">Check In Date</td>
+                        <td style="  border: 1px solid black;">
+                            <span t-out="object.checkin_date.strftime('%d-%b-%Y') or ''"></span>
+                        </td>
+                    </tr>
+
+                    <tr style="  border: 1px solid black;">
+                        <td style="  border: 1px solid black;">Check Out Date</td>
+                        <td style="  border: 1px solid black;">
+                            <span t-out="object.checkout_date.strftime('%d-%b-%Y') or ''"></span>
+                        </td>
+                    </tr>
+                </table>
+
+                <br></br>
+                <br></br>
+                <p></p>
+                <p></p>
+                <p>For any extras &amp; specific requirements, please contact the hotel directly. Kindly note OMG will
+                    not be responsible for any co-ordination on your behalf with the hotel, for your requirements or if
+                    your plan deviates from the assigned date and schedule of your stay.
+                </p>
+                <br></br>
+                <br></br>
+                <p>We wish you a pleasant trip, stay and a very successful event.</p>
+                <br></br>
+
+                <p>In case of any further query please email us at exhibit@hivefurnitureshow.com</p>
+                <br></br>
+
+                <br></br>
+                <br></br>
+                <p>With Warm Regards,</p>
+                <br></br>
+                <br></br>
+                <br></br>
+                <strong>TEAM HFS</strong>
+                <p>OMG EXHIBITIONS AND CONFERENCE</p>
+                <p>1605, Sidra Tower, PO Box
+                    <strong>391299,</strong>
+                </p>
+                <p>Sheikh Zayed Road,</p>
+                <p>Dubai, UAE.</p>
+                <p>
+                    M: 971 504623913 / L: 971 45665205
+                </p>
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <!--        Shipment Specification-->
+
+        <record id="email_template_shipment_specification" model="mail.template">
+            <field name="name">SHIPMENT SECTION</field>
+            <field name="model_id" ref="brand_pannel_hive.model_exhibitor_contract"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&gt;</field>
+            <field name="email_to">exhibit@hivefurnitureshow.com</field>
+            <field name="email_cc">exhibit@hivefurnitureshow.com,admin@omgexhibitions.com,neerajkrishnan82@gmail.com</field>
+
+            <field name="subject">HFS 2024/{{object.company_name}}/ STAND NO {{','.join(object.sale_order_id.stand_ids.mapped('stand_number'))}}/SHIPMENT SECTION</field>
+            <field name="body_html" type="html">
+
+                <br></br>
+                <p>Please check portal for document uploaded by exhibitor.</p>
+                <ol>
+                    <t t-foreach="object.shipment_document_ids" t-as="shipment">
+
+                        <li>
+                            <t t-if="shipment.document_attachment_id">
+                                <t t-esc="shipment.document_attachment_id.name or ''"></t>
+
+                            </t>
+                            /
+                            <t t-if="shipment.document_type_id">
+                                <span t-out="shipment.document_type_id.name"></span>
+                            </t>
+                        </li>
+
+                    </t>
+
+
+                </ol>
+
+
+                <p>Thanks</p>
+                <br></br>
+                <br></br>
+                <p></p>
+<!--                <p></p>-->
+<!--                <strong>TEAM HFS</strong>-->
+<!--                <p></p>-->
+<!--                <p>OMG EXHIBITIONS AND CONFERENCE</p>-->
+<!--                <p>-->
+<!--                    1605, Sidra Tower, PO Box <strong>391299</strong>,-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    Sheikh Zayed Road,-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    Dubai, UAE.-->
+
+<!--                </p>-->
+<!--                <p>-->
+<!--                    M: 971 504623913 / L: 971 45665205-->
+
+<!--                </p>-->
+
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--        Stand design specifications-->
+
+        <record id="email_template_booth_design_line_exhibitor" model="mail.template">
+            <field name="name">Exhibitor Registration: STAND DESIGN SPECIFICATIONS MAIL TO HIVE</field>
+            <field name="model_id" ref="brand_pannel_hive.model_booth_design_line"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&lt;</field>
+            <field name="email_to">exhibit@hivefurnitureshow.com</field>
+            <field name="email_cc"> admin@omgexhibitions.com,exhibit@hivefurnitureshow.com,neerajkrishnan82@gmail.com</field>
+
+  <field name="subject">HFS 2024/{{object.exhibitor_contract_id.company_name}}/ STAND NO {{','.join(object.exhibitor_contract_id.sale_order_id.stand_ids.mapped('stand_number'))}}/ STAND DESIGN SPECIFICATIONS</field>
+            <field name="body_html" type="html">
+
+                <br></br>
+                <p>Please check portal for document uploaded by exhibitor.</p>
+
+
+
+<table style=" border: 1px solid;">
+  <thead>
+    <tr style=" border: 1px solid;">
+      <th style=" border: 1px solid;width:200px" >Document Type</th>
+      <th style=" border: 1px solid;width:200px">Document Name</th>
+      <th style=" border: 1px solid;width:200px">Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td style=" border: 1px solid; width:200px">
+                       <t t-if="object.booth_design_id.name">
+                                    <span t-out="object.booth_design_id.name"></span>
+                                </t>
+        </td>
+
+
+        <td style=" border: 1px solid;width:200px">
+
+                                    <t t-foreach="object.attachement_ids or []" t-as="file">
+                            <p>
+                                <t t-esc="file.name or ''"></t>
+                            </p>
+                        </t>
+        </td>
+        <td style=" border: 1px solid;width:200px">
+                       <t t-if="object.description">
+                                    <span t-out="object.description"></span>
+                                </t>
+        </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<hr/>-->
+<!--                <ol>-->
+<!--                    <t t-set="is_comments_exist" t-value="true"></t>-->
+<!--                    <t t-foreach="object.floor_plan_ids.filtered(lambda l:  l.by_iff_exihibitor == 'exhibitor' and l.is_omg_sent_stand_info == True)"-->
+<!--                       t-as="floor">-->
+<!--                        <t t-if="floor.description">-->
+<!--                    <t t-set="is_comments_exist" t-value="false"></t>-->
+<!--                        </t>-->
+
+
+<!--                        <t t-foreach="floor.attachement_ids or []" t-as="file">-->
+<!--                            <li>-->
+<!--                                <t t-esc="file.name or ''"></t>-->
+<!--                                /-->
+<!--                                <t t-if="floor.booth_design_id">-->
+<!--                                    <span t-out="floor.booth_design_id.name"></span>-->
+<!--                                </t>-->
+<!--                            </li>-->
+<!--                        </t>-->
+
+
+
+
+<!--                    </t>-->
+
+
+<!--                </ol>-->
+
+
+
+<!--                <h4> Comments </h4>-->
+<!--<hr></hr>-->
+<!--                <ol>-->
+<!--                    <t t-set="is_comments_exist" t-value="true"></t>-->
+<!--                    <t t-foreach="object.floor_plan_ids.filtered(lambda l:  l.by_iff_exihibitor == 'exhibitor' and l.is_omg_sent_stand_info == True)"-->
+<!--                       t-as="floor">-->
+<!--                        <li><t t-esc="floor.description"></t> </li>-->
+
+
+
+
+<!--                    </t>-->
+
+
+<!--                </ol>-->
+
+
+
+
+
+                <p>Thanks</p>
+                <br></br>
+                <br></br>
+                <p></p>
+                <p></p>
+<!--                <strong>TEAM HFS</strong>-->
+<!--                <p></p>-->
+<!--                <p>OMG EXHIBITIONS AND CONFERENCE</p>-->
+<!--                <p>-->
+<!--                    1605, Sidra Tower, PO Box <strong>391299</strong>,-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    Sheikh Zayed Road,-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    Dubai, UAE.-->
+
+<!--                </p>-->
+<!--                <p>-->
+<!--                    M: 971 504623913 / L: 971 45665205-->
+
+<!--                </p>-->
+
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+        <record id="email_template_booth_design_line_exhibitor_upload" model="mail.template">
+            <field name="name">Exhibitor Registration: STAND DESIGN SPECIFICATIONS MAIL TO EXHIBITOR</field>
+            <field name="model_id" ref="brand_pannel_hive.model_booth_design_line"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&lt;</field>
+            <field name="email_to">{{ object.exhibitor_contract_id.email }}</field>
+            <field name="email_cc">exhibit@hivefurnitureshow.com,admin@omgexhibitions.com</field>
+
+          <field name="subject">HFS 2024/{{object.exhibitor_contract_id.company_name}}/ STAND NO  {{','.join(object.exhibitor_contract_id.sale_order_id.stand_ids.mapped('stand_number'))}}/STAND DESIGN SPECIFICATIONS</field>
+            <field name="body_html" type="html">
+
+
+                <br></br>
+                <p>
+                  Dear Exhibitor, </p>
+                <p></p>
+                <p></p>
+<p> The Document for Stand Specifications is now uploaded on the portal for your review. </p>
+<p> Please send in your approval immediately, if all okay. </p>
+
+<p> In case, you need to make any requests for changes etc , please use the Comments section. </p>
+<p> You may also upload drawing,images, with reference to your comments, for us to  follow. </p>
+<p> We will accept your approval of final drawing through the portal only. </p>
+<p> Any changes you may require after a final approval, may incur extra charges. </p>
+<p>
+                    We are always here to support you to the best of our ability.
+
+</p>
+                <p>
+               In case of any further query please email us at exhibit@hivefurnitureshow.com
+
+                </p>
+
+<p></p>
+<p></p>
+                <strong>TEAM HFS</strong>
+                <p></p>
+                <p>OMG EXHIBITIONS AND CONFERENCE</p>
+                <p>
+                1605, Sidra Tower, PO Box 391299,
+                </p>
+                <p>
+                    Sheikh Zayed Road,
+                </p>
+                <p>
+                    Dubai, UAE.
+
+                </p>
+
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+        <!--        INVITE LETTER -->
+
+
+        <record id="email_template_invite_letter" model="mail.template">
+            <field name="name">Exhibitor Registration:INVITE LETTER</field>
+            <field name="model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_invitation_letter_request"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&lt;</field>
+            <field name="email_to">{{ object.exhibitor_contract_id.email }}</field>
+            <field name="email_cc">exhibit@hivefurnitureshow.com,admin@omgexhibitions.com</field>
+
+            <field name="subject">HFS 2024 /{{object.exhibitor_contract_id.company_name}}/ STAND NO {{','.join(object.exhibitor_contract_id.sale_order_id.stand_ids.mapped('stand_number'))}} /INVITE LETTER NO.{{object.reference_no}}/ FOR {{object.attendee_id.attendee_full_name}}</field>
+            <field name="body_html" type="html">
+
+                <p>
+
+                </p>
+                <p>
+                    Dear Exhibitor,
+
+                </p>
+
+                <p>
+                    Are you all set ?!
+
+                </p>
+                <p>
+                    As per you request, Please find attached herewith or go to portal to download your Invitation Letter
+                    for purpose of Visa Application, only.
+
+                </p>
+
+                <p></p>
+                <p>In case of any further query please email us at exhibit@hivefurnitureshow.com.</p>
+
+                <p>
+                    With Warm Regards,
+
+                </p>
+
+                <p></p>
+                <p></p>
+                <br></br>
+                <br></br>
+                <br></br>
+
+
+                <p>
+                    <strong>TEAM HFS</strong>
+
+                </p>
+                <p>
+
+
+                    <strong>
+                        OMG EXHIBITIONS AND CONFERENCE
+                    </strong>
+
+                </p>
+                <p>
+                    1605, Sidra Tower, PO Box <strong>391299</strong> ,
+
+                </p>
+                <p>
+                    Sheikh Zayed Road,
+
+                </p>
+                <p>
+                    Dubai, UAE.
+
+                </p>
+                <p>
+                    M: 971 504623913 / L: 971 45665205
+
+                </p>
+
+
+            </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+        <!--SUBMISSION OF -->
+
+        <record id="email_template_submission_of_email" model="mail.template">
+            <field name="name">Exhibitor Registration:SUBMISSION</field>
+            <field name="model_id" ref="techfuge_exhibitor_customisation.model_exhibitor_contract"/>
+            <field name="email_from">HIVE FURNITURE SHOW- HFS 2024 &lt;exhibit@hivefurnitureshow.com&lt;</field>
+            <field name="email_to">exhibit@hivefurnitureshow.com</field>
+            <field name="email_cc">exhibit@hivefurnitureshow.com,admin@omgexhibitions.com,neerajkrishnan82@gmail.com</field>
+
+            <field name="subject">HFS 2024/{{object.company_name}}/ STAND NO {{','.join(object.sale_order_id.stand_ids.mapped('stand_number'))}} / SUBMISSION OF {{ object.name }}</field>
+            <field name="body_html" type="html">
+
+                <style>
+                    table, th, td {
+                    border:1px solid black;
+                    border-collapse: collapse;
+                    }
+                </style>
+
+
+                <p>
+                    <strong>Dear Exhibitor,</strong>
+                </p>
+                <p></p>
+                <p>Wow ! You have done a great job !</p>
+                <p></p>
+                <p>You have submitted the below information /successfully through the online portal.</p>
+                <p>The same &amp; exact information provided to us, will be forwarded to respective departments or
+                    concerned persons for further execution such as printing, stand built up, bookings etc.
+                </p>
+                <p>Extra charges will be applicable in case of changes made after submission or while work is in
+                    progress or completion as per the case may be.
+                </p>
+                <p></p>
+                <p></p>
+
+
+                <ol>
+                    <li>
+                        <strong>
+                            Branding panel info:
+                        </strong>
+
+                        <br></br>
+                        <br></br>
+
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <strong>Company name to be printed</strong>
+                                </td>
+                                <td>
+                                    <span t-out="object.branding_panel_company_name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Stand no</td>
+                                <td>
+                                    <span t-esc="', '.join(object.sale_order_id.stand_ids.mapped('stand_number'))"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Logo file</td>
+                                <td>
+                                    <span t-out="object.company_logo"></span>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br></br>
+                        <br></br>
+
+                        Company name :
+                        <span t-out="object.company_name"/>
+                        <p></p>
+                        Stand no:
+                        <span t-out="', '.join(object.sale_order_id.stand_ids.mapped('stand_number'))"></span>
+                        <p></p>
+                        Logo File : XXXX – FILE NAME
+                        <p></p>
+
+
+                    </li>
+
+
+                    <li>
+                        <strong>Categories info for Catalogue :</strong>
+                        <p></p>
+                        <p></p>
+
+
+                        <table style="width:100%">
+
+                            <tr>
+                                <td>
+                                    <strong>Main Category</strong>
+                                </td>
+                                <td>
+                                    <strong>Sub Category - Selected</strong>
+                                </td>
+                            </tr>
+                            <t t-set="is_furniture" t-value="true"></t>
+                            <t t-foreach="object.category_furniture" t-as="o">
+
+                                <tr>
+                                    <td>
+                                        <t t-if="is_furniture">
+                                            FURNITURE
+                                            <t t-set="is_furniture" t-value="false"></t>
+                                        </t>
+
+
+                                    </td>
+                                    <td>
+                                        <span t-out="o.name"></span>
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t t-set="is_furniture" t-value="true"></t>
+
+                            <t t-foreach="object.category_accessories" t-as="o">
+
+                                <tr>
+                                    <td>
+                                        <t t-if="is_furniture">
+                                            ACCESSORIES
+                                            <t t-set="is_furniture" t-value="false"></t>
+                                        </t>
+
+
+                                    </td>
+                                    <td>
+                                        <span t-out="o.name"></span>
+                                    </td>
+                                </tr>
+                            </t>
+
+                        </table>
+
+
+                        <p/>
+
+
+                    </li>
+
+
+                    <li>
+                        <strong>Stand design details.</strong>
+                        <br></br>
+                        <br></br>
+
+
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <strong>Note</strong>
+                                </td>
+                                <td>Attachment for reference</td>
+                            </tr>
+
+                            <t t-foreach="object.floor_plan_ids" t-as="floor">
+                                <tr>
+                                    <td>
+                                        <span t-out="floor.stand_id.display_name or ''"></span>
+                                        <span t-out="floor.booth_design_id.name or ''"></span>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </t>
+
+
+                        </table>
+
+
+                        <p/>
+
+
+                    </li>
+                    <li>
+                        <strong>Hotel Booking Details.</strong>
+
+                        <br></br>
+                        <br></br>
+                        <table style="width:100%">
+                            <tr>
+                                <th>Room</th>
+                                <th>Guest Name</th>
+                                <th>Check In Date</th>
+                                <th>Check out Date</th>
+                            </tr>
+                            <t t-foreach="object.hotel_request_ids" t-as="hotel">
+
+
+                                <tr>
+                                    <td>
+                                        <span t-out="hotel.room_id"></span>
+                                    </td>
+                                    <td>
+                                        <span t-out="hotel.attendee_id.attendee_full_name"></span>
+                                    </td>
+                                    <td>
+                                        <span t-out="hotel.checkin_date.strftime('%d-%b-%Y')"></span>
+                                    </td>
+                                    <td>
+                                        <span t-out="hotel.checkout_date.strftime('%d-%b-%Y')"></span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+
+
+                        <p/>
+
+
+                    </li>
+                    <li>
+                        <strong>
+                            Additional Items Order Request
+
+                        </strong>
+
+                        <p></p>
+                        <p>
+                            Ordered items will be delivered to your stand subject to 100% payment received in advance
+                            before the Set up / event days.
+
+                        </p>
+                        <p></p>
+
+
+                        <table style="width:100%">
+                            <tr>
+                                <th>Quotation / Proforma Invoice Number
+                                </th>
+                                <th>Item Description</th>
+                                <th>Item code</th>
+                                <th>Qty</th>
+                                <th>UOM</th>
+                                <th>Price per UOM
+                                </th>
+                                <th>Price per UOM Including Taxes</th>
+                                <th>Total Value ( Currency)</th>
+
+                            </tr>
+
+
+                        </table>
+
+
+                        <p/>
+
+
+                    </li>
+                    <li>
+                        <strong>
+                            Shipment details.
+
+                        </strong>
+                        <p></p>
+                        <p>Additional CBM will be charged &amp; to be Paid 100% before setup/event days.</p>
+                        <p></p>
+
+
+                        <table style="width:100%">
+                            <t t-foreach="object.shipment_detail_ids" t-as="shipment">
+                                <tr>
+
+                                    <td>Total CBM</td>
+                                    <td></td>
+                                    <td>
+                                        <span t-out="shipment.total_shipment_volume or  '' "></span>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>Extra CBM</td>
+                                    <td></td>
+                                    <td>
+                                        <span t-out="shipment.extra_cbm or  '' "></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+
+                                    <td>Extra CBM Charges</td>
+                                    <td>
+                                        <t t-esc="shipment.exhibitor_contract_id.currency_id.name or ''"></t>
+                                    </td>
+                                    <td>
+                                        <span t-out="shipment.additional_charges or  '' "></span>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td>Total No of Cartons</td>
+                                    <td></td>
+                                    <td>
+                                        <span t-out="shipment.no_of_cartons or  '' "></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+
+                                    <td>Total No of Cartons</td>
+                                    <td></td>
+                                    <td>
+                                        <span t-out="shipment.no_of_cartons or  '' "></span>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>Net Weight</td>
+                                    <td>KG</td>
+                                    <td>
+                                        <span t-out="shipment.net_weight or  '' "></span>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>Gross Weight</td>
+                                    <td>KG</td>
+                                    <td>
+                                        <span t-out="shipment.gross_weight or  '' "></span>
+                                    </td>
+                                </tr>
+
+
+                            </t>
+
+                            <t t-set="shipping_documents" t-value="true">
+
+                            </t>
+
+
+                            <t t-foreach="object.shipment_document_ids" t-as="shipment_docs">
+
+                                <tr>
+
+                                    <td>
+                                        <t t-if="shipping_documents">
+
+                                        </t>
+
+                                        Gross Weight
+                                    </td>
+                                    <td>KG</td>
+                                    <td>
+                                        <span t-out="shipment.gross_weight or  '' "></span>
+                                    </td>
+                                </tr>
+
+
+                            </t>
+
+                        </table>
+                        <p></p>
+
+
+                    </li>
+                    <li>
+                        <strong>Contractor Section.</strong>
+                        <p></p>
+                        An online portal for Each Contractor will be sent to the Contractor’s registered email id as
+                        well as you as the Exhibitor to access the same.
+
+
+                    </li>
+                    <p/>
+                    <t t-foreach="object.contractor_ids" t-as="contractor">
+                        <table style="width:80%">
+                            <tr>
+                                <td style="width:30%">
+                                    Contractor Company Name
+                                </td>
+                                <td style="width:50%">
+                                    <span t-out="contractor.contractor_full_name or  '' "></span>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Purpose
+                                </td>
+                                <td>
+
+                                    <span t-out="contractor.contract_purpose_id.name"></span>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Login ID
+                                </td>
+                                <td>
+                                    <span t-out="contractor.contractor_user_login"></span>
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Password
+                                </td>
+                                <td>
+                                    <span t-out="contractor.contractor_user_password"></span>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Go to Portal Link
+                                </td>
+                                <td>
+
+                                    <span t-out="contractor.contractor_user_id.authentication_url"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    QR code
+                                </td>
+                                <td>
+                                    <img t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', contractor.contractor_user_id.authentication_url, 100, 100)">
+
+                                    </img>
+                                </td>
+                            </tr>
+                        </table>
+                    </t>
+
+
+                </ol>
+
+                <p>In case of any further query please email us at exhibit@hivefurnitureshow.com.</p>
+                <p></p>
+                <p></p>
+
+
+                <p>Thanks and Regards,</p>
+
+
+                <p>
+                    <strong>Team HFS</strong>
+                </p>
+                <p>
+                    OMG EXHIBITIONS AND CONFERENCE
+
+                </p>
+                <p>
+                    1605, Sidra Tower, PO Box 3051, Sheikh Zayed Road,
+
+                </p>
+                <p>
+                    Dubai, UAE.
+
+                </p>
+                <p>
+                    Cell no. :+971 504623913
+
+                </p>
+                <p>
+                    Landline: +971 45665205
+
+                </p>
+
+
+            </field>
+
+            <field name="report_template"
+                   ref="techfuge_exhibitor_customisation.action_report_exhibitor_invitation_letter"/>
+            <field name="report_name">Invitation letter</field>
+
+
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+
+    </data>
+
+</odoo>

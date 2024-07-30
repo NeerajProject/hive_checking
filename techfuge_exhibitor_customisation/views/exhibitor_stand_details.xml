@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <record id="exhibitor_stand_details_tree_view" model="ir.ui.view">
+            <field name="name">exhibitor.stand.details.tree</field>
+            <field name="model">exhibitor.stand.details</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="stand_number"/>
+                    <field name="stand_width"/>
+                    <field name="stand_depth"/>
+                    <field name="stand_description"></field>
+                    <field name="stand_size"></field>
+                    <field name="hall_id"></field>
+                    <field name="event_id"></field>
+                </tree>
+            </field>
+        </record>
+
+                <record id="exhibitor_stand_details_form_view" model="ir.ui.view">
+            <field name="name">exhibitor.stand.details.tree</field>
+            <field name="model">exhibitor.stand.details</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                                        <sheet>
+
+                    <group>
+                        <group>
+                                   <field name="stand_number"/>
+                    <field name="stand_width"/>
+                    <field name="stand_depth"/>
+                    <field name="stand_description"></field>
+                    <field name="stand_size"></field>
+                        </group>
+                        <group>
+                                <field name="hall_id"></field>
+                    <field name="event_id"></field>
+                        </group>
+                    </group>
+                                        </sheet>
+
+                </form>
+            </field>
+        </record>
+
+<record id="exhibitor_stand_details_search" model="ir.ui.view">
+        <field name="name">exhibitor.stand.details.search</field>
+        <field name="model">exhibitor.stand.details</field>
+        <field name="arch" type="xml">
+            <search>
+                    <field name="stand_number"/>
+                    <field name="stand_description"></field>
+
+                    <field name="hall_id"></field>
+                    <field name="event_id"></field>
+
+
+            </search>
+        </field>
+    </record>
+
+    </data>
+</odoo>

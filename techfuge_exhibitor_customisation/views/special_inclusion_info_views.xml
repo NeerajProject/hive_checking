@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_special_inclusion_info_form" model="ir.ui.view">
+            <field name="name">special.inclusion.info.form</field>
+            <field name="model">special.inclusion.info</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_special_inclusion_info_tree" model="ir.ui.view">
+            <field name="name">special.inclusion.info.tree</field>
+            <field name="model">special.inclusion.info</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_view_special_inclusion_info" model="ir.actions.act_window">
+            <field name="name">Special Inclusion Info</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">special.inclusion.info</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_special_inclusion_info_tree"/>
+        </record>
+
+        <menuitem name="Special Inclusion Info"
+                  id="menu_special_inclusion_info"
+                  action="action_view_special_inclusion_info"
+                  sequence="150"
+                  parent="event.menu_event_configuration"
+                  groups="event.group_event_user"/>
+
+    </data>
+</odoo>

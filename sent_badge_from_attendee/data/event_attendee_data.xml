@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_sent_" model="ir.cron">
+        <field name="name">Send Exhibitors  : Automatic Badge Sent</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="sent_badge_from_attendee.model_event_registration"/>
+        <field name="code">model.cron_badge_sent()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_event_attendee_group,event.attendee.group,model_event_attendee_group,base.group_user,1,1,1,1
+access_activity_location_type,activity.location.type,model_activity_location_type,base.group_user,1,1,1,1
+access_event_attendee_type_user,event.attendee.type,model_event_attendee_type,base.group_user,1,1,1,1
+access_event_business_nature_user,event.business.nature,model_event_business_nature,base.group_user,1,1,1,1
+access_event_knowledge_source_user,event.knowledge.source,model_event_knowledge_source,base.group_user,1,1,1,1
+access_event_visit_purpose_user,event.visit.purpose,model_event_visit_purpose,base.group_user,1,1,1,1
+access_interested_product_categories_user,interested.product.categories,model_interested_product_categories,base.group_user,1,1,1,1
+access_event_activity_location_user,event.activity.location,model_event_activity_location,base.group_user,1,1,1,1
+access_event_attendee_activities_user,event.attendee.activities,model_event_attendee_activities,base.group_user,1,1,1,1
+access_res_brand_user,res.brand,model_res_brand,base.group_user,1,1,1,1
+
+access_event_event_admin,event.event.admin,model_event_event,techfuge_customisation.group_event_create_or_edit_access,1,1,1,1
+event.access_event_event_user,event.event.user,model_event_event,event.group_event_user,1,0,0,0
+event.access_event_event_manager,event.event.manager,model_event_event,event.group_event_manager,1,0,0,0

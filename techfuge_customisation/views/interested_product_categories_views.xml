@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_interested_product_categories_form" model="ir.ui.view">
+            <field name="name">interested.product.categories.form</field>
+            <field name="model">interested.product.categories</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_interested_product_categories_tree" model="ir.ui.view">
+            <field name="name">interested.product.categories.tree</field>
+            <field name="model">interested.product.categories</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_view_interested_product_categories" model="ir.actions.act_window">
+            <field name="name">Product Categories Interested</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">interested.product.categories</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_interested_product_categories_tree"/>
+        </record>
+
+        <menuitem name="Product Categories Interested"
+                  id="menu_interested_product_categories"
+                  action="action_view_interested_product_categories"
+                  sequence="104"
+                  parent="event.menu_event_configuration"
+                  groups="techfuge_customisation.group_event_create_or_edit_access"/>
+
+    </data>
+</odoo>

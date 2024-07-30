@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="calendar_event_view_form_inherit_appointment" model="ir.ui.view">
+            <field name="name">calendar.event.form</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='page_details']" position="before">
+                    <page name="membership_info" string="Membership Details">
+                        <group>
+                            <field name="membership_types_ids" mode="tree">
+                                <tree editable="true" create="false" delete="true">
+                                    <field name="calendar_event_id" width="10%" invisible="1" force_save="1"/>
+                                    <field name="partner_id" readonly="1" width="35%" force_save="1"/>
+                                    <field name="membership_id"  invisible="1" width="15%" force_save="1"/>
+                                    <field name="membership_type_id" readonly="1" width="15%" force_save="1"/>
+                                    <field name="product_id"  domain="[('is_golf','=',True)]" width="20%" force_save="1"/>
+                                    <field name="ninth_hole_only" force_save="1"></field>
+                                    <field name="start_date" readonly="1" invisible="1" width="15%" force_save="1"/>
+                                    <field name="expiry_date" readonly="1" width="15%" force_save="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button type="object" name="action_view_invoice"
+                            string="Invoice"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o">
+                    </button>
+
+
+                    <button name="action_view_18_points" type="object" class="oe_stat_button"
+                            icon="fa-solid fa-arrow-right" string="Related Appointment"/>
+
+                </xpath>
+
+
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="action_create_invoice" type="object" string="Create Invoice"
+                                attrs="{'invisible': [('state', '=', 'invoice')]}"/>
+<!--                         <button name="action_draft" type="object" string="Make as Draft"-->
+<!--                                attrs="{'invisible': [('state', '=', 'draft')]}"/>-->
+                        <field name="is_18_point_created" invisible="1"></field>
+                                                                             <field invisible="1" name="invoice_ids" widget="many2many_tags"></field>
+
+
+
+                        <button name="action_create_eighteen_holes" type="object" string="Create Tee"
+                                attrs="{'invisible': [('is_18_point_created', '=', True)]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                </xpath>
+
+
+
+
+                 <xpath expr="//page[@name='page_invitations']" position="after">
+
+
+                                                 <page string="Update Booking" name="internal_notes">
+
+                                                     <button string="Update" name="action_change_date" type="object"></button>
+
+<field name="slots_to_book_available" widget="AvailableSlotsWizardUpdate"></field>
+
+                            </page>
+
+
+
+                 </xpath>
+
+
+
+
+
+
+
+                <xpath expr="//page[@name='page_details']/group/group/field[@name='alarm_ids']" position="after">
+
+
+                    <field name="product_ids" invisible="1" widget="many2many_tags"/>
+                    <field name="is_single_invoice"/>
+                    <field name="is_visible_to_18_holes" invisible="1"></field>
+
+                    <field name="eighteen_points" invisible="1"/>
+
+
+                </xpath>
+                <xpath expr="//field[@name='description']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='description']" position="after">
+                    <field name="show_available_slots" string="Selected Available Slots"
+                           attrs="{'invisible': [('eighteen_points', '=', True)]}"></field>
+                    <field name="computed_available_slots" string="Suggest Slots"
+                           attrs="{'invisible': [('eighteen_points', '=', True)]}"></field>
+                    <field name="is_18_point_created" invisible="1"></field>
+
+                    <field name="next_available_slot" string=""
+                           attrs="{'invisible': ['|',('eighteen_points', '=', True),('is_18_point_created', '=', True)]}"
+                           widget="AvailableSlotsWizard"></field>
+
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

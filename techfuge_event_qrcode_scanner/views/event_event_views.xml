@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="event_qrcode_action_main_view" model="ir.actions.client">
+        <field name="name">QR Code Scanner</field>
+        <field name="tag">techfuge_event_qrcode_scanner.event_qrcode_scan_view</field>
+        <field name="target">fullscreen</field>
+    </record>
+
+    <menuitem name="Badge Scanner"
+              id="event_qr_code_scanner"
+              sequence="126"
+              web_icon="techfuge_event_qrcode_scanner,static/description/icon.png"
+              action="techfuge_event_qrcode_scanner.event_qrcode_action_main_view"
+              groups="techfuge_event_qrcode_scanner.group_show_event_qr_code_scan"/>
+
+
+    <record id="event_barcode.menu_event_registration_desk" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+</odoo>
